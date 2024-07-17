@@ -1,6 +1,10 @@
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 
 function Login() {
+
+  const {data:session,status} = useSession();
+  console.log(session);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
@@ -16,6 +20,8 @@ function Login() {
       console.error(result.error);
     }
   };
+  
+
 
   return (
     <div>

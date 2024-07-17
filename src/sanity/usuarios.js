@@ -6,8 +6,8 @@ export default {
     type: 'document',
     fields: [
         {
-            name: 'nombre',
-            title: 'Nombre',
+            name: 'name',
+            title: 'Name',
             type: 'string',
             validation: (Rule) => Rule.required(),
         },
@@ -18,11 +18,27 @@ export default {
             validation: (Rule) => Rule.required().email(),
         },
         {
-            name: 'contrasena',
-            title: 'Contraseña',
+            name: 'password',
+            title: 'Password',
+            type: 'string',
+        },
+        {
+            name: 'provider',
+            title: 'Provider',
             type: 'string',
             validation: (Rule) => Rule.required(),
         },
+        {
+            name: 'providerAccountId',
+            title: 'Provider Account ID',
+            type: 'string',
+            validation: (Rule) => Rule.required(),
+        },
+        {
+            name: 'image',
+            title: 'Image',
+            type: 'string',
+        }
         // Otros campos que desees almacenar para cada usuario
     ],
 };
