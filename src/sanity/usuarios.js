@@ -26,13 +26,11 @@ export default {
             name: 'provider',
             title: 'Provider',
             type: 'string',
-            validation: (Rule) => Rule.required(),
         },
         {
             name: 'providerAccountId',
             title: 'Provider Account ID',
             type: 'string',
-            validation: (Rule) => Rule.required(),
         },
         {
             name: 'image',

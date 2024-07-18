@@ -3,6 +3,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { createClient } from '@sanity/client';
+import bcrypt from 'bcryptjs';
 
 const sanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -25,17 +26,24 @@ export default NextAuth({
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-        const user = await sanityClient.fetch(`*[_type == "user" && email == $email][0]`, { email: credentials.email });
-        if (user && user.password === credentials.password) {
-          return user;
+        const { email, password } = credentials;
+        const user = await sanityClient.fetch(`*[_type == "usuario" && email == $email][0]`, { email });
+
+        if (user) {
+          const isValidPassword = bcrypt.compareSync(password, user.password);
+          if (isValidPassword) {
+            return user;
+          } else {
+            throw new Error("Invalid password");
+          }
         } else {
-          return null;
+          throw new Error("User not found");
         }
       }
     })
   ],
   pages: {
-    signIn: '/Login',
+    signIn: '/auth/signin',
     error: '/auth/error',
   },
   callbacks: {
@@ -43,7 +51,6 @@ export default NextAuth({
       if (account.provider === 'google') {
         const userDoc = await sanityClient.fetch(`*[_type == "usuario" && email == $email][0]`, { email: user.email });
         if (!userDoc) {
-          // Create new user if it doesn't exist
           await sanityClient.create({
             _type: 'usuario',
             name: user.name,
