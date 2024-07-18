@@ -36,7 +36,22 @@ export default {
             name: 'image',
             title: 'Image',
             type: 'string',
-        }
-        // Otros campos que desees almacenar para cada usuario
+        },
+        {
+            name: 'createdAt',
+            title: 'Created At',
+            type: 'datetime',
+        },
+        {
+            name: 'updatedAt',
+            title: 'Updated At',
+            type: 'datetime',
+        },
+        {
+            name: 'subscribedModels',
+            title: 'Subscribed Models',
+            type: 'array',
+            of: [{ type: 'reference', to: [{ type: 'modelos' }] }],
+        },
     ],
 };
