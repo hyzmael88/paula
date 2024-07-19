@@ -64,7 +64,7 @@ export default NextAuth({
       return true;
     },
     async redirect({ url, baseUrl }) {
-      return baseUrl;
+      return url;
     },
     async session({ session, token }) {
       session.user.id = token.id;

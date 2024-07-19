@@ -1,4 +1,3 @@
-// /d:/ReactJSProyectos/paula/src/sanity/usuarios.js
 
 export default {
     name: 'usuario',
