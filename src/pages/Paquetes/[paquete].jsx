@@ -71,7 +71,9 @@ function Paquete() {
           <h1>{paqueteState.nombre}</h1>
       {paqueteState.copy && <p>{paqueteState.copy}</p>}
       {paqueteState.precio && <p>Precio: {paqueteState.precio}</p>}
-      <button className='bg-orange-400 rounded-xl px-4 py-2'>
+      <button className='bg-orange-400 rounded-xl px-4 py-2'
+      onClick={router.push('/Galeria')}
+      >
         Comprar
       </button>
     </div>
