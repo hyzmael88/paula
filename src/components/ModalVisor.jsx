@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useGesture } from '@use-gesture/react';
+import React, { useState, useRef } from 'react';
 
 function ModalVisor({ isOpen, onClose, fotografias }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -7,33 +6,25 @@ function ModalVisor({ isOpen, onClose, fotografias }) {
   const [dragging, setDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const imgRef = useRef(null);
-  const containerRef = useRef(null);
   const startPosition = useRef({ x: 0, y: 0 });
   const currentPos = useRef({ x: 0, y: 0 });
 
-
+  if (!isOpen) return null;
 
   const nextPhoto = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % fotografias.length);
-    setPosition({ x: 0, y: 0 });
-    setZoom(100);
   };
 
   const prevPhoto = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + fotografias.length) % fotografias.length);
-    setPosition({ x: 0, y: 0 });
-    setZoom(100);
   };
 
   const zoomIn = () => {
-    setZoom((prevZoom) => prevZoom + 10);
+    setZoom((prevZoom) => prevZoom + 20);
   };
 
   const zoomOut = () => {
-    setZoom((prevZoom) => Math.max(prevZoom - 10, 100));
-    if (zoom === 100) {
-      setPosition({ x: 0, y: 0 });
-    }
+    setZoom((prevZoom) => Math.max(prevZoom - 20, 100));
   };
 
   const stopPropagation = (e) => {
@@ -41,68 +32,20 @@ function ModalVisor({ isOpen, onClose, fotografias }) {
   };
 
   const handleMouseDown = (e) => {
-    if (zoom === 100) return;
     setDragging(true);
     startPosition.current = { x: e.clientX - position.x, y: e.clientY - position.y };
     e.preventDefault();
   };
 
   const handleMouseMove = (e) => {
-    if (!dragging || zoom === 100) return;
+    if (!dragging) return;
     currentPos.current = { x: e.clientX - startPosition.current.x, y: e.clientY - startPosition.current.y };
-
-    const imgWidth = imgRef.current.offsetWidth * (zoom / 100);
-    const imgHeight = imgRef.current.offsetHeight * (zoom / 100);
-    const containerWidth = containerRef.current.offsetWidth;
-    const containerHeight = containerRef.current.offsetHeight;
-
-    // Calculate boundaries
-    const maxX = Math.max((imgWidth - containerWidth) / 2, 0);
-    const maxY = Math.max((imgHeight - containerHeight) / 2, 0);
-
-    const newX = Math.max(Math.min(currentPos.current.x, maxX), -maxX);
-    const newY = Math.max(Math.min(currentPos.current.y, maxY), -maxY);
-
-    setPosition({ x: newX, y: newY });
+    setPosition(currentPos.current);
   };
 
   const handleMouseUp = () => {
     setDragging(false);
   };
-
-  const bind = useGesture(
-    {
-      onDrag: ({ down, movement: [mx, my] }) => {
-        if (zoom === 100) return;
-        if (down) {
-          currentPos.current = { x: mx, y: my };
-          setPosition(currentPos.current);
-        }
-      },
-      onPinch: ({ da: [d] }) => {
-        const newZoom = Math.max(100, zoom + d / 2);
-        setZoom(newZoom);
-      },
-      onWheel: ({ event }) => {
-        const delta = event.deltaY > 0 ? -10 : 10;
-        setZoom((prevZoom) => Math.max(prevZoom + delta, 100));
-      }
-    },
-    {
-      drag: {
-        enabled: zoom > 100
-      }
-    }
-  );
-
-  useEffect(() => {
-    document.addEventListener('mouseup', handleMouseUp);
-    return () => {
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, []);
-
-  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4" onClick={onClose}>
@@ -113,11 +56,11 @@ function ModalVisor({ isOpen, onClose, fotografias }) {
           <button onClick={nextPhoto} className="p-2">Siguiente</button>
         </div>
         <div
-          ref={containerRef}
-          {...bind()}
           className="relative overflow-hidden max-w-[90vw] max-h-[80vh] cursor-grab"
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
         >
           <img
             ref={imgRef}
@@ -127,7 +70,7 @@ function ModalVisor({ isOpen, onClose, fotografias }) {
             style={{
               transform: `scale(${zoom / 100}) translate(${position.x}px, ${position.y}px)`,
               transition: dragging ? 'none' : 'transform 0.2s ease-in-out',
-              cursor: zoom > 100 ? 'grabbing' : 'default',
+              cursor: dragging ? 'grabbing' : 'grab',
             }}
           />
         </div>
