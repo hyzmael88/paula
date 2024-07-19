@@ -4,6 +4,7 @@ import { client } from '../../sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import { useSession } from 'next-auth/react';
 import ModalLogin from '@/components/ModalLogin';
+import ModalVisor from '@/components/ModalVisor';
 
 function Paquete() {
   const [paqueteState, setPaqueteState] = useState(null);
@@ -12,6 +13,8 @@ function Paquete() {
   const { data: session, status } = useSession();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   console.log(session)
+  const [isVisorOpen, setIsVisorOpen] = useState(false);
+
 
 
   useEffect(() => {
@@ -72,12 +75,14 @@ function Paquete() {
       {paqueteState.copy && <p>{paqueteState.copy}</p>}
       {paqueteState.precio && <p>Precio: {paqueteState.precio}</p>}
       <button className='bg-orange-400 rounded-xl px-4 py-2'
-      onClick={router.push('/Galeria')}
+      onClick={()=>setIsVisorOpen(true)}
       >
         Comprar
       </button>
     </div>
     </div>
+    <ModalVisor isOpen={isVisorOpen} onClose={() => setIsVisorOpen(false)} fotografias={paqueteState.fotografias.map(foto => urlFor(foto).url())} />
+
     <ModalLogin isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
 
     </div>
