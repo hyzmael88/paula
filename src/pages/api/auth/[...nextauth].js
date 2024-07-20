@@ -59,7 +59,8 @@ export default NextAuth({
             provider: 'google',
             providerAccountId: account.providerAccountId,
             createdAt: new Date().toISOString(),
-          });
+          })
+          .commit({ publish: true });
           return true;
         }
       }
