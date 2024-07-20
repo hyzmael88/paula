@@ -51,14 +51,16 @@ export default NextAuth({
       if (account.provider === 'google') {
         const userDoc = await sanityClient.fetch(`*[_type == "usuario" && email == $email][0]`, { email: user.email });
         if (!userDoc) {
-          await sanityClient.create({
+          const newUser = await sanityClient.create({
             _type: 'usuario',
             name: user.name,
             email: user.email,
             image: user.image,
             provider: 'google',
             providerAccountId: account.providerAccountId,
+            createdAt: new Date().toISOString(),
           });
+          return true;
         }
       }
       return true;
@@ -67,12 +69,18 @@ export default NextAuth({
       return url;
     },
     async session({ session, token }) {
-      session.user.id = token.id;
+      // Obtener información adicional del usuario desde Sanity, como los paquetes adquiridos
+      if (token.id) {
+        const userData = await sanityClient.fetch(`*[_type == "usuario" && email == $userEmail][0]`, { userEmail: session.user.email });
+        // Asegúrate de que paquetesAdquiridos existe en userData
+        session.user.paquetesAdquiridos = userData?.paquetesAdquiridos || [];
+        console.log(userData);
+      }
       return session;
     },
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
+        token.id = user._id || user.id;
       }
       return token;
     },

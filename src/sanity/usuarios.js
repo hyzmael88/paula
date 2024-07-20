@@ -40,6 +40,7 @@ export default {
             name: 'createdAt',
             title: 'Created At',
             type: 'datetime',
+            
         },
         {
             name: 'updatedAt',
@@ -52,5 +53,18 @@ export default {
             type: 'array',
             of: [{ type: 'reference', to: [{ type: 'modelos' }] }],
         },
+            {
+                name: 'compras',
+                title: 'Compras',
+                type: 'array',
+                of: [{ type: 'reference', to: [{ type: 'compra' }] }],
+            },
+            {
+                name: 'paquetesAdquiridos',
+                title: 'Paquetes Adquiridos',
+                type: 'array',
+                of: [{ type: 'reference', to: [{ type: 'paquetes' }] }],
+            },
     ],
+    
 };

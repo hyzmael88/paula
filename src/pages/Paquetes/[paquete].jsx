@@ -5,6 +5,7 @@ import { urlFor } from '@/sanity/lib/image';
 import { useSession } from 'next-auth/react';
 import ModalLogin from '@/components/ModalLogin';
 import ModalVisor from '@/components/ModalVisor';
+import { createCharge } from '@/stripe/createCharge';
 
 function Paquete() {
   const [paqueteState, setPaqueteState] = useState(null);
@@ -14,6 +15,16 @@ function Paquete() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   console.log(session)
   const [isVisorOpen, setIsVisorOpen] = useState(false);
+  const [comprado, setComprado] = useState(false);
+
+  async function procesarPago() {
+    try {
+      const charge = await createCharge(paqueteState);
+      console.log('Pago exitoso:', charge);
+    } catch (error) {
+      console.error('Error al procesar el pago:', error);
+    }
+  }
 
 
 
@@ -22,7 +33,17 @@ function Paquete() {
       // Si no hay sesión, mostrar el modal
     setIsLoginModalOpen(true); 
     }
+  
   }, [session]);
+
+  useEffect(() => {
+    session?.user?.paquetesAdquiridos.map(paqueteAdquirido => {
+      if(paqueteAdquirido._ref === paqueteState?._id){
+        setComprado(true);
+      }
+    })
+    
+  }, [session, paqueteState]);
 
   const handleLogin = () => {
     signIn(); // Redirige al usuario a la página de inicio de sesión
@@ -75,9 +96,20 @@ function Paquete() {
       {paqueteState.copy && <p>{paqueteState.copy}</p>}
       {paqueteState.precio && <p>Precio: {paqueteState.precio}</p>}
       <button className='bg-orange-400 rounded-xl px-4 py-2'
-      onClick={()=>setIsVisorOpen(true)}
+      onClick={()=>
+      {
+        if(comprado){
+          setIsVisorOpen(true)
+        } else {
+          procesarPago();
+       }
+      }
+    }
+      
       >
-        Comprar
+        {
+          comprado ? 'Ver' : 'Comprar'
+        }
       </button>
     </div>
     </div>
