@@ -1,14 +1,13 @@
 // src/stripe/createCharge.js
 const stripe = require('./stripeConfig');
 
-async function createCharge({ paquete }) {
-    const { nombre, precio, portadas, descripcion } = paquete;
+async function createCharge({ amount, source, currency = 'usd', description = '' }) {
   try {
     const charge = await stripe.charges.create({
-      amount: precio * 100,
-      currency: 'mxn',
-      source: portadas[0] ,
-      description:descripcion ,
+      amount,
+      currency,
+      source,
+      description,
     });
     return charge;
   } catch (error) {

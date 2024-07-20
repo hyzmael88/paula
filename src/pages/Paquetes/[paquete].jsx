@@ -5,7 +5,7 @@ import { urlFor } from '@/sanity/lib/image';
 import { useSession } from 'next-auth/react';
 import ModalLogin from '@/components/ModalLogin';
 import ModalVisor from '@/components/ModalVisor';
-import { createCharge } from '@/stripe/createCharge';
+import getStripe from '@/sanity/lib/getStripe';
 
 function Paquete() {
   const [paqueteState, setPaqueteState] = useState(null);
@@ -18,12 +18,27 @@ function Paquete() {
   const [comprado, setComprado] = useState(false);
 
   async function procesarPago() {
-    try {
-      const charge = await createCharge(paqueteState);
-      console.log('Pago exitoso:', charge);
-    } catch (error) {
-      console.error('Error al procesar el pago:', error);
-    }
+   
+      const stripe = await getStripe();
+
+    const response = await fetch("/api/stripe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        paquete: paqueteState,
+      }),
+    });
+
+    if (response.status === 500) return;
+
+    const data = await response.json();
+
+    // Solo pasa el sessionId a la función redirectToCheckout
+    const { error } = stripe.redirectToCheckout({ sessionId: data.id });
+
+    
   }
 
 
