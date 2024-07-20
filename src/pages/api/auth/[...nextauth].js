@@ -60,7 +60,6 @@ export default NextAuth({
             providerAccountId: account.providerAccountId,
             createdAt: new Date().toISOString(),
           })
-          .commit({ publish: true });
           return true;
         }
       }
