@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react';
 import React, { useState, useRef } from 'react';
 
 function ModalVisor({ isOpen, onClose, fotografias }) {
@@ -8,6 +9,8 @@ function ModalVisor({ isOpen, onClose, fotografias }) {
   const imgRef = useRef(null);
   const startPosition = useRef({ x: 0, y: 0 });
   const currentPos = useRef({ x: 0, y: 0 });
+  const { data: session, status } = useSession();
+
 
   if (!isOpen) return null;
 
@@ -62,6 +65,9 @@ function ModalVisor({ isOpen, onClose, fotografias }) {
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
         >
+           <div className="absolute bottom-4 right-4 text-white text-3xl opacity-75 z-10">mylove.ai/{session?.user?.email}</div>
+          <div className="absolute top-4 left-4 text-white text-3xl opacity-75 z-10">mylove.ai/{session?.user?.email}</div>
+       
           <img
             ref={imgRef}
             src={fotografias[currentIndex]}
