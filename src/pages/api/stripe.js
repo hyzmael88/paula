@@ -2,7 +2,7 @@ const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { paquete } = req.body;
+    const { paquete, email } = req.body; // Recibe el correo electrónico aquí
 
     const { nombre, precio, descripcion, _id: paqueteId } = paquete;
     const imageUrl = paquete.portadas[0].asset._ref
@@ -34,6 +34,7 @@ export default async function handler(req, res) {
         metadata: {
           paqueteId: paqueteId,
         },
+        customer_email: email, 
       });
 
       res.status(200).json({ id: session.id });

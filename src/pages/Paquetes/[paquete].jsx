@@ -28,6 +28,7 @@ function Paquete() {
       },
       body: JSON.stringify({
         paquete: paqueteState,
+        email: session.user.email,
       }),
     });
 
