@@ -57,7 +57,7 @@ export default {
                 name: 'compras',
                 title: 'Compras',
                 type: 'array',
-                of: [{ type: 'reference', to: [{ type: 'compra' }] }],
+                of: [{ type: 'reference', to: [{ type: 'publicaciones' }] }],
             },
             {
                 name: 'paquetesAdquiridos',
