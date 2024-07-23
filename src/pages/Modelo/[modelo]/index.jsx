@@ -147,7 +147,7 @@ function Modelo() {
       >
         {subscribed ? (
           !publicacion.precio ? (
-            publicacion.fotografias && publicacion.fotografias.length > 0 ? (
+            publicacion.fotografias && publicacion.fotografias.length > 0 && (
               <div className="fotografias mb-4">
                 {publicacion.fotografias.map((foto, index) => (
                   <img
@@ -158,16 +158,33 @@ function Modelo() {
                   />
                 ))}
               </div>
-            ) : null
+            )
           ) : (
-            <div className="w-full h-[60vh] bg-gray-700 object-cover mb-2 flex flex-col items-center justify-center">
-              <div
-                className="w-[70%] bg-pink-500 text-center py-4 rounded-3xl text-white cursor-pointer"
-                onClick={() => comprarPublicacionStripe(publicacion)}
-                >
-                Compra este contenido por ${publicacion.precio}mxn
-              </div>
-            </div>
+            session.user.compras.map((compra,i) =>(
+              compra._ref.includes(publicacion._id) ? (
+                publicacion.fotografias && publicacion.fotografias.length > 0 && (
+                  <div className="fotografias mb-4">
+                    {publicacion.fotografias.map((foto, index) => (
+                      <img
+                        key={index}
+                        src={urlFor(foto).url()}
+                        alt={`Fotografía ${index + 1}`}
+                        className="w-full h-[60vh] object-cover mb-2"
+                      />
+                    ))}
+                  </div>
+                )
+              ) : (
+                <div className="w-full h-[60vh] bg-gray-700 object-cover mb-2 flex flex-col items-center justify-center" key={i}>
+                  <div
+                    className="w-[70%] bg-pink-500 text-center py-4 rounded-3xl text-white cursor-pointer"
+                    onClick={() => comprarPublicacionStripe(publicacion)}
+                  >
+                    Compra este contenido por ${publicacion.precio}mxn
+                  </div>
+                </div>
+              )
+            )) 
           )
         ) : (
           <div className="w-full h-[60vh] bg-gray-700 object-cover mb-2 flex flex-col items-center justify-center">
@@ -187,6 +204,7 @@ function Modelo() {
     ))
   )}
 </div>
+
 
       {/* <ModalVisor isOpen={isVisorOpen} onClose={() => setIsVisorOpen(false)} fotografias={paqueteState.fotografias.map(foto => urlFor(foto).url())} /> */}
 
