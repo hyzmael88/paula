@@ -3,7 +3,7 @@ const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 async function handler(req, res) {
   if (req.method === 'POST') {
-    const { precio, email, nombre, fotoPerfil, modeloId } = req.body;
+    const { precio, email, nombre, fotoPerfil, _id } = req.body;
 
     const imageUrl = fotoPerfil.asset._ref
       .replace("image-", "https://cdn.sanity.io/images/aw6296fu/production/")
@@ -35,7 +35,7 @@ async function handler(req, res) {
         success_url: `${previousUrl}?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${previousUrl}`,
         metadata: {
-          modeloId: modeloId,
+          modeloId: _id,
         },
       });
 

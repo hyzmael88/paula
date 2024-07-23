@@ -28,6 +28,8 @@ function Modelo() {
     }
   }, [session]);
 
+  console.log(session)
+
   useEffect(() => {
     session?.user?.subscribedModels?.map((subscribed) => {
       if (subscribed._ref === modelo) {
