@@ -94,8 +94,31 @@ function Modelo() {
 
   // Solo pasa el sessionId a la función redirectToCheckout
   const { error } = stripe.redirectToCheckout({ sessionId: data.id });
+}
+  async function comprarPublicacionStripe(publicacion) {
+   
+    const stripe = await getStripe();
 
-  
+  const response = await fetch("/api/stripeComprarPublicacion", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      precio: publicacion.precio,
+      nombre: modelo.nombre,
+      slug: publicacion.slug,
+      email: session.user.email,
+
+    }),
+  });
+
+  if (response.status === 500) return;
+
+  const data = await response.json();
+
+  // Solo pasa el sessionId a la función redirectToCheckout
+  const { error } = stripe.redirectToCheckout({ sessionId: data.id });
 }
 
 
@@ -113,47 +136,57 @@ function Modelo() {
       {/* Muestra más detalles de la modelo como desees */}
       <p className="mb-8">{modelo.biografia}</p>
       <div className="publicaciones">
-        {publicaciones.length === 0 ? (
-          <p>No hay publicaciones disponibles.</p>
-        ) : (
-          publicaciones.map((publicacion) => (
-            <div
-              key={publicacion._id}
-              className="publicacion mb-8 p-4 bg-white rounded shadow-md"
-            >
-              {subscribed ? (
-                publicacion.fotografias &&
-                publicacion.fotografias.length > 0 ? (
-                  <div className="fotografias mb-4">
-                    {publicacion.fotografias.map((foto, index) => (
-                      <img
-                        key={index}
-                        src={urlFor(foto).url()}
-                        alt={`Fotografía ${index + 1}`}
-                        className="w-full h-[60vh] object-cover mb-2"
-                      />
-                    ))}
-                  </div>
-                ) : null
-              ) : (
-                <div className="w-full h-[60vh] bg-gray-700 object-cover mb-2 flex flex-col items-center justify-center" >
-                <div className="w-[70%] bg-pink-500 text-center py-4 rounded-3xl text-white cursor-pointer"
-                onClick={suscribeStripe}
-                >
-                  Suscribete para ver el contenido
-                  </div>
-                </div>
-              )}
-              <p className="copy mb-2">{publicacion.copy}</p>
-              {publicacion.precio && (
-                <p className="precio text-sm text-gray-500">
-                  Precio: ${publicacion.precio}
-                </p>
-              )}
+  {publicaciones.length === 0 ? (
+    <p>No hay publicaciones disponibles.</p>
+  ) : (
+    publicaciones.map((publicacion) => (
+      <div
+        key={publicacion._id}
+        className="publicacion mb-8 p-4 bg-white rounded shadow-md"
+      >
+        {subscribed ? (
+          !publicacion.precio ? (
+            publicacion.fotografias && publicacion.fotografias.length > 0 ? (
+              <div className="fotografias mb-4">
+                {publicacion.fotografias.map((foto, index) => (
+                  <img
+                    key={index}
+                    src={urlFor(foto).url()}
+                    alt={`Fotografía ${index + 1}`}
+                    className="w-full h-[60vh] object-cover mb-2"
+                  />
+                ))}
+              </div>
+            ) : null
+          ) : (
+            <div className="w-full h-[60vh] bg-gray-700 object-cover mb-2 flex flex-col items-center justify-center">
+              <div
+                className="w-[70%] bg-pink-500 text-center py-4 rounded-3xl text-white cursor-pointer"
+                onClick={comprarPublicacionStripe(publicacion)}
+              >
+                Compra este contenido por ${publicacion.precio}mxn
+              </div>
             </div>
-          ))
+          )
+        ) : (
+          <div className="w-full h-[60vh] bg-gray-700 object-cover mb-2 flex flex-col items-center justify-center">
+            <div
+              className="w-[70%] bg-pink-500 text-center py-4 rounded-3xl text-white cursor-pointer"
+              onClick={suscribeStripe}
+            >
+              Suscríbete para ver el contenido
+            </div>
+          </div>
+        )}
+        <p className="copy mb-2">{publicacion.copy}</p>
+        {publicacion.precio && (
+          <p className="precio text-sm text-gray-500">Precio: ${publicacion.precio}</p>
         )}
       </div>
+    ))
+  )}
+</div>
+
       {/* <ModalVisor isOpen={isVisorOpen} onClose={() => setIsVisorOpen(false)} fotografias={paqueteState.fotografias.map(foto => urlFor(foto).url())} /> */}
 
       <ModalLogin
