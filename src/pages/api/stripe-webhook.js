@@ -41,7 +41,7 @@ export default async function handler(req, res) {
       const email = session.customer_details.email;
       const paqueteId = session.metadata.paqueteId;
       const modeloId = session.metadata.modeloId;
-      const publicacionSlug = session.metadata.publicacionSlug;
+      const publicacionId = session.metadata.publicacionId;
 
 
       try {
@@ -62,19 +62,19 @@ export default async function handler(req, res) {
 
         console.log(`Paquete ${paqueteId} añadido al usuario ${user._id}`);
          }
-         if(publicacionSlug){
-          console.log("entre en publicacionSlug")
+         if(publicacionId){
+          console.log("entre en publicacionId")
           await sanityClient
           .patch(user._id)
           .setIfMissing({ compras: [] })
           .insert('after', 'compras[-1]', [{
             _type: 'reference',
-            slug: publicacionSlug,
-            _key: publicacionSlug
+            _ref: publicacionId,
+            _key: publicacionId
           }])
           .commit({ publish: true });
 
-        console.log(`Publicacion ${publicacionSlug} añadido al usuario ${user._id}`);
+        console.log(`Publicacion ${publicacionId} añadido al usuario ${user._id}`);
          }
           if(session.mode == "subscription"){
           console.log("entre en modelo")

@@ -32,7 +32,7 @@ function Modelo() {
 
   useEffect(() => {
     session?.user?.subscribedModels?.map((subscribed) => {
-      if (subscribed._ref === modelo._id) {
+      if (subscribed?._ref === modelo?._id) {
         setSubscribed(true);
       }
     });
@@ -108,7 +108,7 @@ function Modelo() {
     body: JSON.stringify({
       precio: publicacion.precio,
       nombre: modelo.nombre,
-      slug: publicacion.slug.current,
+      publicacionId: publicacion._id,
       email: session.user.email,
 
     }),
