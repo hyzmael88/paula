@@ -32,7 +32,7 @@ function Modelo() {
 
   useEffect(() => {
     session?.user?.subscribedModels?.map((subscribed) => {
-      if (subscribed._ref === modelo) {
+      if (subscribed._ref === modelo._id) {
         setSubscribed(true);
       }
     });
