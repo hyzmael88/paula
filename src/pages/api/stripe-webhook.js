@@ -70,11 +70,11 @@ export default async function handler(req, res) {
           .insert('after', 'compras[-1]', [{
             _type: 'reference',
             slug: publicacionSlug,
-            _key: paqueteId
+            _key: publicacionSlug
           }])
           .commit({ publish: true });
 
-        console.log(`Paquete ${paqueteId} añadido al usuario ${user._id}`);
+        console.log(`Publicacion ${publicacionSlug} añadido al usuario ${user._id}`);
          }
           if(session.mode == "subscription"){
           console.log("entre en modelo")
