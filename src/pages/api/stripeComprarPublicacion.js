@@ -2,7 +2,7 @@ const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { precio, nombre, slug, email } = req.body; // Recibe el correo electrónico aquí
+    const { precio, nombre, slug, email, _id } = req.body; // Recibe el correo electrónico aquí
 
   
 
@@ -28,7 +28,7 @@ export default async function handler(req, res) {
         success_url: `${previousUrl}?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${previousUrl}`,
         metadata: {
-          publicacionSlug: slug,
+          publicacionId: _id,
         },
         customer_email: email, 
       });

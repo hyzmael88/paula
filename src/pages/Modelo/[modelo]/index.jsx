@@ -108,7 +108,7 @@ function Modelo() {
     body: JSON.stringify({
       precio: publicacion.precio,
       nombre: modelo.nombre,
-      publicacionId: publicacion._id,
+      _id: publicacion._id,
       email: session.user.email,
 
     }),
