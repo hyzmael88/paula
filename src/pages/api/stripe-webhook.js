@@ -34,29 +34,49 @@ export default async function handler(req, res) {
       console.error('Webhook signature verification failed.', err.message);
       return res.status(400).send(`Webhook Error: ${err.message}`);
     }
-
+    
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
 
       const email = session.customer_details.email;
       const paqueteId = session.metadata.paqueteId;
+      const modeloId = session.metadata.modeloId;
+
 
       try {
         const user = await sanityClient.fetch(`*[_type == "usuario" && email == $email][0]`, { email });
 
         if (user) {
+         if(paqueteId){
+          console.log("entre en paquete")
           await sanityClient
-            .patch(user._id)
-            .setIfMissing({ paquetesAdquiridos: [] })
-            .insert('after', 'paquetesAdquiridos[-1]', [{
-              _type: 'reference',
-              _ref: paqueteId,
-              _key: paqueteId
-            }])
-            .commit({ publish: true });
+          .patch(user._id)
+          .setIfMissing({ paquetesAdquiridos: [] })
+          .insert('after', 'paquetesAdquiridos[-1]', [{
+            _type: 'reference',
+            _ref: paqueteId,
+            _key: paqueteId
+          }])
+          .commit({ publish: true });
 
+        console.log(`Paquete ${paqueteId} añadido al usuario ${user._id}`);
+         }
+          if(session.mode == "subscription"){
+          console.log("entre en modelo")
+          await sanityClient
+          .patch(user._id)
+          .setIfMissing({ subscribedModels: [] })
+          .insert('after', 'subscribedModels[-1]', [{
+            _type: 'reference',
+            _ref: modeloId,
+            _key: modeloId
+          }])
+          .commit({ publish: true });
           console.log(`Paquete ${paqueteId} añadido al usuario ${user._id}`);
+
         }
+        
+      }
       } catch (error) {
         console.error('Error al actualizar el documento del usuario en Sanity:', error);
         return res.status(500).json({ error: 'Error al actualizar el documento del usuario en Sanity' });

@@ -19,6 +19,16 @@ export default {
       },
     },
     {
+      name: "fotoPerfil",
+      title: "Foto de perfil",
+      type: "image",
+    },
+    {
+      name: "fotoPortada",
+      title: "Foto de portada",
+      type: "image",
+    },
+    {
       name: "biografia",
       title: "Biografía",
       type: "text",

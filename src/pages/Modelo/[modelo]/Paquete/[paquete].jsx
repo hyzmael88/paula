@@ -13,7 +13,7 @@ function Paquete() {
   const { paquete } = router.query;
   const { data: session, status } = useSession();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  console.log(session)
+
   const [isVisorOpen, setIsVisorOpen] = useState(false);
   const [comprado, setComprado] = useState(false);
 
@@ -72,7 +72,6 @@ function Paquete() {
       client.fetch(query, { paquete })
         .then((data) => {
           if (data) {
-            console.log(data);
             setPaqueteState(data);
           } else {
             console.error("Paquete no encontrado");

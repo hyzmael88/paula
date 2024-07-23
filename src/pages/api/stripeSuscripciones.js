@@ -1,10 +1,17 @@
-// pages/api/stripe.js
+// pages/api/stripe-subscription.js
 const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 async function handler(req, res) {
   if (req.method === 'POST') {
-    const { precio, email, nombre } = req.body;
-    
+    const { precio, email, nombre, fotoPerfil, modeloId } = req.body;
+
+    const imageUrl = fotoPerfil.asset._ref
+      .replace("image-", "https://cdn.sanity.io/images/aw6296fu/production/")
+      .replace("-png", ".png")
+      .replace("-jpg", ".jpg");
+
+    const previousUrl = req.headers.referer || 'https://localhost:3000';
+
     try {
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -15,8 +22,9 @@ async function handler(req, res) {
             product_data: {
               name: nombre,
               description: `Suscripción mensual para acceder al contenido exclusivo de ${nombre}`,
+              images: [imageUrl],
             },
-            unit_amount: precio * 100, // Precio en centavos
+            unit_amount: precio * 100,
             recurring: {
               interval: 'month',
             },
@@ -24,8 +32,11 @@ async function handler(req, res) {
           quantity: 1,
         }],
         mode: 'subscription',
-        success_url: `${req.headers.origin}/success`,
-        cancel_url: `${req.headers.origin}/cancel`,
+        success_url: `${previousUrl}?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${previousUrl}`,
+        metadata: {
+          modeloId: modeloId,
+        },
       });
 
       res.status(200).json({ id: session.id });

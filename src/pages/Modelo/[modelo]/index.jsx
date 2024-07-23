@@ -18,9 +18,8 @@ function Modelo() {
   const { modelo: slug } = router.query;
   const { data: session, status } = useSession();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [suscribed, setSuscribed] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
 
-  console.log(session);
 
   useEffect(() => {
     if (!session) {
@@ -28,12 +27,11 @@ function Modelo() {
       setIsLoginModalOpen(true);
     }
   }, [session]);
-  console.log(session);
 
   useEffect(() => {
-    session?.user?.suscribedModels.map((suscribed) => {
-      if (suscribed._ref === modelo) {
-        setSuscribed(true);
+    session?.user?.subscribedModels?.map((subscribed) => {
+      if (subscribed._ref === modelo) {
+        setSubscribed(true);
       }
     });
   }, [session]);
@@ -82,6 +80,8 @@ function Modelo() {
       precio: modelo.precioSuscripcion,
       nombre: modelo.nombre,
       email: session.user.email,
+      fotoPerfil: modelo.fotoPerfil,
+      _id: modelo._id,
 
     }),
   });
@@ -119,7 +119,7 @@ function Modelo() {
               key={publicacion._id}
               className="publicacion mb-8 p-4 bg-white rounded shadow-md"
             >
-              {suscribed ? (
+              {subscribed ? (
                 publicacion.fotografias &&
                 publicacion.fotografias.length > 0 ? (
                   <div className="fotografias mb-4">

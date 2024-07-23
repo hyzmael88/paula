@@ -74,7 +74,7 @@ export default NextAuth({
         const userData = await sanityClient.fetch(`*[_type == "usuario" && email == $userEmail][0]`, { userEmail: session.user.email });
         // Asegúrate de que paquetesAdquiridos existe en userData
         session.user.paquetesAdquiridos = userData?.paquetesAdquiridos || [];
-        session.user.suscribedModels = userData?.suscribedModels || [];
+        session.user.subscribedModels = userData?.subscribedModels || [];
         session.user.compras = userData?.compras || [];
         console.log(userData);
       }
