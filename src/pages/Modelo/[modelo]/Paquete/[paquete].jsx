@@ -21,7 +21,7 @@ function Paquete() {
    
       const stripe = await getStripe();
 
-    const response = await fetch("/api/stripe", {
+    const response = await fetch("/api/stripePaquetes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

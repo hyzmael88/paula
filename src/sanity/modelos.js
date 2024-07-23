@@ -49,6 +49,11 @@ export default {
       type: "url",
     },
     {
+      name:"precioSuscripcion",
+      title: "Precio de suscripción",
+      type: "number",
+    },
+    {
       name: "paquetes",
       title: "Paquetes",
       type: "array",
