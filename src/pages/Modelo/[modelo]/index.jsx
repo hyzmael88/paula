@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { client } from '../../sanity/lib/client';
+import { client } from '@/sanity/lib/client';
 
 function Modelo() {
   const [modelo, setModelo] = useState(null);
