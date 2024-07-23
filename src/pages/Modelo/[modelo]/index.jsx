@@ -94,11 +94,12 @@ function Modelo() {
 
   // Solo pasa el sessionId a la función redirectToCheckout
   const { error } = stripe.redirectToCheckout({ sessionId: data.id });
+  
 }
   async function comprarPublicacionStripe(publicacion) {
    
     const stripe = await getStripe();
-
+    console.log(publicacion)
   const response = await fetch("/api/stripeComprarPublicacion", {
     method: "POST",
     headers: {
@@ -107,7 +108,7 @@ function Modelo() {
     body: JSON.stringify({
       precio: publicacion.precio,
       nombre: modelo.nombre,
-      slug: publicacion.slug,
+      slug: publicacion.slug.current,
       email: session.user.email,
 
     }),
@@ -162,8 +163,8 @@ function Modelo() {
             <div className="w-full h-[60vh] bg-gray-700 object-cover mb-2 flex flex-col items-center justify-center">
               <div
                 className="w-[70%] bg-pink-500 text-center py-4 rounded-3xl text-white cursor-pointer"
-                onClick={comprarPublicacionStripe(publicacion)}
-              >
+                onClick={() => comprarPublicacionStripe(publicacion)}
+                >
                 Compra este contenido por ${publicacion.precio}mxn
               </div>
             </div>
