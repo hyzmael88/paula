@@ -24,7 +24,10 @@ const Compras = () => {
               copy,
               slug,
               precio,
-              _createdAt
+              _createdAt,
+              modelo {
+                _ref
+              }
             },
             paquetesAdquiridos[]->{
               _id,
@@ -32,7 +35,10 @@ const Compras = () => {
               portadas,
               slug,
               precio,
-              _createdAt
+              _createdAt,
+              modelo {
+                _ref
+              }
             }
           }`, {
             email: session.user.email,
@@ -41,9 +47,11 @@ const Compras = () => {
           if (user) {
             if (user.compras) {
               setCompras(user.compras);
+              console.log(user.compras);
             }
             if (user.paquetesAdquiridos) {
               setPaquetes(user.paquetesAdquiridos);
+              console.log(user.paquetesAdquiridos);
             }
           }
           setLoading(false);
@@ -57,12 +65,39 @@ const Compras = () => {
     }
   }, [session]);
 
-  const handlePaqueteClick = (paqueteSlug) => {
-    router.push(`/paquete/${paqueteSlug}`);
+  const obtenerSlugDeModeloPorRef = async (modeloRef) => {
+    try {
+      const query = `*[_type == "modelos" && _id == $modeloRef][0]{
+        "slug": slug.current
+      }`;
+      const params = { modeloRef };
+      const data = await client.fetch(query, params);
+      if (data && data.slug) {
+        console.log(`El slug de la modelo es: ${data.slug}`);
+        console.log(data)
+        return data.slug;
+      } else {
+        console.error("No se encontró la modelo con el _ref proporcionado.");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error al obtener el slug de la modelo:", error);
+      return null;
+    }
   };
 
-  const handlePublicacionClick = (publicacionSlug) => {
-    router.push(`/publicacion/${publicacionSlug}`);
+  const handlePaqueteClick = async (modeloRef, paqueteSlug) => {
+    const modeloSlug = await obtenerSlugDeModeloPorRef(modeloRef);
+    if (modeloSlug) {
+      router.push(`/Modelo/${modeloSlug}/Paquete/${paqueteSlug}`);
+    }
+  };
+
+  const handlePublicacionClick = async (modeloRef, publicacionSlug) => {
+    const modeloSlug = await obtenerSlugDeModeloPorRef(modeloRef);
+    if (modeloSlug) {
+      router.push(`/Modelo/${modeloSlug}/Publicacion/${publicacionSlug}`);
+    }
   };
 
   if (loading) return <Spinner />; // Muestra el loader mientras los datos se cargan
@@ -82,17 +117,14 @@ const Compras = () => {
               <div 
                 key={publicacion._id} 
                 className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
-                onClick={() => handlePublicacionClick(publicacion.slug.current)}
+                onClick={() => handlePublicacionClick(publicacion.modelo?._ref, publicacion.slug.current)}
               >
                 <img 
                   src={publicacion.fotografias && publicacion.fotografias.length > 0 ? urlFor(publicacion.fotografias[0]).url() : '/default-image.png'} 
                   alt={publicacion.copy} 
                   className="w-full h-48 object-cover"
                 />
-                <div className="p-4">
-                  <p className="text-sm text-gray-500">{publicacion.copy}</p>
-                  {publicacion.precio && <p className="font-bold">Precio: ${publicacion.precio}</p>}
-                </div>
+                
               </div>
             ))}
           </div>
@@ -102,8 +134,9 @@ const Compras = () => {
               <div 
                 key={paquete._id} 
                 className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
-                onClick={() => handlePaqueteClick(paquete.slug.current)}
+                onClick={() => handlePaqueteClick(paquete.modelo?._ref, paquete.slug.current)}
               >
+               
                 <img 
                   src={paquete.portadas && paquete.portadas.length > 0 ? urlFor(paquete.portadas[0]).url() : '/default-image.png'} 
                   alt={paquete.nombre} 
