@@ -107,7 +107,25 @@ function Modelo() {
 
   async function donateStripe() {
     const stripe = await getStripe();
-    
+
+    const response = await fetch("/api/stripeDonaciones", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        amount: 5000, // Donación fija de $50 MXN
+        email: session.user.email,
+        description: `Donación para ${modelo.nombre}`,
+      }),
+    });
+
+    if (response.status === 500) return;
+
+    const data = await response.json();
+
+    // Solo pasa el sessionId a la función redirectToCheckout
+    const { error } = stripe.redirectToCheckout({ sessionId: data.id });
   }
 
   async function comprarPublicacionStripe(publicacion) {
@@ -152,30 +170,33 @@ function Modelo() {
       <h1 className="text-3xl font-bold mb-4">{modelo.nombre}</h1>
       {/* Muestra más detalles de la modelo como desees */}
       <p className="">{modelo.biografia}</p>
-        {!subscribed ? (
       <div className="flex flex-row gap-x-4 my-4">
+        {!subscribed ? (
           <button
             className="bg-pink-500 text-white px-4 py-2 rounded-2xl cursor-pointer"
             onClick={suscribeStripe}
           >
             Suscribete
           </button>
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-2xl cursor-pointer"
-            onClick={donateStripe}
-          >
-            Donar
-          </button>
           
-          </div>
+          
         ) : (
           <button
             className="bg-pink-300 text-white px-4 py-2 rounded-2xl "
             onClick={suscribeStripe}
-          >
+            >
             Suscrito
           </button>
-        )}
+        )
+        
+      }
+        {/* <button
+          className="bg-blue-500 text-white px-4 py-2 rounded-2xl cursor-pointer"
+          onClick={donateStripe}
+        >
+          Donar
+        </button> */}
+      </div>
       <div>
         <div className="w-full flex text-center  ">
           <div
