@@ -29,12 +29,17 @@ export default function Home() {
               fotografias,
               copy,
               slug,
+              precio,
               _createdAt,
               modelo->{
                 nombre,
-                slug
+                slug,
+                _id
               }
             }
+          },
+          compras[]->{
+            _id
           }
         }`, { email: session.user.email });
 
@@ -58,12 +63,36 @@ export default function Home() {
     fetchData();
   }, [session, status, router]);
 
+  const comprarPublicacionStripe = async (publicacion) => {
+    // Implementa la lógica para comprar la publicación usando Stripe
+    // Este es solo un ejemplo, debes ajustarlo según tu implementación de Stripe
+    const stripe = await getStripe();
+    const response = await fetch('/api/stripeComprarPublicacion', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        precio: publicacion.precio,
+        nombre: publicacion.modelo.nombre,
+        _id: publicacion._id,
+        email: session.user.email,
+      }),
+    });
+
+    if (response.status === 500) return;
+
+    const data = await response.json();
+    const { error } = stripe.redirectToCheckout({ sessionId: data.id });
+    if (error) console.error('Error al redirigir a Stripe:', error);
+  };
+
   if (loading) return <Spinner />; // Muestra el loader mientras los datos se cargan
 
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>; // Muestra el mensaje de error
 
   return (
-    <div className="max-w-4xl w-1/3 p-6">
+    <div className="max-w-4xl w-full p-6 mx-auto">
       <h1 className="text-3xl font-bold mb-6">Publicaciones Recientes</h1>
       {publicaciones.length === 0 ? (
         <p>No hay publicaciones disponibles.</p>
@@ -73,16 +102,54 @@ export default function Home() {
             <div 
               key={publicacion._id} 
               className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
-              onClick={() => router.push(`/Modelo/${publicacion.modelo.slug.current}/publicacion/${publicacion.slug.current}`)}
             >
-              <img 
-                src={publicacion.fotografias && publicacion.fotografias.length > 0 ? urlFor(publicacion.fotografias[0]).url() : '/default-image.png'} 
-                alt={publicacion.copy} 
-                className="w-full h-72 object-cover"
-              />
+              {!publicacion.precio  ?(
+                    publicacion.fotografias &&
+                    publicacion.fotografias.length > 0 && (
+                      <div className="fotografias mb-4">
+                        {publicacion.fotografias.map((foto, index) => (
+                          <img
+                            key={index}
+                            src={urlFor(foto).url()}
+                            alt={`Fotografía ${index + 1}`}
+                            className="w-full h-[60vh] object-cover mb-2"
+                          />
+                        ))}
+                      </div>
+                    )
+                  ) : session.user.compras &&
+                    session.user.compras.some(
+                      (compra) => compra._ref === publicacion._id
+                    ) ? (
+                    publicacion.fotografias &&
+                    publicacion.fotografias.length > 0 && (
+                      <div className="fotografias mb-4">
+                        {publicacion.fotografias.map((foto, index) => (
+                          <img
+                            key={index}
+                            src={urlFor(foto).url()}
+                            alt={`Fotografía ${index + 1}`}
+                            className="w-full h-[60vh] object-cover mb-2"
+                          />
+                        ))}
+                      </div>
+                    )
+                  ) : (
+                    <div className="w-full h-[60vh] bg-gray-700 object-cover mb-2 flex flex-col items-center justify-center">
+                      <div
+                        className="w-[70%] bg-pink-500 text-center py-4 rounded-3xl text-white cursor-pointer"
+                        onClick={() => comprarPublicacionStripe(publicacion)}
+                      >
+                        Compra este contenido por ${publicacion.precio}mxn
+                      </div>
+                    </div>
+                  )
+              }
               <div className="p-4">
-                <p className="text-sm text-gray-500">{publicacion.copy}</p>
-                <p className="text-xs text-gray-400">{new Date(publicacion._createdAt).toLocaleDateString()}</p>
+                <h2 className="text-xl font-bold">{publicacion.copy}</h2>
+                <p className="text-sm text-gray-500">
+                  {new Date(publicacion._createdAt).toLocaleDateString()}
+                </p>
               </div>
             </div>
           ))}
