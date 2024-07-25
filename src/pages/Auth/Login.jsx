@@ -12,9 +12,10 @@ function Login() {
     const password = event.target.password.value;
 
     const result = await signIn('credentials', {
-      redirect: false,
+      redirect: false, // Desactiva la redirección automática
       email,
-      password
+      password,
+      callbackUrl: `${window.location.origin}/Home` // Especifica la URL a la que quieres redirigir después del signIn
     });
 
     if (result.error) {
@@ -81,7 +82,7 @@ function Login() {
         </form>
         <hr className="my-6 w-full max-w-md" />
         <button
-          onClick={() => signIn('google')}
+          onClick={() => signIn('google', { callbackUrl: '/Home' })}
           className="w-full max-w-md bg-white border border-gray-300 text-gray-700 py-2 rounded flex items-center justify-center"
         >
           <img src="/google-logo.png" alt="Google Logo" className="w-5 h-5 mr-2" />
