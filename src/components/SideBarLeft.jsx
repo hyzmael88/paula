@@ -15,47 +15,47 @@ function SideBarLeft() {
               </Link>
             </li>
             <li>
-              <Link href="/explorar">
+              <Link href="/Explorar">
                 <p className="block text-lg font-medium text-black hover:text-purple-600">Explorar</p>
               </Link>
             </li>
             <li>
-              <Link href="/notificaciones">
+              <Link href="/Notificaciones">
                 <p className="block text-lg font-medium text-black hover:text-purple-600">Notificaciones</p>
               </Link>
             </li>
             <li>
-              <Link href="/suscripciones">
+              <Link href="/Suscripciones">
                 <p className="block text-lg font-medium text-black hover:text-purple-600">Suscripciones</p>
               </Link>
             </li>
             <li>
-              <Link href="/compras">
+              <Link href="/Compras">
                 <p className="block text-lg font-medium text-black hover:text-purple-600">Compras</p>
               </Link>
             </li>
             <li>
-              <Link href="/historial-pagos">
+              <Link href="/Historial">
                 <p className="block text-lg font-medium text-black hover:text-purple-600">Historial de pagos</p>
               </Link>
             </li>
             <li>
-              <Link href="/faqs">
+              <Link href="/Faqs">
                 <p className="block text-lg font-medium text-black hover:text-purple-600">FAQS</p>
               </Link>
             </li>
             <li>
-              <Link href="/soporte">
+              <Link href="/Soporte">
                 <p className="block text-lg font-medium text-black hover:text-purple-600">Soporte</p>
               </Link>
             </li>
             <li>
-              <Link href="/configuracion">
+              <Link href="/Configuracion">
                 <p className="block text-lg font-medium text-black hover:text-purple-600">Configuracion</p>
               </Link>
             </li>
             <li>
-              <Link href="/cerrar-sesion">
+              <Link href="/Cerrar-sesion">
                 <p className="block text-lg font-medium text-black hover:text-purple-600">Cerrar sesión</p>
               </Link>
             </li>
@@ -63,10 +63,10 @@ function SideBarLeft() {
         </nav>
       </div>
       <div className="text-center">
-        <Link href="/politicas-privacidad">
+        <Link href="/Politicas">
           <p className="block text-sm font-medium text-black hover:text-purple-600">Políticas de privacidad</p>
         </Link>
-        <Link href="/terminos-condiciones">
+        <Link href="/Terminos">
           <p className="block text-sm font-medium text-black hover:text-purple-600">Términos y condiciones</p>
         </Link>
       </div>
