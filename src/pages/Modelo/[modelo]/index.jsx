@@ -28,12 +28,11 @@ function Modelo() {
   }, [session]);
 
   useEffect(() => {
-    session?.user?.subscribedModels?.forEach((subscribedModel) => {
-      if (subscribedModel?._ref === modelo?._id) {
-        setSubscribed(true);
-      }
-    });
-  }, [session]);
+    if (session && modelo) {
+      const isSubscribed = session.user.subscribedModels.some((subscribedModel) => subscribedModel._ref === modelo._id);
+      setSubscribed(isSubscribed);
+    }
+  }, [session, modelo]);
 
   useEffect(() => {
     if (slug) {
@@ -63,11 +62,10 @@ function Modelo() {
         .fetch(query, { slug })
         .then((data) => {
           setModelo(data);
-          console.log(data);
-          if (data && data.publicaciones) {
+          if (data.publicaciones) {
             setPublicaciones(data.publicaciones);
           }
-          if (data && data.paquetes) {
+          if (data.paquetes) {
             setPaquetes(data.paquetes);
           }
           setLoading(false);
@@ -130,7 +128,6 @@ function Modelo() {
 
   async function comprarPublicacionStripe(publicacion) {
     const stripe = await getStripe();
-    console.log(publicacion);
     const response = await fetch("/api/stripeComprarPublicacion", {
       method: "POST",
       headers: {
@@ -153,9 +150,6 @@ function Modelo() {
   }
 
   const handlePaqueteClick = (paqueteSlug) => {
-    /*  const currentPath = router.asPath; // Obtén la ruta actual
-    router.push(`${currentPath}/Paquete/${paqueteSlug}`); */
-
     router.push(`/Modelo/${slug}/Paquete/${paqueteSlug}`);
   };
 
@@ -168,7 +162,6 @@ function Modelo() {
   return (
     <div className="p-4 w-full xl:w-1/3 ">
       <h1 className="text-3xl font-bold mb-4">{modelo.nombre}</h1>
-      {/* Muestra más detalles de la modelo como desees */}
       <p className="">{modelo.biografia}</p>
       <div className="flex flex-row gap-x-4 my-4">
         {!subscribed ? (
@@ -178,35 +171,25 @@ function Modelo() {
           >
             Suscribete
           </button>
-          
-          
         ) : (
           <button
-            className="bg-pink-300 text-white px-4 py-2 rounded-2xl "
+            className="bg-pink-300 text-white px-4 py-2 rounded-2xl"
             onClick={suscribeStripe}
-            >
+          >
             Suscrito
           </button>
-        )
-        
-      }
-        {/* <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-2xl cursor-pointer"
-          onClick={donateStripe}
-        >
-          Donar
-        </button> */}
+        )}
       </div>
       <div>
-        <div className="w-full flex text-center  ">
+        <div className="w-full flex text-center">
           <div
-            className="w-full text-white bg-pink-500  px-4 py-2 cursor-pointer "
+            className="w-full text-white bg-pink-500 px-4 py-2 cursor-pointer"
             onClick={() => setSelector("Publicaciones")}
           >
             Publicaciones
           </div>
           <div
-            className="w-full bg-purple-700 text-white  px-4 py-2  cursor-pointer "
+            className="w-full bg-purple-700 text-white px-4 py-2 cursor-pointer"
             onClick={() => setSelector("Paquetes")}
           >
             Paquetes 😈
@@ -225,8 +208,7 @@ function Modelo() {
               >
                 {subscribed ? (
                   !publicacion.precio ? (
-                    publicacion.fotografias &&
-                    publicacion.fotografias.length > 0 && (
+                    publicacion.fotografias && publicacion.fotografias.length > 0 && (
                       <div className="fotografias mb-4">
                         {publicacion.fotografias.map((foto, index) => (
                           <img
@@ -242,8 +224,7 @@ function Modelo() {
                     session.user.compras.some(
                       (compra) => compra._ref === publicacion._id
                     ) ? (
-                    publicacion.fotografias &&
-                    publicacion.fotografias.length > 0 && (
+                    publicacion.fotografias && publicacion.fotografias.length > 0 && (
                       <div className="fotografias mb-4">
                         {publicacion.fotografias.map((foto, index) => (
                           <img
@@ -287,7 +268,6 @@ function Modelo() {
         ) : (
           <div>
             <h2 className="text-2xl font-bold mb-4">Paquetes</h2>
-            {console.log(paquetes)}
             {paquetes.length > 0 ? (
               <div className="grid grid-cols-2">
                 {paquetes.map((paquete, index) => (
@@ -317,11 +297,7 @@ function Modelo() {
           </div>
         )}
       </div>
-
-      <ModalLogin
-        isOpen={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
-      />
+      <ModalLogin isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
     </div>
   );
 }

@@ -1,10 +1,15 @@
 // pages/auth/login.js
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
+import axios from 'axios';
+import Link from 'next/link';
 
 function Login() {
   const { data: session, status } = useSession();
   const [error, setError] = useState(null);
+  const [emailForReset, setEmailForReset] = useState('');
+  const [resetError, setResetError] = useState(null);
+  const [resetMessage, setResetMessage] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -12,10 +17,10 @@ function Login() {
     const password = event.target.password.value;
 
     const result = await signIn('credentials', {
-      redirect: false, // Desactiva la redirección automática
+      redirect: false,
       email,
       password,
-      callbackUrl: `${window.location.origin}/Home` // Especifica la URL a la que quieres redirigir después del signIn
+      callbackUrl: `${window.location.origin}/Home`
     });
 
     if (result.error) {
@@ -23,6 +28,18 @@ function Login() {
     } else {
       setError(null);
       window.location.href = '/';
+    }
+  };
+
+  const handleResetPassword = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post('/api/auth/reset-password', { email: emailForReset });
+      setResetMessage('Please check your email for the password reset link.');
+      setResetError(null);
+    } catch (error) {
+      setResetError('Error sending reset password email. Please try again.');
+      setResetMessage(null);
     }
   };
 
@@ -71,13 +88,6 @@ function Login() {
             />
             <p className="text-xs text-gray-500 mt-1">It must be a combination of minimum 8 letters, numbers, and symbols.</p>
           </div>
-          <div className="flex justify-between items-center">
-            <div className="flex items-center">
-              <input type="checkbox" className="h-4 w-4 text-blue-500" />
-              <label className="ml-2 text-gray-700">Remember me</label>
-            </div>
-            <a href="#" className="text-blue-500">Forgot Password?</a>
-          </div>
           <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">Log In</button>
         </form>
         <hr className="my-6 w-full max-w-md" />
@@ -89,8 +99,30 @@ function Login() {
           Log in with Google
         </button>
         <p className="mt-6 text-center">
-          No account yet? <a href="/auth/signup" className="text-blue-500">Sign Up</a>
+          No account yet? <Link href="/Auth/Signup"> <span  className="text-blue-500">Sign Up</span></Link>
         </p>
+        <p className="mt-6 text-center">
+          <a href="#" className="text-blue-500" onClick={() => setResetMessage(true)}>Forgot Password?</a>
+        </p>
+        {resetMessage && (
+          <form onSubmit={handleResetPassword} className="w-full max-w-md space-y-4 mt-4">
+            <div>
+              <label htmlFor="resetEmail" className="block text-gray-700">Enter your email to reset password</label>
+              <input
+                name="resetEmail"
+                type="email"
+                placeholder="Email"
+                required
+                value={emailForReset}
+                onChange={(e) => setEmailForReset(e.target.value)}
+                className="w-full p-2 border border-gray-300 rounded mt-1"
+              />
+            </div>
+            <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">Reset Password</button>
+            {resetError && <p className="text-red-500">{resetError}</p>}
+            {resetMessage && <p className="text-green-500">{resetMessage}</p>}
+          </form>
+        )}
       </div>
       <div className="hidden md:flex md:w-1/2 bg-pink-500">
         {/* You can add an image or any other content here */}

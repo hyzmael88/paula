@@ -2,6 +2,7 @@
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 
 function Signup() {
   const [error, setError] = useState(null);
@@ -103,10 +104,10 @@ function Signup() {
           className="w-full max-w-md bg-white border border-gray-300 text-gray-700 py-2 rounded flex items-center justify-center"
         >
           <img src="/google-logo.png" alt="Google Logo" className="w-5 h-5 mr-2" />
-          Log in with Google
+          Sign Up with Google
         </button>
         <p className="mt-6 text-center">
-          Already have an account? <a href="/auth/login" className="text-blue-500">Log In</a>
+          Already have an account? <Link href="/Auth/Login" className="text-blue-500">Log In</Link>
         </p>
       </div>
       <div className="hidden md:flex md:w-1/2 bg-pink-500">

@@ -48,6 +48,11 @@ export default {
             type: 'datetime',
         },
         {
+            name: 'resetToken',
+            title: 'Reset Token',
+            type: 'string',
+          },
+        {
             name: 'subscribedModels',
             title: 'Subscribed Models',
             type: 'array',
