@@ -1,18 +1,25 @@
 import "@/styles/globals.css";
-import {Providers} from '../components/Providers';
+import { Providers } from "../components/Providers";
 import Footer from "@/components/Footer";
 import SideBarRight from "@/components/SideBarRight";
 import SideBarLeft from "@/components/SideBarLeft";
+import { useRouter } from "next/router";
+
 export default function App({ Component, pageProps }) {
-  return(
+  const router = useRouter();
+  const shouldShowSidebar =
+    router.pathname !== "/" && !router.pathname.startsWith("/Auth");
+
+  return (
     <Providers>
       <div className="w-full h-full flex justify-between">
+        {shouldShowSidebar && <SideBarLeft />}
 
-      <SideBarLeft/>
-    <Component {...pageProps} />
-      <SideBarRight/>
+        <Component {...pageProps} />
+
+        {shouldShowSidebar && <SideBarRight />}
       </div>
-    <Footer/>
+      <Footer />
     </Providers>
-  ) 
+  );
 }

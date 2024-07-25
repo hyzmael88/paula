@@ -1,8 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 function SideBarLeft() {
+
+  const { data: session } = useSession();
+if(session){
   return (
+    
     <div className="w-1/3 hidden bg-white h-screen border-r-2  xl:flex flex-col justify-between p-4">
       <div>
         <div className="text-center mb-8">
@@ -97,7 +101,9 @@ function SideBarLeft() {
         </Link>
       </div>
     </div>
-  );
+  )
+}
+
 }
 
 export default SideBarLeft;

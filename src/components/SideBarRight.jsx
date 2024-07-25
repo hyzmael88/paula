@@ -1,6 +1,12 @@
+import { useSession } from 'next-auth/react';
 import React from 'react';
 
 const SidebarRight = () => {
+
+  const {data: session} = useSession();
+  if(session){
+  
+
   return (
     <div className="w-1/3 hidden bg-white h-screen border-l-2  xl:flex flex-col p-4">
       <div className="mb-8">
@@ -43,7 +49,8 @@ const SidebarRight = () => {
         </div>
       </div>
     </div>
-  );
+  )
+}
 };
 
 export default SidebarRight;
