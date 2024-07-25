@@ -5,7 +5,8 @@ import SideBarRight from "@/components/SideBarRight";
 import SideBarLeft from "@/components/SideBarLeft";
 import { useRouter } from "next/router";
 import { DefaultSeo } from "next-seo";
-import SEO from "../../next-seo.config";;
+import SEO from "../../next-seo.config";import NavbarMovil from "@/components/NavbarMovil";
+;
 
 
 export default function App({ Component, pageProps }) {
@@ -19,6 +20,7 @@ export default function App({ Component, pageProps }) {
         {shouldShowSidebar && <SideBarLeft />}
         <DefaultSeo {...SEO} />
         <Component {...pageProps} />
+        {shouldShowSidebar && <NavbarMovil />}
 
         {shouldShowSidebar && <SideBarRight />}
       </div>
