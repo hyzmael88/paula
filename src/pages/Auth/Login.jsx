@@ -26,35 +26,74 @@ function Login() {
   };
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return <div className="flex items-center justify-center h-screen">Loading...</div>;
   }
 
   if (session) {
     return (
-      <div>
-        <h1>You are already signed in</h1>
-        <button onClick={() => signOut()}>Sign out</button>
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <h1 className="text-3xl font-bold mb-4">You are already signed in</h1>
+        <button
+          onClick={() => signOut()}
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          Sign out
+        </button>
       </div>
     );
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input name="email" type="email" placeholder="Email" required />
-        </label>
-        <label>
-          Password
-          <input name="password" type="password" placeholder="Password" required />
-        </label>
-        <button type="submit">Log in</button>
-      </form>
-      <hr />
-      <button onClick={() => signIn('google')}>Log in with Google</button>
+    <div className="flex flex-col md:flex-row w-full h-screen">
+      <div className="flex flex-col items-center justify-center w-full md:w-1/2 p-8 bg-gray-100">
+        <h1 className="text-4xl font-bold mb-6">Log In</h1>
+        {error && <p className="text-red-500 mb-4">{error}</p>}
+        <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
+          <div>
+            <label htmlFor="email" className="block text-gray-700">Email Address</label>
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              required
+              className="w-full p-2 border border-gray-300 rounded mt-1"
+            />
+          </div>
+          <div>
+            <label htmlFor="password" className="block text-gray-700">Password</label>
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              required
+              className="w-full p-2 border border-gray-300 rounded mt-1"
+            />
+            <p className="text-xs text-gray-500 mt-1">It must be a combination of minimum 8 letters, numbers, and symbols.</p>
+          </div>
+          <div className="flex justify-between items-center">
+            <div className="flex items-center">
+              <input type="checkbox" className="h-4 w-4 text-blue-500" />
+              <label className="ml-2 text-gray-700">Remember me</label>
+            </div>
+            <a href="#" className="text-blue-500">Forgot Password?</a>
+          </div>
+          <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">Log In</button>
+        </form>
+        <hr className="my-6 w-full max-w-md" />
+        <button
+          onClick={() => signIn('google')}
+          className="w-full max-w-md bg-white border border-gray-300 text-gray-700 py-2 rounded flex items-center justify-center"
+        >
+          <img src="/google-logo.png" alt="Google Logo" className="w-5 h-5 mr-2" />
+          Log in with Google
+        </button>
+        <p className="mt-6 text-center">
+          No account yet? <a href="/auth/signup" className="text-blue-500">Sign Up</a>
+        </p>
+      </div>
+      <div className="hidden md:flex md:w-1/2 bg-pink-500">
+        {/* You can add an image or any other content here */}
+      </div>
     </div>
   );
 }

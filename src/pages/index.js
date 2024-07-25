@@ -21,9 +21,14 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <div className='w-full h-[90vh] flex flex-col justify-center items-center'>
       <h1>Aqui va una pantalla bien chingona</h1>
       <div>
+        <Link href={"/Auth/Signup"}>
+        <button className='px-4 py-2 bg-pink-500 m-4 '>
+          Registrarse
+        </button>
+        </Link>
         <Link href={"/Auth/Login"}>
         <button className='px-4 py-2 bg-pink-500 m-4 '>
           Iniciar Sesion
