@@ -67,7 +67,7 @@ const Configuracion = () => {
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
 
   return (
-    <div className="max-w-4xl h-[85vh] mx-auto p-6">
+    <div className="max-w-4xl w-full xl:w-1/3 h-[85vh] mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Configuración de la Cuenta</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
