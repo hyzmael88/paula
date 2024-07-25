@@ -45,7 +45,7 @@ export default function Home() {
         }`, { email: session.user.email });
 
         if (!user || !user.subscribedModels || user.subscribedModels.length === 0) {
-          router.push('/explorar'); // Si no hay suscripciones, redirigir a explorar
+          router.push('/Explorar'); // Si no hay suscripciones, redirigir a explorar
           return;
         }
 
