@@ -8,7 +8,7 @@ function SideBarLeft() {
 
   if (session) {
     return (
-      <div className="w-1/3 hidden bg-white h-screen border-r-2 xl:flex flex-col justify-between p-4">
+      <div className="hidden w-1/3  bg-white h-screen border-r-2 xl:flex flex-col justify-between p-4">
         <div>
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold">Logo</h1>
@@ -16,7 +16,7 @@ function SideBarLeft() {
           <nav>
             <ul className="space-y-4">
               <li>
-                <Link href="/">
+                <Link href="/Home">
                   <p className="flex items-center text-lg font-medium text-black hover:text-purple-600">
                     <FaHome className="mr-2" />
                     Inicio
