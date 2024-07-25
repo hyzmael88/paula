@@ -69,7 +69,7 @@ const Explore = () => {
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl w-full xl:w-1/3 mx-auto p-6">
       <div className="mb-8">
         <Slider {...settings}>
           {paquetes.slice(0, 4).map((paquete, index) => (
