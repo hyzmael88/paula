@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
+import { NextSeo } from 'next-seo';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,6 +22,23 @@ export default function Home() {
   }
 
   return (
+    <>
+    <NextSeo
+      title="Inicio"
+      description="Esta es la descripción de la página de inicio"
+      openGraph={{
+        title: 'Página de Inicio',
+        description: 'Esta es la descripción de la página de inicio',
+        images: [
+          {
+            url: 'https://www.tusitioweb.com/imagen-inicio-og.png',
+            width: 800,
+            height: 600,
+            alt: 'Imagen de Inicio',
+          },
+        ],
+      }}
+    />
     <div className='w-full h-[90vh] flex flex-col justify-center items-center'>
       <h1>Aqui va una pantalla bien chingona</h1>
       <div>
@@ -36,5 +54,6 @@ export default function Home() {
         </Link>
       </div>
     </div>
+    </>
   );
 }

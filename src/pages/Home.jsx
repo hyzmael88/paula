@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import { Spinner } from '@/components/Spinner';
+import { NextSeo } from 'next-seo';
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -92,6 +93,23 @@ export default function Home() {
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>; // Muestra el mensaje de error
 
   return (
+    <>
+    <NextSeo
+      title="Prime Beauties | Home"
+      description="Esta es la descripción de la página de inicio"
+      openGraph={{
+        title: 'Prime Beauties | Home',
+        description: 'Esta es la descripción de la página de inicio',
+        images: [
+          {
+            url: 'https://www.tusitioweb.com/imagen-inicio-og.png',
+            width: 800,
+            height: 600,
+            alt: 'Imagen de Inicio',
+          },
+        ],
+      }}
+    />
     <div className="max-w-4xl w-full p-6 mx-auto">
       <h1 className="text-3xl font-bold mb-6">Publicaciones Recientes</h1>
       {publicaciones.length === 0 ? (
@@ -156,5 +174,6 @@ export default function Home() {
         </div>
       )}
     </div>
+    </>
   );
 }

@@ -31,14 +31,14 @@ function SideBarLeft() {
                   </p>
                 </Link>
               </li>
-              <li>
+            {/*   <li>
                 <Link href="/Notificaciones">
                   <p className="flex items-center text-lg font-medium text-black hover:text-purple-600">
                     <FaBell className="mr-2" />
                     Notificaciones
                   </p>
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/Suscripciones">
                   <p className="flex items-center text-lg font-medium text-black hover:text-purple-600">
@@ -55,14 +55,14 @@ function SideBarLeft() {
                   </p>
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/Historial">
                   <p className="flex items-center text-lg font-medium text-black hover:text-purple-600">
                     <FaHistory className="mr-2" />
                     Historial de pagos
                   </p>
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/Faqs">
                   <p className="flex items-center text-lg font-medium text-black hover:text-purple-600">
