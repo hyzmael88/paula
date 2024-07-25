@@ -1,5 +1,5 @@
 // pages/api/auth/update-password.js
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { client } from '@/sanity/lib/client';
 
 export default async (req, res) => {
