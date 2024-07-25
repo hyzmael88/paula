@@ -44,6 +44,16 @@ const Suscripciones = () => {
     router.push(`/Modelo/${slug}`);
   };
 
+  useEffect(() => {
+    if (!session) {
+      router.push('/Auth/Login');
+    }
+  }, [session, router]);
+
+  if (!session) {
+    return null; // Retorna null para evitar renderizar el componente antes de redirigir
+  }
+
   if (loading) return <div className="text-center p-6">Cargando...</div>;
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
 

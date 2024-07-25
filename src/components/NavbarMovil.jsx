@@ -36,12 +36,12 @@ const NavbarMovil = () => {
         <div className="bg-white shadow-md border-t-2 p-4">
           <ul className="space-y-4">
             <li>
-              <Link href="/" className="block text-lg font-medium text-black hover:text-purple-600">
+              <Link href="/" onClick={toggleMenu} className="block text-lg font-medium text-black hover:text-purple-600">
                 Inicio
               </Link>
             </li>
             <li>
-              <Link href="/Explorar" className="block text-lg font-medium text-black hover:text-purple-600">
+              <Link href="/Explorar" onClick={toggleMenu} className="block text-lg font-medium text-black hover:text-purple-600">
                 Explorar
               </Link>
             </li>
@@ -51,12 +51,12 @@ const NavbarMovil = () => {
               </Link>
             </li> */}
             <li>
-              <Link href="/Suscripciones" className="block text-lg font-medium text-black hover:text-purple-600">
+              <Link href="/Suscripciones" onClick={toggleMenu} className="block text-lg font-medium text-black hover:text-purple-600">
                 Suscripciones
               </Link>
             </li>
             <li>
-              <Link href="/Compras" className="block text-lg font-medium text-black hover:text-purple-600">
+              <Link href="/Compras" onClick={toggleMenu} className="block text-lg font-medium text-black hover:text-purple-600">
                 Compras
               </Link>
             </li>
@@ -66,17 +66,17 @@ const NavbarMovil = () => {
               </Link>
             </li> */}
             <li>
-              <Link href="/Faqs" className="block text-lg font-medium text-black hover:text-purple-600">
+              <Link href="/Faqs" onClick={toggleMenu} className="block text-lg font-medium text-black hover:text-purple-600">
                 FAQS
               </Link>
             </li>
             <li>
-              <Link href="/Soporte" className="block text-lg font-medium text-black hover:text-purple-600">
+              <Link href="/Soporte" onClick={toggleMenu} className="block text-lg font-medium text-black hover:text-purple-600">
                 Soporte
               </Link>
             </li>
             <li>
-              <Link href="/Configuracion" className="block text-lg font-medium text-black hover:text-purple-600">
+              <Link href="/Configuracion" onClick={toggleMenu} className="block text-lg font-medium text-black hover:text-purple-600">
                 Configuracion
               </Link>
             </li>

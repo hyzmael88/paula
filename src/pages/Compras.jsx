@@ -100,6 +100,16 @@ const Compras = () => {
     }
   };
 
+  useEffect(() => {
+    if (!session) {
+      router.push('/Auth/Login');
+    }
+  }, [session, router]);
+
+  if (!session) {
+    return null; // Retorna null para evitar renderizar el componente antes de redirigir
+  }
+
   if (loading) return <Spinner />; // Muestra el loader mientras los datos se cargan
 
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>; // Muestra el mensaje de error
