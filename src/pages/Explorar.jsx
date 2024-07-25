@@ -38,8 +38,8 @@ const Explore = () => {
         
         // Simulating data for sections, replace this with your own logic
         setForYou(paquetesData.slice(0, 4));
-        setNewPaquetes(paquetesData.slice(4, 8));
-        setDiscover(paquetesData.slice(8, 12));
+        setNewPaquetes(paquetesData.slice(0, 4));
+        setDiscover(paquetesData.slice(0, 4));
 
         setLoading(false);
       } catch (error) {

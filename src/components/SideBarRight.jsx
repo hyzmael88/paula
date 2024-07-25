@@ -7,7 +7,27 @@ const SidebarRight = () => {
   const { data: session } = useSession();
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [suggestions, setSuggestions] = useState([1, 2, 3]); // Replace this with real suggestions if needed
+  const [suggestions, setSuggestions] = useState([]);
+
+  useEffect(() => {
+    // Fetch initial suggestions
+    const fetchSuggestions = async () => {
+      try {
+        const query = `*[_type == "modelos"] | order(_createdAt desc)[0...5]{
+          _id,
+          nombre,
+          slug,
+          fotoPerfil
+        }`;
+        const results = await client.fetch(query);
+        setSuggestions(results);
+      } catch (error) {
+        console.error('Error fetching suggestions:', error);
+      }
+    };
+
+    fetchSuggestions();
+  }, []);
 
   useEffect(() => {
     if (searchQuery) {
@@ -75,16 +95,20 @@ const SidebarRight = () => {
                     </div>
                   </div>
                 ))
-              : suggestions.map((item) => (
+              : suggestions.map((model) => (
                   <div
-                    key={item}
-                    className="flex items-center bg-gray-200 p-4 rounded-lg shadow-md"
+                    key={model._id}
+                    className="flex items-center bg-gray-200 p-4 rounded-lg shadow-md cursor-pointer"
+                    onClick={() => window.location.href = `/Modelo/${model.slug.current}`}
                   >
-                    <div className="w-12 h-12 bg-gray-400 rounded-full mr-4"></div>
+                    <img
+                      src={urlFor(model.fotoPerfil).url()}
+                      alt={model.nombre}
+                      className="w-12 h-12 bg-gray-400 rounded-full mr-4"
+                    />
                     <div>
-                      <h3 className="text-md font-bold">Lorem Ipsum</h3>
-                      <p className="text-sm text-gray-600">@LoremIpsum</p>
-                      <p className="text-sm text-gray-600">Disponible ahora</p>
+                      <h3 className="text-md font-bold">{model.nombre}</h3>
+                      <p className="text-sm text-gray-600">@{model.nombre.replace(/\s+/g, '').toLowerCase()}</p>
                     </div>
                   </div>
                 ))}

@@ -166,7 +166,7 @@ function Modelo() {
   if (!modelo) return <div>No se encontró el modelo.</div>;
 
   return (
-    <div className="p-4">
+    <div className="p-4 ">
       <h1 className="text-3xl font-bold mb-4">{modelo.nombre}</h1>
       {/* Muestra más detalles de la modelo como desees */}
       <p className="">{modelo.biografia}</p>
