@@ -63,12 +63,12 @@ export default function Home() {
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>; // Muestra el mensaje de error
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl w-1/3 p-6">
       <h1 className="text-3xl font-bold mb-6">Publicaciones Recientes</h1>
       {publicaciones.length === 0 ? (
         <p>No hay publicaciones disponibles.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="flex flex-col gap-4">
           {publicaciones.map((publicacion) => (
             <div 
               key={publicacion._id} 
@@ -78,7 +78,7 @@ export default function Home() {
               <img 
                 src={publicacion.fotografias && publicacion.fotografias.length > 0 ? urlFor(publicacion.fotografias[0]).url() : '/default-image.png'} 
                 alt={publicacion.copy} 
-                className="w-full h-48 object-cover"
+                className="w-full h-72 object-cover"
               />
               <div className="p-4">
                 <p className="text-sm text-gray-500">{publicacion.copy}</p>
