@@ -6,6 +6,7 @@ import { Spinner } from "@/components/Spinner"; // Asegúrate de tener un compon
 import { useSession } from "next-auth/react";
 import ModalLogin from "@/components/ModalLogin";
 import getStripe from "@/sanity/lib/getStripe";
+import { FaInstagram, FaTwitter, FaTiktok } from 'react-icons/fa';
 
 function Modelo() {
   const [modelo, setModelo] = useState(null);
@@ -163,6 +164,26 @@ function Modelo() {
     <div className="p-4 w-full xl:w-1/3 ">
       <h1 className="text-3xl font-bold mb-4">{modelo.nombre}</h1>
       <p className="">{modelo.biografia}</p>
+      <div className="flex space-x-4 my-4">
+        {modelo.instagram && (
+          <a href={modelo.instagram} target="_blank" rel="noopener noreferrer">
+            <FaInstagram className="text-pink-500 w-6 h-6" />
+          </a>
+        )}
+        {modelo.twitter && (
+          <a href={modelo.twitter} target="_blank" rel="noopener noreferrer">
+                        {console.log(modelo.twitter)}
+
+            <FaTwitter className="text-blue-400 w-6 h-6" />
+          </a>
+        )}
+        {modelo.tiktok && (
+          <a href={modelo.tiktok} target="_blank" rel="noopener noreferrer">
+            {console.log(modelo.tiktok)}
+            <FaTiktok className="text-black-600 w-6 h-6" />
+          </a>
+        )}
+      </div>
       <div className="flex flex-row gap-x-4 my-4">
         {!subscribed ? (
           <button
