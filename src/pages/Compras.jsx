@@ -47,11 +47,9 @@ const Compras = () => {
           if (user) {
             if (user.compras) {
               setCompras(user.compras);
-              console.log(user.compras);
             }
             if (user.paquetesAdquiridos) {
               setPaquetes(user.paquetesAdquiridos);
-              console.log(user.paquetesAdquiridos);
             }
           }
           setLoading(false);
@@ -73,8 +71,7 @@ const Compras = () => {
       const params = { modeloRef };
       const data = await client.fetch(query, params);
       if (data && data.slug) {
-        console.log(`El slug de la modelo es: ${data.slug}`);
-        console.log(data)
+      
         return data.slug;
       } else {
         console.error("No se encontró la modelo con el _ref proporcionado.");

@@ -26,7 +26,6 @@ function Signup() {
         });
 
         if (result.error) {
-          console.log(result.error);
           setError(result.error);
         } else {
           setError(null);
@@ -37,7 +36,6 @@ function Signup() {
       }
     } catch (error) {
       setError(error.response?.data?.message || 'An unexpected error occurred');
-      console.log(error)
     }
   };
 

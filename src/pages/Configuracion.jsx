@@ -58,7 +58,6 @@ const Configuracion = () => {
         .commit();
       setUpdated(true);
     } catch (error) {
-      console.log(error)
       setError('Error al actualizar los datos del usuario.');
     }
   };
