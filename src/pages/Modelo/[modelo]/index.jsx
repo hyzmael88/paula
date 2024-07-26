@@ -166,6 +166,8 @@ function Modelo() {
             src={urlFor(modelo.fotoPortada).url()}
             alt="Portada"
             className="w-full h-48 object-cover rounded-t-lg"
+            onContextMenu={(e) => e.preventDefault()}
+
           />
         )}
         {modelo.fotoPerfil && (
@@ -173,6 +175,8 @@ function Modelo() {
             src={urlFor(modelo.fotoPerfil).url()}
             alt="Foto de Perfil"
             className="w-24 h-24 rounded-full border-4 border-white absolute -bottom-12 left-4"
+            onContextMenu={(e) => e.preventDefault()}
+
           />
         )}
       </div>
@@ -255,6 +259,7 @@ function Modelo() {
                               onClick={() =>
                                 setIsVisorOpen(true)
                               }
+                              onContextMenu={(e) => e.preventDefault()}
                             />
                           {console.log(publicacion.fotografias)}
                           {isVisorOpen && (
@@ -281,6 +286,7 @@ function Modelo() {
                               onClick={() =>
                                 setIsVisorOpen2(true)
                               }
+                              onContextMenu={(e) => e.preventDefault()}
                             />	
                             {isVisorOpen2 && (
         <ModalVisor2

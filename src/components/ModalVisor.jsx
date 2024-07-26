@@ -78,6 +78,8 @@ function ModalVisor({ isOpen, onClose, fotografias }) {
               transition: dragging ? 'none' : 'transform 0.2s ease-in-out',
               cursor: dragging ? 'grabbing' : 'grab',
             }}
+            onContextMenu={(e) => e.preventDefault()}
+
           />
         </div>
         <div className="flex justify-center gap-4 p-4">
