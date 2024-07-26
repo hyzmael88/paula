@@ -43,7 +43,7 @@ export default NextAuth({
     })
   ],
   pages: {
-    signIn: '/auth/signin',
+    signIn: '/Auth/Login',
     error: '/auth/error',
   },
   callbacks: {
