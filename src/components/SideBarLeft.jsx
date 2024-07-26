@@ -99,7 +99,7 @@ function SideBarLeft() {
             </ul>
           </nav>
         </div>
-        <div className="text-center">
+       {/*  <div className="text-center">
           <Link href="/Politicas">
             <p className="flex items-center text-sm font-medium text-black hover:text-purple-600">
               <FaShieldAlt className="mr-2" />
@@ -112,7 +112,7 @@ function SideBarLeft() {
               Términos y condiciones
             </p>
           </Link>
-        </div>
+        </div> */}
       </div>
     );
   }
