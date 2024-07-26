@@ -8,7 +8,6 @@ import ModalLogin from "@/components/ModalLogin";
 import getStripe from "@/sanity/lib/getStripe";
 import { FaInstagram, FaTwitter, FaTiktok, FaShareAlt } from 'react-icons/fa';
 import ModalVisor from "@/components/ModalVisor";
-import ModalVisor2 from "@/components/ModalVisor";
 
 function Modelo() {
   const [modelo, setModelo] = useState(null);
@@ -23,8 +22,7 @@ function Modelo() {
   const [subscribed, setSubscribed] = useState(false);
   const [selector, setSelector] = useState("Publicaciones");
   const [isVisorOpen, setIsVisorOpen] = useState(false);
-  const [isVisorOpen2, setIsVisorOpen2] = useState(false);
-
+  const [currentFotos, setCurrentFotos] = useState([]);
 
   useEffect(() => {
     if (!session) {
@@ -148,7 +146,6 @@ function Modelo() {
   if (!modelo) return <div>No se encontró el modelo.</div>;
 
   const handleShare = () => {
-    // Implementa la funcionalidad para compartir el perfil
     if (navigator.share) {
       navigator.share({
         title: modelo.nombre,
@@ -156,6 +153,11 @@ function Modelo() {
         url: window.location.href,
       }).catch((error) => console.error('Error sharing', error));
     }
+  };
+
+  const openVisor = (fotografias) => {
+    setCurrentFotos(fotografias);
+    setIsVisorOpen(true);
   };
 
   return (
@@ -167,7 +169,6 @@ function Modelo() {
             alt="Portada"
             className="w-full h-48 object-cover rounded-t-lg"
             onContextMenu={(e) => e.preventDefault()}
-
           />
         )}
         {modelo.fotoPerfil && (
@@ -176,7 +177,6 @@ function Modelo() {
             alt="Foto de Perfil"
             className="w-24 h-24 rounded-full border-4 border-white absolute -bottom-12 left-4"
             onContextMenu={(e) => e.preventDefault()}
-
           />
         )}
       </div>
@@ -249,26 +249,16 @@ function Modelo() {
                   {subscribed ? (
                     !publicacion.precio ? (
                       publicacion.fotografias && publicacion.fotografias.length > 0 && (
-                        <div className="fotografias mb-4">
-                          
-                            <img
-                              key={publicacion.fotografias[0]}
-                              src={urlFor(publicacion.fotografias[0]).url()}
-                              alt={`Fotografía `}
-                              className="w-full h-[60vh] object-cover mb-2 cursor-pointer"
-                              onClick={() =>
-                                setIsVisorOpen(true)
-                              }
-                              onContextMenu={(e) => e.preventDefault()}
-                            />
+                        <div className="fotografias mb-4"> 
+                          <img
+                            key={publicacion.fotografias[0]}
+                            src={urlFor(publicacion.fotografias[0]).url()}
+                            alt={`Fotografía `}
+                            className="w-full h-[60vh] object-cover mb-2 cursor-pointer"
+                            onClick={() => openVisor(publicacion.fotografias.map(foto => urlFor(foto).url()))}
+                            onContextMenu={(e) => e.preventDefault()}
+                          />
                           {console.log(publicacion.fotografias)}
-                          {isVisorOpen && (
-        <ModalVisor
-          isOpen={isVisorOpen}
-          onClose={() => setIsVisorOpen(false)}
-          fotografias={publicacion.fotografias.map(foto => urlFor(foto).url())}
-        />
-      )}
                         </div>
                       )
                     ) : session.user.compras &&
@@ -277,25 +267,14 @@ function Modelo() {
                       ) ? (
                       publicacion.fotografias && publicacion.fotografias.length > 0 && (
                         <div className="fotografias mb-4">
-                          
-                            <img
-                              key={publicacion.fotografias[0]}
-                              src={urlFor(publicacion.fotografias[0]).url()}
-                              alt={`Fotografía `}
-                              className="w-full h-[60vh] object-cover mb-2 cursor-pointer"
-                              onClick={() =>
-                                setIsVisorOpen2(true)
-                              }
-                              onContextMenu={(e) => e.preventDefault()}
-                            />	
-                            {isVisorOpen2 && (
-        <ModalVisor2
-          isOpen={isVisorOpen2}
-          onClose={() => setIsVisorOpen2(false)}
-          fotografias={publicacion.fotografias.map(foto => urlFor(foto).url())}
-        />
-      )}
-                        
+                          <img
+                            key={publicacion.fotografias[0]}
+                            src={urlFor(publicacion.fotografias[0]).url()}
+                            alt={`Fotografía `}
+                            className="w-full h-[60vh] object-cover mb-2 cursor-pointer"
+                            onClick={() => openVisor(publicacion.fotografias.map(foto => urlFor(foto).url()))}
+                            onContextMenu={(e) => e.preventDefault()}
+                          />	
                         </div>
                       )
                     ) : (
@@ -360,9 +339,14 @@ function Modelo() {
           )}
         </div>
         <ModalLogin isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
-        
+        {isVisorOpen && (
+          <ModalVisor
+            isOpen={isVisorOpen}
+            onClose={() => setIsVisorOpen(false)}
+            fotografias={currentFotos}
+          />
+        )}
       </div>
-
     </div>
   );
 }
