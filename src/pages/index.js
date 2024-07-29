@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
 
+
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
@@ -39,24 +40,27 @@ export default function Home() {
         ],
       }}
     />
-    <div className='w-full h-[90vh] flex flex-col justify-center items-center'>
+    <div className='w-full'>
+
+    <div className='w-full h-screen flex flex-col justify-center items-center'>
       <img src='/logo.png' alt='logo' className=' object-cover' />
-      <p className='max-w-xl text-center text-[16px]'>Explora contenido exclusivo y personalizado, creado por talentosos influencers y potenciado por inteligencia artificial. Suscríbete para una experiencia única y atrevida que va más allá de lo convencional.</p>
-      <div>
+      <p className='max-w-xl text-center text-[16px] mt-[27px]'>Explora contenido exclusivo y personalizado, creado por talentosos influencers y potenciado por inteligencia artificial. Suscríbete para una experiencia única y atrevida que va más allá de lo convencional.</p>
+      <div className='mt-[39px] flex gap-[50px]'>
         <Link href={"/Auth/Signup"}>
-        <button className='px-8 py-3 bg-[#602AB1] m-4 text-white font-inter font-bold rounded-[34px] text-[20px] '>
-          Registrarse
+        <button className='px-8 py-3 bg-[#602AB1] m-4 text-white font-inter font-bold rounded-[34px] text-[20px] shadowButton '>
+          Registrate
         </button>
         </Link>
         <Link href={"/Auth/Login"}>
-        <button className='px-6 py-3 m-4 text-white font-inter font-bold rounded-[34px] text-[20px]'
+        <button className='px-6 py-3 m-4 text-white font-inter font-bold rounded-[34px] text-[20px] shadowButton'
         style={{ background: 'linear-gradient(180deg, #FF66AE 0%, #6E26B6 100%)' }}
         >
-          Iniciar Sesion
+          Iniciar Sesión
         </button>
         </Link>
       </div>
     </div>
+          </div>
     </>
   );
 }

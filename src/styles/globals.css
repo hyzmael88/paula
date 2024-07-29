@@ -41,3 +41,7 @@
   body {
     font-family: 'Inter', sans-serif;
   }
+
+.shadowButton{
+  box-shadow: 3px 4px 7.4px 0px rgba(0, 0, 0, 0.59);
+}
