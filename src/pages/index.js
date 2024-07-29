@@ -40,15 +40,18 @@ export default function Home() {
       }}
     />
     <div className='w-full h-[90vh] flex flex-col justify-center items-center'>
-      <h1>Aqui va una pantalla bien chingona</h1>
+      <img src='/logo.png' alt='logo' className=' object-cover' />
+      <p className='max-w-xl text-center text-[16px]'>Explora contenido exclusivo y personalizado, creado por talentosos influencers y potenciado por inteligencia artificial. Suscríbete para una experiencia única y atrevida que va más allá de lo convencional.</p>
       <div>
         <Link href={"/Auth/Signup"}>
-        <button className='px-4 py-2 bg-pink-500 m-4 '>
+        <button className='px-8 py-3 bg-[#602AB1] m-4 text-white font-inter font-bold rounded-[34px] text-[20px] '>
           Registrarse
         </button>
         </Link>
         <Link href={"/Auth/Login"}>
-        <button className='px-4 py-2 bg-pink-500 m-4 '>
+        <button className='px-6 py-3 m-4 text-white font-inter font-bold rounded-[34px] text-[20px]'
+        style={{ background: 'linear-gradient(180deg, #FF66AE 0%, #6E26B6 100%)' }}
+        >
           Iniciar Sesion
         </button>
         </Link>
