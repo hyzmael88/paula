@@ -8,7 +8,7 @@ function CarrouselIndex({ photos }) {
     const bottomPhotos = photos.slice(8, 16);
 
   return (
-    <div className='absolute w-full h-[45vh] '>
+    <div className='absolute w-full h-1/4 xl:h-[45vh] '>
 
     <div className='w-full h-full  flex flex-col gap-y-2 -z-10 relative  '>
     <div className='h-[800px] w-full xl:h-full bg-white z-10 blur-2xl opacity-70 xl:opacity-65 rounded-[45px]  absolute '/>
