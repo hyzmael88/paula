@@ -67,7 +67,7 @@ export default function Home() {
     <div className='w-full h-full xl:h-[94vh] relative overflow-hidden'>
    <CarrouselIndex photos={photos} />
     <div className='w-full h-screen xl:h-[95vh] flex flex-col justify-end items-center pb-[20px] xl:pb-[100px] px-4 '>
-      <img src='/logo.png' alt='logo' className=' object-cover' />
+      <img src='/Logo.png' alt='logo' className=' object-cover' />
       <p className='max-w-sm xl:max-w-xl text-center text-[13px] xl:text-[16px] mt-[10px] xl:mt-[27px]'>Explora contenido exclusivo y personalizado, creado por talentosos influencers y potenciado por inteligencia artificial. Suscríbete para una experiencia única y atrevida que va más allá de lo convencional.</p>
       <div className='w-full max-w-sm mt-[20px] xl:mt-[39px] flex justify-between gap-4 xl:gap-[50px]'>
         <Link href={"/Auth/Signup"}
