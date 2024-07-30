@@ -1,6 +1,8 @@
 import moment from "moment";
 import React, { useState } from "react";
-import { FaChevronLeft, FaChevronRight, FaRegImage } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaHeart, FaMoneyBillWave, FaRegCommentDots, FaRegImage } from "react-icons/fa";
+import { CiBookmark } from "react-icons/ci";
+
 
 function Publicacion({
   publicacion,
@@ -21,8 +23,8 @@ function Publicacion({
   };
 
   return (
-    <div className="bg-white shadow-lg overflow-hidden cursor-pointer">
-      <div className="w-full flex justify-between px-2 ">
+    <div className="bg-white shadow-lg overflow-hidden cursor-pointer rounded-[27px]">
+      <div className="w-full flex justify-between px-4 h-[125px] ">
         <div className="flex items-center">
           <img
             src={urlFor(publicacion.modelo.fotoPerfil).url()}
@@ -121,14 +123,16 @@ function Publicacion({
           </div>
         </div>
       )}
-      <div className="w-full flex justify-between items-center px-2">
-        <div className="flex">
-          <div className="flex ">
-            <span>200</span>
+      <div className="w-full flex justify-between items-center px-8 h-[52px]">
+        <div className="flex gap-4">
+          <div className="flex  ">
+            <span className="text-[11px] flex items-center gap-1 "><FaHeart/>200</span>
           </div>
-          <div className="flex ">10 comentarios</div>
+          <div className=" text-[11px] flex items-center gap-1 ">
+          <FaRegCommentDots />
+          10 comentarios</div>
         </div>
-        <div>dinero y guardar</div>
+        <div className="text-[20px] flex gap-2"><FaMoneyBillWave /> <CiBookmark /></div>
       </div>
     </div>
   );

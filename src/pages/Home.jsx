@@ -11,6 +11,7 @@ import moment from 'moment';
 import 'moment/locale/es'; // Importa el idioma español
 import { FaRegImage } from 'react-icons/fa';
 import Publicacion from '@/components/Publicacion';
+import getStripe from '@/sanity/lib/getStripe';
 
 moment.locale('es');
 
@@ -142,7 +143,7 @@ export default function Home() {
               openVisor={openVisor}
               session={session}
               urlFor={urlFor}
-              
+
 
               />
             ))}
