@@ -3,6 +3,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import PieLogin from '@/components/PieLogin';
 
 function Signup() {
   const [error, setError] = useState(null);
@@ -58,58 +59,65 @@ function Signup() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row w-full h-screen">
-      <div className="flex flex-col items-center justify-center w-full md:w-1/2 p-8 bg-gray-100">
-        <h1 className="text-4xl font-bold mb-6">Sign Up</h1>
+    <div className="flex flex-col lg:flex-row w-full h-full items-center">
+      <div className='w-full h-full relative lg:hidden'>
+        <img src="/loginImgMovil.png" alt="Logo" className="w-full h-full mx-auto" />
+        <img src="/logoLoginImgMovil.png" alt="Logo" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+      </div>
+      <div className="flex flex-col justify-center lg:items-center w-full md:w-1/2 p-8">
+        <h1 className="text-4xl font-bold mb-6">Regístrate</h1>
         {error && <p className="text-red-500 mb-4">{error}</p>}
-        <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
+        <form onSubmit={handleSubmit} className="w-full space-y-4">
           <div>
-            <label htmlFor="name" className="block text-gray-700">Name</label>
+            <label htmlFor="name" className="block text-gray-700 text-[14px]">Nombre</label>
             <input
               name="name"
               type="text"
-              placeholder="Name"
+              placeholder="Nombre"
               required
-              className="w-full p-2 border border-gray-300 rounded mt-1"
+              className="w-full p-2 mt-1 rounded-[34px] bg-[#F2F4F8] inputLogin placeholder:text-[#B9B9B9] placeholder:text-[16px]"
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-gray-700">Email Address</label>
+            <label htmlFor="email" className="block text-gray-700 text-[14px]">Correo electrónico</label>
             <input
               name="email"
               type="email"
-              placeholder="Email"
+              placeholder="Correo electrónico"
               required
-              className="w-full p-2 border border-gray-300 rounded mt-1"
+              className="w-full p-2 mt-1 rounded-[34px] bg-[#F2F4F8] inputLogin placeholder:text-[#B9B9B9] placeholder:text-[16px]"
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-gray-700">Password</label>
+            <label htmlFor="password" className="block text-gray-700 text-[14px]">Contraseña</label>
             <input
               name="password"
               type="password"
-              placeholder="Password"
+              placeholder="Contraseña"
               required
-              className="w-full p-2 border border-gray-300 rounded mt-1"
+              className="w-full p-2 mt-1 rounded-[34px] bg-[#F2F4F8] inputLogin placeholder:text-[#B9B9B9] placeholder:text-[16px]"
             />
-            <p className="text-xs text-gray-500 mt-1">It must be a combination of minimum 8 letters, numbers, and symbols.</p>
+            <p className="text-xs text-gray-500 mt-1">Debe ser una combinación de al menos 8 letras, números y símbolos.</p>
           </div>
-          <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">Sign Up</button>
+          <button type="submit" className="w-full loginButton font-bold text-white py-2 rounded-[34px]">Regístrate</button>
         </form>
-        <hr className="my-6 w-full max-w-md" />
         <button
           onClick={() => signIn('google', { callbackUrl: '/Home' })}
-          className="w-full max-w-md bg-white border border-gray-300 text-gray-700 py-2 rounded flex items-center justify-center"
+          className="w-full  bg-[#4F70D0] border border-gray-300 text-white font-bold py-2 rounded flex items-center justify-center rounded-[34px] mt-2"
         >
-          <img src="/google-logo.png" alt="Google Logo" className="w-5 h-5 mr-2" />
-          Sign Up with Google
+          <img src="/icons/google.svg" alt="Google Logo" className="w-5 h-5 mr-2" />
+          Regístrate con Google
         </button>
-        <p className="mt-6 text-center">
-          Already have an account? <Link href="/Auth/Login" className="text-blue-500">Log In</Link>
+        <p className="mt-6 text-left text-[#602AB1] text-[14px]">
+          ¿Ya tienes una cuenta? <Link href="/Auth/Login"> <span className="text-[#602AB1]">Inicia sesión aquí</span></Link>
         </p>
+        <div className='hidden lg:block'>
+          <PieLogin />
+        </div>
       </div>
-      <div className="hidden md:flex md:w-1/2 bg-pink-500">
-        {/* You can add an image or any other content here */}
+      <div className="hidden lg:flex md:w-1/2 bg-pink-500 relative">
+        <img src="/loginImgDesktop.png" alt="Logo" className="w-full h-screen object-cover" />
+        <img src="/logoLoginImgMovil.png" alt="Logo" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
       </div>
     </div>
   );

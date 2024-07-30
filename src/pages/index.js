@@ -64,7 +64,7 @@ export default function Home() {
         ],
       }}
     />
-    <div className='w-full h-full relative overflow-hidden'>
+    <div className='w-full h-[94vh] relative overflow-hidden'>
    <CarrouselIndex photos={photos} />
     <div className='w-full h-[950px] xl:h-[95vh] flex flex-col justify-end items-center pb-[20px] xl:pb-[100px] px-4 '>
       <img src='/logo.png' alt='logo' className=' object-cover' />

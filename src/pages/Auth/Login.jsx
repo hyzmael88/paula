@@ -3,6 +3,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import PieLogin from '@/components/PieLogin';
 
 function Login() {
   const { data: session, status } = useSession();
@@ -62,16 +63,16 @@ function Login() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row w-full h-full">
-      <div className='w-full h-full relative'>
+    <div className="flex flex-col lg:flex-row w-full h-full  items-center ">
+      <div className='w-full h-full relative lg:hidden'>
         <img src="/loginImgMovil.png" alt="Logo" className="w-full h-full mx-auto " />
-          <img src="/logoLoginImgMovil.png" alt="Logo" className=" mx-auto absolute top-16 left-0 right-0 " />
+          <img src="/logoLoginImgMovil.png" alt="Logo" className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
         
       </div>
-      <div className="flex flex-col justify-center w-full md:w-1/2 p-8 ">
-        <h1 className="text-4xl font-bold mb-6 ">Inicia Sesión</h1>
+      <div className="flex flex-col justify-center lg:items-center w-full md:w-1/2 p-8 ">
+        <h1 className="text-4xl font-bold mb-6">Inicia Sesión</h1>
         {error && <p className="text-red-500 mb-4">{error}</p>}
-        <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
+        <form onSubmit={handleSubmit} className="w-full  space-y-4">
           <div>
             <label htmlFor="email" className="block text-gray-700 text-[14px]">Correo electrónico</label>
             <input
@@ -100,7 +101,7 @@ function Login() {
         </form>
         <button
           onClick={() => signIn('google', { callbackUrl: '/Home' })}
-          className="w-full max-w-md bg-[#4F70D0] border border-gray-300 text-white font-bold py-2 rounded flex items-center justify-center rounded-[34px] mt-2"
+          className="w-full  bg-[#4F70D0] border border-gray-300 text-white font-bold py-2 rounded flex items-center justify-center rounded-[34px] mt-2"
         >
           <img src="/icons/google.svg" alt="Google Logo" className="w-5 h-5 mr-2  " />
           Inicia sesión con Google
@@ -108,6 +109,9 @@ function Login() {
         <p className="mt-6 text-left text-[#602AB1] text-[14px] ">
           ¿No tienes una cuenta? <Link href="/Auth/Signup"> <span  className="text-[#602AB1]">Regístrate aquí</span></Link>
         </p>
+        <div className='hidden lg:block'>
+          <PieLogin/>
+        </div>
         
         {resetMessage && (
           <form onSubmit={handleResetPassword} className="w-full max-w-md space-y-4 mt-4">
@@ -129,8 +133,9 @@ function Login() {
           </form>
         )}
       </div>
-      <div className="hidden md:flex md:w-1/2 bg-pink-500">
-        {/* You can add an image or any other content here */}
+      <div className="hidden lg:flex md:w-1/2 bg-pink-500 relative">
+       <img src="/loginImgDesktop.png" alt="Logo" className="w-full h-screen object-cover" />
+       <img src="/logoLoginImgMovil.png" alt="Logo" className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
       </div>
     </div>
   );
