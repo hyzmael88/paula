@@ -62,48 +62,53 @@ function Login() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row w-full h-screen">
-      <div className="flex flex-col items-center justify-center w-full md:w-1/2 p-8 bg-gray-100">
-        <h1 className="text-4xl font-bold mb-6">Log In</h1>
+    <div className="flex flex-col md:flex-row w-full h-full">
+      <div className='w-full h-full relative'>
+        <img src="/loginImgMovil.png" alt="Logo" className="w-full h-full mx-auto " />
+          <img src="/logoLoginImgMovil.png" alt="Logo" className=" mx-auto absolute top-16 left-0 right-0 " />
+        
+      </div>
+      <div className="flex flex-col justify-center w-full md:w-1/2 p-8 ">
+        <h1 className="text-4xl font-bold mb-6 ">Inicia Sesión</h1>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
           <div>
-            <label htmlFor="email" className="block text-gray-700">Email Address</label>
+            <label htmlFor="email" className="block text-gray-700 text-[14px]">Correo electrónico</label>
             <input
               name="email"
               type="email"
-              placeholder="Email"
+              placeholder="Correo electrónico"
               required
-              className="w-full p-2 border border-gray-300 rounded mt-1"
+              className="w-full p-2 mt-1 rounded-[34px] bg-[#F2F4F8] inputLogin placeholder:text-[#B9B9B9] placeholder:text-[16px]"
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-gray-700">Password</label>
+            <label htmlFor="password" className="block text-gray-700 text-[14px]">Contraseña</label>
             <input
               name="password"
               type="password"
-              placeholder="Password"
+              placeholder="Contraseña"
               required
-              className="w-full p-2 border border-gray-300 rounded mt-1"
+              className="w-full p-2  mt-1  rounded-[34px] bg-[#F2F4F8] inputLogin placeholder:text-[#B9B9B9] placeholder:text-[16px]"
             />
-            <p className="text-xs text-gray-500 mt-1">It must be a combination of minimum 8 letters, numbers, and symbols.</p>
+            {/* <p className="text-xs text-gray-500 mt-1">It must be a combination of minimum 8 letters, numbers, and symbols.</p> */}
           </div>
-          <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">Log In</button>
+          <p className="mt-6 text-right">
+          <a href="#" className="text-[#602AB1] text-[14px]" onClick={() => setResetMessage(true)}>¿Olvidaste la contraseña?</a>
+        </p>
+          <button type="submit" className="w-full loginButton font-bold text-white py-2 rounded-[34px]">Inicia Sesión</button>
         </form>
-        <hr className="my-6 w-full max-w-md" />
         <button
           onClick={() => signIn('google', { callbackUrl: '/Home' })}
-          className="w-full max-w-md bg-white border border-gray-300 text-gray-700 py-2 rounded flex items-center justify-center"
+          className="w-full max-w-md bg-[#4F70D0] border border-gray-300 text-white font-bold py-2 rounded flex items-center justify-center rounded-[34px] mt-2"
         >
-          <img src="/google-logo.png" alt="Google Logo" className="w-5 h-5 mr-2" />
-          Log in with Google
+          <img src="/icons/google.svg" alt="Google Logo" className="w-5 h-5 mr-2  " />
+          Inicia sesión con Google
         </button>
-        <p className="mt-6 text-center">
-          No account yet? <Link href="/Auth/Signup"> <span  className="text-blue-500">Sign Up</span></Link>
+        <p className="mt-6 text-left text-[#602AB1] text-[14px] ">
+          ¿No tienes una cuenta? <Link href="/Auth/Signup"> <span  className="text-[#602AB1]">Regístrate aquí</span></Link>
         </p>
-        <p className="mt-6 text-center">
-          <a href="#" className="text-blue-500" onClick={() => setResetMessage(true)}>Forgot Password?</a>
-        </p>
+        
         {resetMessage && (
           <form onSubmit={handleResetPassword} className="w-full max-w-md space-y-4 mt-4">
             <div>
