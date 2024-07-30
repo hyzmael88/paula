@@ -10,7 +10,7 @@ const Footer = () => {
   }
   else{
   return (
-        <div className='w-full flex justify-center'>
+        <div className='w-full h-full pb-14 xl:pb-0 flex justify-center '>
       <footer className="w-[90%] bg-white py-4 border-t border-gray-300">
       <div className=" mx-auto flex flex-col-reverse lg:flex-row items-center justify-between px-4">
         <div className="flex flex-col-reverse lg:flex-row items-center lg:space-x-4 gap-y-4 text-gray-700 text-[12px] mb-4 xl:mb-0">

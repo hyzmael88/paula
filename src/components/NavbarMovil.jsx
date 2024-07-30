@@ -4,6 +4,9 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { FiHome, FiSearch, FiBell, FiUser, FiMenu } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
+import { TiHome } from "react-icons/ti";
+import { FaCompass, FaStar } from "react-icons/fa";
+
 
 const NavbarMovil = () => {
   const { data: session } = useSession();
@@ -14,20 +17,23 @@ const NavbarMovil = () => {
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
-    <div className="fixed xl:hidden bottom-0 left-0 right-0 bg-white border-t-2 z-50">
-      <div className="flex justify-around items-center py-2">
+    <div className="fixed xl:hidden bottom-0 left-0 right-0 navbarMovil border-t-2 h-[71px] z-50">
+      <div className="w-full h-full flex justify-around items-center pb-4 ">
         <Link href="/">
-          <FiHome className="text-2xl" />
+          <TiHome className="text-2xl" />
         </Link>
         <Link href="/Explorar">
-          <FiSearch className="text-2xl" />
+          <FaCompass className="text-2xl" />
+        </Link>
+        <Link href="/Suscripciones">
+          <FaStar className="text-2xl" />
         </Link>
         {/* <Link href="/Notificaciones">
           <FiBell className="text-2xl" />
         </Link> */}
         <button onClick={toggleMenu}>
           {menuOpen ? <MdClose className="text-2xl" /> : <FiMenu className="text-2xl" />}
-        </button>
+        </button>    
         {/* <Link href="/Configuracion">
           <FiUser className="text-2xl" />
         </Link> */}

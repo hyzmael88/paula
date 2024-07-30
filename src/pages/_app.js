@@ -20,11 +20,12 @@ export default function App({ Component, pageProps }) {
         {shouldShowSidebar && <SideBarLeft />}
         <DefaultSeo {...SEO} />
         <Component {...pageProps} />
-        {shouldShowSidebar && <NavbarMovil />}
 
         {shouldShowSidebar && <SideBarRight />}
       </div>
       <Footer />
+      {shouldShowSidebar && <NavbarMovil />}
+
     </Providers>
   );
 }
