@@ -7,6 +7,11 @@ import { urlFor } from '@/sanity/lib/image';
 import { Spinner } from '@/components/Spinner';
 import { NextSeo } from 'next-seo';
 import ModalVisor from '@/components/ModalVisor';
+import moment from 'moment';
+import 'moment/locale/es'; // Importa el idioma español
+
+moment.locale('es');
+
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -38,6 +43,7 @@ export default function Home() {
               _createdAt,
               modelo->{
                 nombre,
+                fotoPerfil,
                 slug,
                 _id
               }
@@ -117,8 +123,11 @@ export default function Home() {
           ],
         }}
       />
-      <div className="max-w-4xl w-full p-6 mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Publicaciones Recientes</h1>
+      <div className="max-w-4xl w-full lg:w-1/3  mx-auto">
+        <div className='w-full  mb-[33px]'>
+          <img src='/Logo.png' alt='Logo' className='w-[205px] mx-auto' />
+        </div>
+        {/* <h1 className="text-3xl font-bold mb-6">Publicaciones Recientes</h1> */}
         {publicaciones.length === 0 ? (
           <p>No hay publicaciones disponibles.</p>
         ) : (
@@ -126,8 +135,25 @@ export default function Home() {
             {publicaciones.map((publicacion) => (
               <div 
                 key={publicacion._id} 
-                className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
+                className="bg-white  shadow-lg overflow-hidden cursor-pointer"
               >
+                <div className='w-full flex justify-between px-2 '>
+                  <div className='flex items-center'>
+                    <img src={urlFor(publicacion.modelo.fotoPerfil).url()} alt={publicacion.modelo.nombre} className='w-[60px] h-[60px] bg-gray-400 rounded-full mr-4' />
+                    <div className='flex flex-col'>
+                      <p className='font-black text-[16px] '>{publicacion.modelo.nombre}</p>
+                      <p className='text-[11px] font-bold text-[#B9B9B9]'>@{publicacion.modelo.slug.current}</p>
+                      </div>
+                    </div>
+                    <div>
+                     
+                      <p className='text-[#B9B9B9] font-bold text-[11px] pt-3'>{moment(publicacion._createdAt).fromNow()}</p>
+                      </div>
+                  </div>
+                 <div className="p-4">
+                  <h2 className="text-[11px] leading-[13px]">{publicacion.copy}</h2>
+                  
+                </div>
                 {!publicacion.precio  ?(
                   publicacion.fotografias &&
                   publicacion.fotografias.length > 0 && (
@@ -136,7 +162,7 @@ export default function Home() {
                         key={publicacion.fotografias[0]}
                         src={urlFor(publicacion.fotografias[0]).url()}
                         alt={`Fotografía `}
-                        className="w-full h-[60vh] object-cover mb-2 cursor-pointer"
+                        className="w-full h-[330px] object-cover mb-2 cursor-pointer"
                         onClick={() => openVisor(publicacion.fotografias.map(foto => urlFor(foto).url()))}
                         onContextMenu={(e) => e.preventDefault()}
                       />
@@ -170,12 +196,22 @@ export default function Home() {
                     </div>
                   )
                 }
-                <div className="p-4">
-                  <h2 className="text-xl font-bold">{publicacion.copy}</h2>
-                  <p className="text-sm text-gray-500">
-                    {new Date(publicacion._createdAt).toLocaleDateString()}
-                  </p>
-                </div>
+                <div className='w-full flex justify-between items-center'>
+                  <div className='flex'>
+
+                    <div className='flex '>
+                      <span>
+                        200
+                      </span>
+                      </div>
+                      <div className='flex '>
+                        10 comentarios
+                        </div>
+                      </div>
+                      <div>
+                       dinero y guardar
+                        </div>
+                  </div>
               </div>
             ))}
           </div>

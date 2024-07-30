@@ -8,7 +8,7 @@ function SideBarLeft() {
 
   if (session) {
     return (
-      <div className="hidden w-1/3  bg-white h-screen border-r-2 xl:flex flex-col justify-between p-4">
+      <div className="hidden w-1/3  bg-white h-screen border-r-2 lg:flex flex-col justify-between p-4">
         <div>
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold">Logo</h1>

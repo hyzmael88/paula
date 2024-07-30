@@ -50,7 +50,7 @@ const SidebarRight = () => {
 
   if (session) {
     return (
-      <div className="w-1/3 hidden bg-white h-screen border-l-2 xl:flex flex-col p-4">
+      <div className="w-1/3 hidden bg-white h-screen border-l-2 lg:flex flex-col p-4">
         <div className="mb-8">
           <div className="relative">
             <input
