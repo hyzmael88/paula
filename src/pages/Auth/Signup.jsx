@@ -99,6 +99,7 @@ function Signup() {
             />
             <p className="text-xs text-gray-500 mt-1">Debe ser una combinación de al menos 8 letras, números y símbolos.</p>
           </div>
+          
           <button type="submit" className="w-full loginButton font-bold text-white py-2 rounded-[34px]">Regístrate</button>
         </form>
         <button
@@ -108,6 +109,7 @@ function Signup() {
           <img src="/icons/google.svg" alt="Google Logo" className="w-5 h-5 mr-2" />
           Regístrate con Google
         </button>
+        <p className="text-[10px] text-gray-500 mt-4">*Al hacer clic en Regístrate, aceptas nuestros <Link href="/Terms">Términos de servicio</Link> y nuestra <Link href="/Privacy">Política de privacidad</Link>.</p>
         <p className="mt-6 text-left text-[#602AB1] text-[14px]">
           ¿Ya tienes una cuenta? <Link href="/Auth/Login"> <span className="text-[#602AB1]">Inicia sesión aquí</span></Link>
         </p>
