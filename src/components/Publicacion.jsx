@@ -25,22 +25,23 @@ function Publicacion({
   return (
     <div className="bg-white shadow-lg overflow-hidden cursor-pointer rounded-[27px]">
       <div className="w-full flex justify-between px-4 h-[125px] ">
-        <div className="flex items-center">
+        <div className="w-full flex items-center">
           <img
             src={urlFor(publicacion.modelo.fotoPerfil).url()}
             alt={publicacion.modelo.nombre}
             className="w-[60px] h-[60px] bg-gray-400 rounded-full mr-4"
           />
-          <div className="flex flex-col">
-            <p className="font-black text-[16px] ">{publicacion.modelo.nombre}</p>
-            <p className="text-[11px] font-bold text-[#B9B9B9]">@{publicacion.modelo.slug.current}</p>
+          <div className="w-full flex flex-col">
+            <div className="w-full flex justify-between items-center  ">
+            <span className="font-black text-[16px] ">{publicacion.modelo.nombre}</span>
+          <span className="text-[#B9B9B9] font-bold text-[11px] pt-3">
+            {moment(publicacion._createdAt).fromNow()}
+          </span>
+        </div>
+            <span className="text-[11px] font-bold text-[#B9B9B9]">@{publicacion.modelo.slug.current}</span>
           </div>
         </div>
-        <div>
-          <p className="text-[#B9B9B9] font-bold text-[11px] pt-3">
-            {moment(publicacion._createdAt).fromNow()}
-          </p>
-        </div>
+        
       </div>
       <div className="p-4">
         <h2 className="text-[11px] leading-[13px]">{publicacion.copy}</h2>
