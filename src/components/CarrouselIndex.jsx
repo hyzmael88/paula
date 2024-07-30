@@ -11,7 +11,7 @@ function CarrouselIndex({ photos }) {
     <div className='absolute w-full h-[45vh] '>
 
     <div className='w-full h-full  flex flex-col gap-y-2 -z-10 relative  '>
-    <div className='w-[800px] h-[800px] xl:w-full xl:h-full bg-white z-10 blur-2xl opacity-70 xl:opacity-65 rounded-[45px]  absolute '/>
+    <div className='h-[800px] w-full xl:h-full bg-white z-10 blur-2xl opacity-70 xl:opacity-65 rounded-[45px]  absolute '/>
 
 
         <div className='w-full h-full flex gap-4 -translate-x-20 transition-all '>
