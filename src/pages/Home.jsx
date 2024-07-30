@@ -1,16 +1,19 @@
+// pages/Home.js
 import { useEffect, useState } from 'react';
 import { useSession, signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { client } from '@/sanity/lib/client';
+import { urlFor } from '@/sanity/lib/image';
 import { Spinner } from '@/components/Spinner';
 import { NextSeo } from 'next-seo';
+import ModalVisor from '@/components/ModalVisor';
 import moment from 'moment';
 import 'moment/locale/es'; // Importa el idioma español
 import { FaRegImage } from 'react-icons/fa';
-import ModalVisor from '@/components/ModalVisor';
 import Publicacion from '@/components/Publicacion';
 
 moment.locale('es');
+
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -19,7 +22,7 @@ export default function Home() {
   const [error, setError] = useState(null);
   const [isVisorOpen, setIsVisorOpen] = useState(false);
   const [currentFotos, setCurrentFotos] = useState([]);
-
+  
   const router = useRouter();
 
   useEffect(() => {
@@ -107,10 +110,10 @@ export default function Home() {
   return (
     <>
       <NextSeo
-        title="LuvMyPack | Home"
+        title="Prime Beauties | Home"
         description="Esta es la descripción de la página de inicio"
         openGraph={{
-          title: 'LuvMyPack | Home',
+          title: 'Prime Beauties | Home',
           description: 'Esta es la descripción de la página de inicio',
           images: [
             {
@@ -122,21 +125,25 @@ export default function Home() {
           ],
         }}
       />
-      <div className="max-w-4xl w-full lg:w-1/3 mx-auto">
-        <div className='w-full mb-[33px]'>
+      <div className="max-w-4xl w-full lg:w-1/3  mx-auto">
+        <div className='w-full  mb-[33px]'>
           <img src='/Logo.png' alt='Logo' className='w-[205px] mx-auto' />
         </div>
+        {/* <h1 className="text-3xl font-bold mb-6">Publicaciones Recientes</h1> */}
         {publicaciones.length === 0 ? (
           <p>No hay publicaciones disponibles.</p>
         ) : (
           <div className="flex flex-col gap-4">
             {publicaciones.map((publicacion) => (
-              <Publicacion 
-                key={publicacion._id} 
-                publicacion={publicacion} 
-                comprarPublicacionStripe={comprarPublicacionStripe}
-                openVisor={openVisor}
-                session={session}
+              <Publicacion
+              key={publicacion._id}
+              publicacion={publicacion}
+              comprarPublicacionStripe={comprarPublicacionStripe}
+              openVisor={openVisor}
+              session={session}
+              urlFor={urlFor}
+              
+
               />
             ))}
           </div>
