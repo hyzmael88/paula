@@ -35,7 +35,7 @@ const NavbarMovil = () => {
         </div>
       </div>
       <div
-        className={`fixed top-0 left-0 h-full bg-white shadow-md transform ${menuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 z-50 rounded-[18px]`}
+        className={`fixed top-0 left-0 h-full bg-white shadow-md transform ${menuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 z-50 rounded-r-[18px]`}
         style={{ width: '75%' }}
       >
         <div className="p-4 h-full flex flex-col justify-center">
