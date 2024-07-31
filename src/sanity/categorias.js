@@ -1,6 +1,6 @@
 export default {
-    name: 'categoria',
-    title: 'Categoria',
+    name: 'categorias',
+    title: 'Categorias',
     type: 'document',
     fields: [
         
