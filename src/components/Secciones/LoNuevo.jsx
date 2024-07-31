@@ -3,12 +3,39 @@ import React, { useEffect, useState } from 'react';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import { useRouter } from 'next/router';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 const LoNuevo = ({ title }) => {
     const [modelos, setModelos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const router = useRouter();
+
+    const settings = {
+        className: "center",
+        infinite: true,
+        centerPadding: "60px",
+        slidesToShow: 3, // Show 3 slides at a time for better visualization
+        swipeToSlide: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            }
+        ]
+    };
 
     useEffect(() => {
         const fetchPublicaciones = async () => {
@@ -42,22 +69,23 @@ const LoNuevo = ({ title }) => {
         <div className='w-full h-auto flex flex-col gap-[26px] mb-8'>
             <h1 className='text-[20px] font-bold'>{title}</h1>
             <div className='w-full flex items-center gap-[22px] overflow-x-auto no-scrollbar'>
-                {modelos.map(modelo => (
-                    <div
-                        key={modelo.slug.current}
-                        className='flex-shrink-0 w-[384px] h-[258px] relative cursor-pointer'
-                        onClick={() => handlePublicacionClick(modelo.slug.current)}
-                    >
-                        <img
-                            src={urlFor(modelo.fotoPerfil).url()}
-                            alt={modelo.nombre}
-                            className='w-[384px] h-[258px] object-cover rounded-[30px]'
-                        />
-                        <div className='absolute bottom-4 left-0 right-0 mx-auto w-[164px] '>
-                            <h2 className='text-[16px] text-white font-bold modeloButton text-center'>{modelo.nombre}</h2>
-                          </div>
-                    </div>
-                ))}
+              
+                    {modelos.map(modelo => (
+                        <div
+                            key={modelo.slug.current}
+                            className='flex-shrink-0 w-[384px] h-[258px] relative cursor-pointer'
+                            onClick={() => handlePublicacionClick(modelo.slug.current)}
+                        >
+                            <img
+                                src={urlFor(modelo.fotoPerfil).url()}
+                                alt={modelo.nombre}
+                                className='w-[384px] h-[258px] object-cover rounded-[30px]'
+                            />
+                            <div className='absolute bottom-4 left-0 right-0 mx-auto w-[164px]'>
+                                <h2 className='text-[16px] text-white font-bold modeloButton text-center'>{modelo.nombre}</h2>
+                            </div>
+                        </div>
+                    ))}
             </div>
         </div>
     );

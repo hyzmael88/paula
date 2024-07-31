@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <Providers>
-      <div className="w-full max-w-[1440px] mx-auto h-full flex justify-between">
+      <div className="w-full max-w-[1440px] mx-auto h-screen flex justify-between">
         {shouldShowSidebar && <SideBarLeft />}
         <DefaultSeo {...SEO} />
         <Component {...pageProps} />

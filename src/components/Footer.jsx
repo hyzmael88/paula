@@ -5,10 +5,8 @@ import { FaInstagram, FaTwitter, FaFacebook, FaTiktok, FaGlobe } from 'react-ico
 const Footer = () => {
   const router = useRouter()
 
-  if(router.pathname === '/Auth/Login' || router.pathname === '/Auth/Signup') {
-    return null;
-  }
-  else{
+  if(router.pathname === '/' ) {
+    
   return (
         <div className='w-full h-full pb-14 xl:pb-0 flex justify-center '>
       <footer className="w-[90%] bg-white py-4 border-t border-gray-300">
