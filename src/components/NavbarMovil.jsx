@@ -18,7 +18,7 @@ const NavbarMovil = () => {
 
   return (
     <div className="relative">
-      <div className="fixed xl:hidden bottom-0 left-0 right-0 navbarMovil border-t-2 h-[71px] z-40">
+      <div className="fixed lg:hidden bottom-0 left-0 right-0 navbarMovil border-t-2 h-[71px] z-40">
         <div className="w-full h-full flex justify-around items-center pb-4">
           <Link href="/">
             <TiHome className="text-2xl" />

@@ -17,7 +17,8 @@ const SidebarRight = () => {
           _id,
           nombre,
           slug,
-          fotoPerfil
+          fotoPerfil,
+          fotoPortada
         }`;
         const results = await client.fetch(query);
         setSuggestions(results);
@@ -36,7 +37,8 @@ const SidebarRight = () => {
           _id,
           nombre,
           slug,
-          fotoPerfil
+          fotoPerfil,
+          fotoPortada
         }`;
         const results = await client.fetch(query);
         setSearchResults(results);
@@ -98,17 +100,26 @@ const SidebarRight = () => {
               : suggestions.map((model) => (
                   <div
                     key={model._id}
-                    className="flex items-center bg-gray-200 p-4 rounded-lg shadow-md cursor-pointer"
+                    className="flex items-center bg-gray-200 p-4  shadow-md cursor-pointer relative rounded-[30px]"
                     onClick={() => window.location.href = `/Modelo/${model.slug.current}`}
                   >
+                     <img
+                      src={urlFor(model.fotoPortada).url()}
+                      alt={model.nombre}
+                      className="w-full h-full absolute object-cover rounded-[30px] left-0" 
+                    /> 
+                    <div className="w-full h-1/2 absolute bottom-0 left-0 rounded-b-[30px] bg-black bg-opacity-50 z-10"/>
                     <img
                       src={urlFor(model.fotoPerfil).url()}
                       alt={model.nombre}
-                      className="w-12 h-12 bg-gray-400 rounded-full mr-4"
+                      className="w-[78px] h-[78px] bg-gray-400 rounded-full mr-4 object-cover z-20"
                     />
-                    <div>
-                      <h3 className="text-md font-bold">{model.nombre}</h3>
-                      <p className="text-sm text-gray-600">@{model.nombre.replace(/\s+/g, '').toLowerCase()}</p>
+                    <button className='absolute top-4 right-4 text-white visitButton rounded-[23px] w-[112px] h-[23px] '>
+                      Follow
+                    </button>
+                    <div className='z-20 text-white mt-8 '>
+                      <h3 className="text-[18px] font-bold ">{model.nombre}</h3>
+                      <p className="text-[9px] text-[#B9B9B9] ">@{model.nombre.replace(/\s+/g, '').toLowerCase()}</p>
                     </div>
                   </div>
                 ))}

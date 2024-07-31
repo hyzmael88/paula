@@ -61,3 +61,9 @@
 
 
 }
+.visitButton{
+  background: var(--Gradiente-4, linear-gradient(180deg, #FF66AE 0%, #6E26B6 100%));
+}
+.publicacionShadow{
+  box-shadow: 0px 4px 12.9px -5px rgba(0, 0, 0, 0.31);
+}

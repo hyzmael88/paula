@@ -90,10 +90,10 @@ const Explore = () => {
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
 
   return (
-    <div className="max-w-4xl w-full xl:w-1/3 mx-auto p-6">
+    <div className="max-w-4xl w-full lg:w-1/3 mx-auto ">
 
       <div className="mb-8">
-      <div className="relative mb-4 xl:hidden"> 
+      <div className="relative mb-4 lg:hidden"> 
             <input
               type="text"
               className="w-full p-2 pl-10 rounded-full bg-gray-200"
@@ -114,7 +114,7 @@ const Explore = () => {
               />
             </svg>
           </div>
-          <div className="space-y-4 mb-4">
+          <div className="space-y-4 mb-4 lg:mb-0">
             {searchQuery
               && searchResults.map((model) => (
                   <div

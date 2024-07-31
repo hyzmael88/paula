@@ -23,7 +23,7 @@ function Publicacion({
   };
 
   return (
-    <div className="bg-white shadow-lg overflow-hidden cursor-pointer rounded-[27px]">
+    <div className="bg-white publicacionShadow overflow-hidden cursor-pointer rounded-[27px]">
       <div className="w-full flex justify-between px-4 h-[125px] ">
         <div className="w-full flex items-center">
           <img
