@@ -43,28 +43,37 @@ const Parati = ({ title }) => {
     if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
 
     return (
-        <div className="mb-8">
-            <h2 className="text-2xl font-bold mb-4">{title}</h2>
-            <div className="flex space-x-4 overflow-x-auto no-scrollbar">
-                {publicacionesGratuitas.map((publicacion, index) => (
-                    <div 
-                        key={index} 
-                        className="relative cursor-pointer flex-shrink-0"
-                        onClick={() => handlePublicacionClick(publicacion.modelo.slug.current, publicacion.slug.current)}
-                    >
-                        <img 
-                            src={urlFor(publicacion.fotografias[0]).url()} 
-                            alt={publicacion.modelo.nombre} 
-                            className="w-[200px] h-[300px] object-cover rounded-[30px]"
-                        />
-                        <img
-                            src={urlFor(publicacion.modelo.fotoPerfil).url()}
-                            alt={publicacion.modelo.nombre}
-                            className="w-[70px] h-[70px] xl:w-[90px] xl:h-[90px] rounded-full border-2 border-white absolute -bottom-[35px] left-0 right-0 mx-auto"
-                        />
-                    </div>
-                ))}
-            </div>
+        <div className='w-full h-[450px] flex flex-col  gap-[26px] '>
+          <h1 className='text-[20px] font-bold '>
+            {title}
+          </h1>
+          <div className='w-full flex items-center gap-[26px]'>
+          {
+            publicacionesGratuitas.map(publicacion => (
+                <div
+                    key={publicacion._id}
+                    className='flex flex-col items-center justify-center  relative'
+                    onClick={() => handlePublicacionClick(publicacion.modelo.slug.current, publicacion.slug.current)}
+                >
+                    <img
+                        src={urlFor(publicacion.fotografias[0].asset).url()}
+                        alt={publicacion.titulo}
+                        className='w-[201px] h-[299px] object-cover rounded-[30px]'
+                    />
+                    
+                    
+                    <img
+                        src={urlFor(publicacion.modelo.fotoPerfil).width(300).height(300).url()}
+                        alt={publicacion.titulo}
+                        className='absolute w-[98px] h-[98px] object-cover rounded-full -bottom-8'
+                    /> 
+                    
+                    
+                </div>
+            ))
+          }
+
+        </div>
         </div>
     );
 };

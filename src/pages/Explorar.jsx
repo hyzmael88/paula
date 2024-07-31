@@ -94,7 +94,7 @@ const Explore = () => {
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
 
   return (
-    <div className="max-w-4xl w-full lg:w-1/3 mx-auto ">
+    <div className="max-w-4xl w-full lg:w-1/3 h-full mx-auto px-[25px] ">
 
       <div className="mb-8">
       <div className="relative mb-4 lg:hidden"> 
@@ -139,19 +139,22 @@ const Explore = () => {
                 ))
               }
           </div>
+          <h1 className='text-[20px] font-bold mb-[27px] mt-[90px] '>
+            Tendencias
+          </h1>
         <Slider {...settings}>
           {paquetes.slice(0, 4).map((paquete, index) => (
             <div 
               key={index} 
-              className="relative cursor-pointer"
+              className="relative cursor-pointer  "
               onClick={() => handlePaqueteClick(paquete.modelo.slug.current, paquete.slug.current)}
             >
               <img 
                 src={paquete.portadas && paquete.portadas.length > 0 ? urlFor(paquete.portadas[0]).url() : '/default-image.png'} 
                 alt={paquete.nombre} 
-                className="w-full h-[450px] object-cover"
+                className="w-full h-[400px] object-cover rounded-[38px] "
               />
-              <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white p-4">
+              <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white p-4 rounded-b-[38px]">
                 <h2 className="text-xl font-bold">{paquete.nombre}</h2>
                 <p>Ver ${paquete.precio}</p>
               </div>
