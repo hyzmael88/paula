@@ -29,7 +29,7 @@ function Publicacion({
           <img
             src={urlFor(publicacion.modelo.fotoPerfil).url()}
             alt={publicacion.modelo.nombre}
-            className="w-[60px] h-[60px] bg-gray-400 rounded-full mr-4"
+            className="w-[60px] h-[60px] bg-gray-400 rounded-full mr-4 object-cover"
           />
           <div className="w-full flex flex-col">
             <div className="w-full flex justify-between items-center  ">
@@ -66,7 +66,7 @@ function Publicacion({
               key={publicacion.fotografias[0]}
               src={urlFor(publicacion.fotografias[posicion]).url()}
               alt={`Fotografía `}
-              className="w-full h-[330px] object-cover mb-2 cursor-pointer"
+              className="w-full h-[330px]  mb-2 cursor-pointer object-cover"
               onClick={() =>
                 openVisor(
                   publicacion.fotografias.map((foto) => urlFor(foto).url())

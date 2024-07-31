@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { FaHome, FaCompass, FaBell, FaHeart, FaShoppingCart, FaHistory, FaQuestionCircle, FaHeadset, FaCog, FaSignOutAlt, FaShieldAlt } from "react-icons/fa";
+import { FaHome, FaCompass, FaBell, FaHeart, FaShoppingCart, FaHistory, FaQuestionCircle, FaHeadset, FaCog, FaSignOutAlt, FaShieldAlt, FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 function SideBarLeft() {
   const { data: session } = useSession();
@@ -10,11 +11,11 @@ function SideBarLeft() {
     return (
       <div className="hidden w-1/3  bg-white h-screen border-r-2 lg:flex flex-col justify-between p-4">
         <div>
-          <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold">Logo</h1>
-          </div>
+        <div className='w-full h-[160px] flex justify-center items-center  '>
+          <img src='/Logo.png' alt='Logo' className='w-[166px] h-[100px] mx-auto' />
+        </div>
           <nav>
-            <ul className="space-y-4">
+            <ul className="space-y-4 pl-[50px]">
               <li>
                 <Link href="/Home">
                   <p className="flex items-center text-lg font-medium text-black hover:text-purple-600">
@@ -97,6 +98,28 @@ function SideBarLeft() {
                 </p>
               </li>
             </ul>
+            <div className="flex  items-center  text-[20px] gap-[25px] pl-[50px] my-[40px]">
+            <a href="#" className="text-black hover:text-purple-600">
+              <FaFacebook className="" />
+            </a>
+            <a href="#" className="text-black hover:text-purple-600">
+              <FaInstagram className="" />
+            </a>
+            <a href="#" className="text-black hover:text-purple-600">
+              <FaXTwitter className="" />
+            </a>
+            <a href="#" className="text-black hover:text-purple-600">
+              <FaTiktok className="" />
+            </a>
+          </div>
+          <div className="mt-6 text-center">
+            <Link href="/PoliticaPrivacidad" className="block text-black hover:text-purple-600">
+              Políticas de privacidad
+            </Link>
+            <Link href="/TerminosCondiciones" className="block text-black hover:text-purple-600">
+              Términos y condiciones
+            </Link>
+          </div>
           </nav>
         </div>
        {/*  <div className="text-center">

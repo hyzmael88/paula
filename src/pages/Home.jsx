@@ -127,7 +127,7 @@ export default function Home() {
         }}
       />
       <div className="max-w-4xl w-full lg:w-1/3  mx-auto">
-        <div className='w-full h-[160px] flex justify-center items-center  '>
+        <div className='w-full h-[160px] flex lg:hidden justify-center items-center  '>
           <img src='/Logo.png' alt='Logo' className='w-[205px] mx-auto' />
         </div>
         {/* <h1 className="text-3xl font-bold mb-6">Publicaciones Recientes</h1> */}
