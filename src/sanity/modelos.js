@@ -75,5 +75,12 @@ export default {
       type: "array",
       of: [{ type: "reference", to: [{ type: "publicaciones" }] }],
     },
+    {
+      name: 'publicacionesGratuitas',
+      title: 'Publicaciones Gratuitas',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'publicacionesGratuitas' }] }],
+  },
+
   ],
 };

@@ -113,10 +113,10 @@ function SideBarLeft() {
             </a>
           </div>
           <div className="mt-6 text-center">
-            <Link href="/PoliticaPrivacidad" className="block text-black hover:text-purple-600">
+            <Link href="/Politicas" className="block text-black hover:text-purple-600">
               Políticas de privacidad
             </Link>
-            <Link href="/TerminosCondiciones" className="block text-black hover:text-purple-600">
+            <Link href="/Terminos" className="block text-black hover:text-purple-600">
               Términos y condiciones
             </Link>
           </div>

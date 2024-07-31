@@ -7,6 +7,10 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Section from '@/components/Section';
+import Parati from '@/components/Secciones/Parati';
+import LoNuevo from '@/components/Secciones/LoNuevo';
+import Packs from '@/components/Secciones/Packs';
+import Categorias from '@/components/Secciones/Categorias';
 
 const Explore = () => {
   const [paquetes, setPaquetes] = useState([]);
@@ -156,9 +160,10 @@ const Explore = () => {
         </Slider>
       </div>
 
-      <Section title="FOR YOU" paquetes={forYou} handlePaqueteClick={handlePaqueteClick} />
-      <Section title="NEW" paquetes={newPaquetes} handlePaqueteClick={handlePaqueteClick} />
-      <Section title="DISCOVER" paquetes={discover} handlePaqueteClick={handlePaqueteClick} />
+      <Parati title="Para ti"  />
+      <LoNuevo title="Lo + nuevo" />
+      <Packs title="Packs" paquetes={paquetes}  />
+      <Categorias title="Categorías"  />
     </div>
   );
 };
