@@ -64,6 +64,12 @@ export default {
       type: "number",
     },
     {
+      name: "categorias",
+      title: "Categorias",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "categorias" }] }],
+    },
+    {
       name: "paquetes",
       title: "Paquetes",
       type: "array",
