@@ -58,7 +58,7 @@ const Parati = ({ title }) => {
                     <img
                         src={urlFor(publicacion.fotografias[0].asset).url()}
                         alt={publicacion.titulo}
-                        className='w-[201px] h-[299px] object-cover rounded-[30px]'
+                        className='flex-shrink-0 w-[201px] h-[299px] object-cover rounded-[30px]'
                     />
                     
                     

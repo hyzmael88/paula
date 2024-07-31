@@ -67,6 +67,12 @@
 .publicacionShadow{
   box-shadow: 0px 4px 12.9px -5px rgba(0, 0, 0, 0.31);
 }
+.modeloButton{
+  border-radius: 34px;
+background: var(--Gradiente-4, linear-gradient(180deg, #FF66AE 0%, #6E26B6 100%));
+box-shadow: 3px 4px 7.4px 0px rgba(0, 0, 0, 0.59);
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
