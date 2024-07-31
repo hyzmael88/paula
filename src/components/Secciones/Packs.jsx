@@ -50,9 +50,7 @@ const Packs = ({ title }) => {
                         className='flex-shrink-0 w-full h-full relative cursor-pointer'
                         onClick={() => handlePublicacionClick(paquete.slug.current)}
                     >
-                      {
-                        console.log(paquete)
-                      }<img
+                      <img
                             src={urlFor(paquete.portadas[0]).url()}
                             alt={paquete.nombre}
                             className='w-full h-[393px] object-cover rounded-[30px]'
