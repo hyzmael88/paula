@@ -261,7 +261,7 @@ function Modelo() {
         <div>
           <div className="w-full flex text-center mb-4">
             <div
-              className={`w-full {selector==='Publicaciones ' ? "bg-[#D9D9D9] text-black" : "bg-[#e2e1e1] text-[#9b9b9b] } px-4 py-2 cursor-pointer uppercase`}
+              className={`w-full {selector==='Publicaciones ' ? "bg-[#D9D9D9] text-black" : "bg-[#e2e1e1] text-[#9b9b9b] }  cursor-pointer uppercase text-[12px] font-bold flex justify-center items-center`}
               onClick={() => setSelector("Publicaciones")}
             >
               {
@@ -270,7 +270,7 @@ function Modelo() {
             : modelo.publicaciones.length } Publicaciones 
             </div>
             <div
-              className={`w-full ${selector==='Paquetes' ? "bg-[#D9D9D9] text-black" : "bg-[#e2e1e1] text-[#9b9b9b]" }  px-4 py-2 cursor-pointer uppercase`}
+              className={`w-full ${selector==='Paquetes' ? "bg-[#D9D9D9] text-black" : "bg-[#e2e1e1] text-[#9b9b9b]" }  px-4 py-2 cursor-pointer uppercase text-[12px] font-bold flex justify-center items-center uppercase`}
               onClick={() => setSelector("Paquetes")}
             >
               {modelo.paquetes.length} Paquetes
