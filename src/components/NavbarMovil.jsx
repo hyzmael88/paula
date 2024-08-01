@@ -44,7 +44,9 @@ const NavbarMovil = () => {
             
           </div>
           <ul className="space-y-4 pl-[50px]">
-              <li>
+              <li
+              onClick={toggleMenu}
+              >
                 <Link href="/Home">
                   <p className="flex items-center text-lg font-medium text-black hover:text-purple-600">
                     <FaHome className="mr-2" />
@@ -52,7 +54,9 @@ const NavbarMovil = () => {
                   </p>
                 </Link>
               </li>
-              <li>
+              <li
+              onClick={toggleMenu}
+              >
                 <Link href="/Explorar">
                   <p className="flex items-center text-lg font-medium text-black hover:text-purple-600">
                     <FaCompass className="mr-2" />
@@ -68,7 +72,9 @@ const NavbarMovil = () => {
                   </p>
                 </Link>
               </li> */}
-              <li>
+              <li
+              onClick={toggleMenu}
+              >
                 <Link href="/Suscripciones">
                   <p className="flex items-center text-lg font-medium text-black hover:text-purple-600">
                     <FaHeart className="mr-2" />
@@ -76,7 +82,9 @@ const NavbarMovil = () => {
                   </p>
                 </Link>
               </li>
-              <li>
+              <li
+              onClick={toggleMenu}
+              >
                 <Link href="/Compras">
                   <p className="flex items-center text-lg font-medium text-black hover:text-purple-600">
                     <FaShoppingCart className="mr-2" />
@@ -92,7 +100,9 @@ const NavbarMovil = () => {
                   </p>
                 </Link>
               </li> */}
-              <li>
+              <li
+              onClick={toggleMenu}
+              >
                 <Link href="/Faqs">
                   <p className="flex items-center text-lg font-medium text-black hover:text-purple-600">
                     <FaQuestionCircle className="mr-2" />
@@ -100,7 +110,9 @@ const NavbarMovil = () => {
                   </p>
                 </Link>
               </li>
-              <li>
+              <li
+              onClick={toggleMenu}
+              >
                 <Link href="/Soporte">
                   <p className="flex items-center text-lg font-medium text-black hover:text-purple-600">
                     <FaHeadset className="mr-2" />
@@ -116,7 +128,9 @@ const NavbarMovil = () => {
                   </p>
                 </Link>
               </li>
-              <li>
+              <li
+              onClick={toggleMenu}
+              >
                 <p
                   className="flex items-center text-lg font-medium text-black hover:text-purple-600 cursor-pointer"
                   onClick={() => signOut({ callbackUrl: "/" })}

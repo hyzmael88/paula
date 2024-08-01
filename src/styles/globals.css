@@ -72,6 +72,10 @@
 background: var(--Gradiente-4, linear-gradient(180deg, #FF66AE 0%, #6E26B6 100%));
 box-shadow: 3px 4px 7.4px 0px rgba(0, 0, 0, 0.59);
 }
+.paqueteButton{
+  background: var(--Gradiente-4, linear-gradient(180deg, #FF66AE 0%, #6E26B6 100%));
+  box-shadow: 2.84px 3.786px 7.005px 0px rgba(0, 0, 0, 0.59);
+}
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
