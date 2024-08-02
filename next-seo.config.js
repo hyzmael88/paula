@@ -1,12 +1,12 @@
 // next-seo.config.js
 export default {
-    title: 'Prime Beauties',
+    title: 'LuvYourPack',
     description: 'Descripción de tu sitio web',
     openGraph: {
       type: 'website',
       locale: 'es_ES',
       url: 'https://www.tusitioweb.com/',
-      site_name: 'Prime Beauties',
+      site_name: 'LuvYourPack',
       images: [
         {
           url: 'https://www.tusitioweb.com/imagen-og.png',

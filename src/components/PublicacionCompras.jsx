@@ -22,6 +22,7 @@ function PublicacionCompras({
 
   return (
     <div className="bg-white publicacionShadow overflow-hidden cursor-pointer rounded-[27px]">
+      <Link href={`/Modelo/${publicacion.modelo.slug.current}`}>
       <div className="w-full flex justify-between px-4 h-[125px]">
         <div className="w-full flex items-center">
           <img
@@ -40,6 +41,7 @@ function PublicacionCompras({
           </div>
         </div>
       </div>
+      </Link>
       <div className="p-4">
         <h2 className="text-[11px] leading-[13px]">{publicacion.copy}</h2>
       </div>

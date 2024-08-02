@@ -172,7 +172,7 @@ function Modelo() {
   };
 
   return (
-    <div className="p-4 w-full lg:w-1/3 mx-auto bg-white rounded-lg shadow-lg h-screen overflow-y-auto">
+    <div className="p-4 w-full lg:w-1/3 mx-auto bg-white rounded-lg shadow-lg h-screen overflow-y-auto pb-[150px]">
       <div className="relative">
         {modelo.fotoPortada && (
           <img

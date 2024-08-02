@@ -84,7 +84,7 @@ function Paquete() {
     );
 
   return (
-    <div className="w-full min-h-screen lg:w-1/3 flex flex-col items-center py-10 px-4 ">
+    <div className="w-full min-h-screen lg:w-1/3 flex flex-col items-center py-10 px-4 pb-[75px] ">
       <div className="w-full max-w-4xl bg-white rounded-lg  overflow-hidden">
         {paqueteState.portadas && (
           <div className="w-full overflow-hidden flex">

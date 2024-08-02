@@ -2,6 +2,7 @@ import moment from "moment";
 import React, { useState } from "react";
 import { FaChevronLeft, FaChevronRight, FaHeart, FaMoneyBillWave, FaRegCommentDots, FaRegImage } from "react-icons/fa";
 import { CiBookmark } from "react-icons/ci";
+import Link from "next/link";
 
 
 function Publicacion({
@@ -24,7 +25,10 @@ function Publicacion({
 
   return (
     <div className="bg-white publicacionShadow overflow-hidden cursor-pointer rounded-[27px]">
-      <div className="w-full flex justify-between px-4 h-[125px] ">
+      <Link href={`/Modelo/${publicacion.modelo.slug.current}`}>
+      <div className="w-full flex justify-between px-4 h-[125px] "
+      
+      >
         <div className="w-full flex items-center">
           <img
             src={urlFor(publicacion.modelo.fotoPerfil || publicacion.compras.modelo.fotoPerfil).url()}
@@ -43,6 +47,7 @@ function Publicacion({
         </div>
         
       </div>
+      </Link>
       <div className="p-4">
         <h2 className="text-[11px] leading-[13px]">{publicacion.copy}</h2>
       </div>
