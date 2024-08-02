@@ -1,5 +1,6 @@
 import { useSession } from 'next-auth/react';
 import React, { useState, useRef } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 function ModalVisor({ isOpen, onClose, fotografias }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,13 +15,22 @@ function ModalVisor({ isOpen, onClose, fotografias }) {
 
   if (!isOpen) return null;
 
-  const nextPhoto = () => {
+/*   const nextPhoto = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % fotografias.length);
   };
 
   const prevPhoto = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + fotografias.length) % fotografias.length);
-  };
+  }; */
+const [posicion, setPosicion] = useState(0);
+
+    const handleNext = () => {
+      setPosicion((prevPos) => (prevPos + 1) % fotografias.length);
+    };
+  
+    const handlePrev = () => {
+      setPosicion((prevPos) => (prevPos - 1 + fotografias.length) % fotografias.length);
+    };
 
   const zoomIn = () => {
     setZoom((prevZoom) => prevZoom + 20);
@@ -52,12 +62,13 @@ function ModalVisor({ isOpen, onClose, fotografias }) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50" onClick={onClose}>
-      <div className="bg-white rounded-lg overflow-hidden" onClick={stopPropagation}>
-        <div className="flex justify-between items-center p-4">
-          <button onClick={prevPhoto} className="p-2">Anterior</button>
+      <div className="bg-white rounded-[50px] overflow-hidden" onClick={stopPropagation}>
+        {/* <div className="flex justify-between items-center p-4">
+          
+         <button onClick={prevPhoto} className="p-2">Anterior</button>
           <button onClick={onClose} className="p-2">Cerrar</button>
-          <button onClick={nextPhoto} className="p-2">Siguiente</button>
-        </div>
+          <button onClick={nextPhoto} className="p-2">Siguiente</button> 
+        </div> */}
         <div
           className="relative overflow-hidden max-w-[90vw] max-h-[80vh] cursor-grab"
           onMouseDown={handleMouseDown}
@@ -66,12 +77,21 @@ function ModalVisor({ isOpen, onClose, fotografias }) {
           onMouseLeave={handleMouseUp}
         >
            <div className="absolute bottom-4 right-4 text-white text-3xl opacity-75 z-10">mylove.ai/{session?.user?.email}</div>
-          <div className="absolute top-4 left-4 text-white text-3xl opacity-75 z-10">mylove.ai/{session?.user?.email}</div>
-       
+          <div className="absolute top-4 left-4 text-white text-[24px] opacity-65 z-10">luvmypack/{session?.user?.email}</div>
+
+        <div className="absolute top-4 right-4 bg-[#2222228F] rounded-[27px] text-white px-2 py-1 z-10">
+                  <p className="text-[12px]">{posicion + 1}/{fotografias.length}</p>
+                </div>
+                <div className="absolute right-4 top-1/2 transform -translate-y-1/2 w-[47px] h-[47px] rounded-full z-10 bg-[#B9B9B98C] flex justify-center items-center" onClick={handleNext}>
+                  <FaChevronRight className="text-white"/>
+                </div>
+                <div className="absolute left-4 top-1/2 transform -translate-y-1/2 w-[47px] h-[47px] rounded-full z-10 bg-[#B9B9B98C] flex justify-center items-center" onClick={handlePrev}>
+                  <FaChevronLeft className="text-white"/>
+                </div>
           <img
             ref={imgRef}
-            src={fotografias[currentIndex]}
-            alt={`Fotografía ${currentIndex + 1}`}
+            src={fotografias[posicion]}
+            alt={`Fotografía ${posicion + 1}`}
             className="object-contain"
             style={{
               transform: `scale(${zoom / 100}) translate(${position.x}px, ${position.y}px)`,
@@ -82,9 +102,13 @@ function ModalVisor({ isOpen, onClose, fotografias }) {
 
           />
         </div>
-        <div className="flex justify-center gap-4 p-4">
-          <button onClick={zoomOut} className="p-2">-</button>
-          <button onClick={zoomIn} className="p-2">+</button>
+        <div className="flex justify-center gap-8 p-4">
+          <button onClick={zoomOut} className="p">
+            <img src='/icons/zoomLess.svg'  alt="zoomOut" />
+          </button>
+          <button onClick={zoomIn} className="p">
+            <img src='/icons/zoomPlus.svg'  alt="zoomIn" />
+          </button>
         </div>
       </div>
     </div>

@@ -3,6 +3,8 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
+import moment from "moment";
+
 
 const Suscripciones = () => {
   const { data: session } = useSession();
@@ -20,7 +22,8 @@ const Suscripciones = () => {
               _id,
               nombre,
               slug,
-              fotoPerfil
+              fotoPerfil,
+              _createdAt
             }
           }`, {
             email: session.user.email,
@@ -57,27 +60,36 @@ const Suscripciones = () => {
   if (loading) return <div className="text-center p-6">Cargando...</div>;
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
 
+  console.log(subscriptions);
+
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl w-full lg:w-1/3 mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Mis Suscripciones</h1>
       {subscriptions.length === 0 ? (
         <p>No estás suscrito a ningún modelo.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="flex flex-col gap-6">
           {subscriptions.map((model) => (
             <div 
               key={model._id} 
-              className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer" 
+              className="bg-white rounded-[30px] suscriptionShadow overflow-hidden cursor-pointer flex flex-row items-center gap-[15px] px-[37px]" 
               onClick={() => handleModelClick(model.slug.current)}
             >
               <img 
                 src={model.fotoPerfil ? urlFor(model.fotoPerfil).url() : '/default-profile.png'} 
                 alt={model.nombre} 
-                className="w-full h-48 object-cover"
+                className="w-[59px] h-[59px] rounded-full object-cover"
               />
               <div className="p-4">
                 <h2 className="text-xl font-bold">{model.nombre}</h2>
+                <p className="text-[10px] font-bold text-[#B9B9B9] ">@{model.slug.current}</p>
+                <p className='text-[10px]'>Suscrito desde el {
+                
+                moment(model.createdAt).format('DD/MM/YY')
+                
+                }</p>
               </div>
+              <p></p>
             </div>
           ))}
         </div>
