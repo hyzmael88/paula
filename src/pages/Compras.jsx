@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import { Spinner } from '@/components/Spinner';
+import Publicacion from '@/components/Publicacion';
+import PublicacionCompras from '@/components/PublicacionCompras';
 
 const Compras = () => {
   const { data: session } = useSession();
@@ -11,7 +13,14 @@ const Compras = () => {
   const [paquetes, setPaquetes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selector, setSelector] = useState("Publicaciones");
   const router = useRouter();
+
+  const openVisor = (fotografias) => {
+    setCurrentFotos(fotografias);
+    setIsVisorOpen(true);
+  };
+
 
   useEffect(() => {
     if (session) {
@@ -25,8 +34,11 @@ const Compras = () => {
               slug,
               precio,
               _createdAt,
-              modelo {
-                _ref
+              modelo->{
+                fotoPerfil,
+                nombre,
+                slug
+
               }
             },
             paquetesAdquiridos[]->{
@@ -36,8 +48,10 @@ const Compras = () => {
               slug,
               precio,
               _createdAt,
-              modelo {
-                _ref
+              modelo->{
+                fotoPerfil,
+                nombre,
+                slug
               }
             }
           }`, {
@@ -46,6 +60,7 @@ const Compras = () => {
 
           if (user) {
             if (user.compras) {
+              console.log(user.compras)
               setCompras(user.compras);
             }
             if (user.paquetesAdquiridos) {
@@ -112,50 +127,74 @@ const Compras = () => {
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>; // Muestra el mensaje de error
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl w-full lg:w-1/3 mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Mis Compras</h1>
       {compras.length === 0 && paquetes.length === 0 ? (
         <p>No has comprado ningún paquete o publicación.</p>
       ) : (
         <>
-          <h2 className="text-2xl font-bold mb-4">Publicaciones Compradas</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
-            {compras.map((publicacion) => (
-              <div 
-                key={publicacion._id} 
-                className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
-                onClick={() => handlePublicacionClick(publicacion.modelo?._ref, publicacion.slug.current)}
-              >
-                <img 
-                  src={publicacion.fotografias && publicacion.fotografias.length > 0 ? urlFor(publicacion.fotografias[0]).url() : '/default-image.png'} 
-                  alt={publicacion.copy} 
-                  className="w-full h-48 object-cover"
-                />
-                
-              </div>
+        <div className="w-full flex text-center mb-4">
+            <div
+              className={`w-full {selector==='Publicaciones ' ? "bg-[#D9D9D9] text-black" : "bg-[#e2e1e1] text-[#9b9b9b] }  cursor-pointer uppercase text-[12px] font-bold flex justify-center items-center`}
+              onClick={() => setSelector("Publicaciones")}
+            >
+               Publicaciones 
+            </div>
+            <div
+              className={`w-full ${selector==='Paquetes' ? "bg-[#D9D9D9] text-black" : "bg-[#e2e1e1] text-[#9b9b9b]" }  px-4 py-2 cursor-pointer uppercase text-[12px] font-bold flex justify-center items-center `}
+              onClick={() => setSelector("Paquetes")}
+            >
+               Paquetes
+            </div>
+          </div>
+          {
+            selector === "Publicaciones" && (
+          <div className="flex flex-col gap-6 mb-8">
+          
+            {compras.map((publicacion, index) => (
+              
+              <PublicacionCompras
+              publicacion={publicacion}
+              openVisor={openVisor}
+              urlFor={urlFor}
+              key={index}
+              />
+              
             ))}
           </div>
-          <h2 className="text-2xl font-bold mb-4">Paquetes Adquiridos</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {paquetes.map((paquete) => (
-              <div 
-                key={paquete._id} 
-                className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
-                onClick={() => handlePaqueteClick(paquete.modelo?._ref, paquete.slug.current)}
-              >
-               
-                <img 
-                  src={paquete.portadas && paquete.portadas.length > 0 ? urlFor(paquete.portadas[0]).url() : '/default-image.png'} 
-                  alt={paquete.nombre} 
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-4">
-                  <h3 className="text-xl font-bold">{paquete.nombre}</h3>
-                  {paquete.precio && <p className="font-bold">Precio: ${paquete.precio}</p>}
-                </div>
-              </div>
+            )
+          } 
+          
+          {
+            selector === "Paquetes" && (
+          <div className="flex flex-col gap-6">
+            {paquetes.map((paquete, index) => (
+               <div
+               key={index}
+               className="w-full h-full relative cursor-pointer"
+               onClick={() => handlePaqueteClick(paquete.slug.current)}
+             >
+               <div className="w-full absolute left-0 bottom-4 z-10 flex flex-col justify-center items-center">
+                 {paquete.nombre && (
+                   <h3 className="text-center text-white bg-opacity-50 p-2">
+                     {paquete.nombre}
+                   </h3>
+                 )}
+                 <div className="w-[152px] h-[33px] paqueteButton text-center rounded-[32px] text-white font-bold flex items-center justify-center">
+                   Ver por ${paquete.precio}
+                 </div>
+               </div>
+               <img
+                 src={urlFor(paquete.portadas[0]).url()}
+                 alt=""
+                 className="w-full h-[372px] rounded-[28px] object-cover"
+               />
+             </div>
             ))}
           </div>
+            )
+          } 
+            
         </>
       )}
     </div>

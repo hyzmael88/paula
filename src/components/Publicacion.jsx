@@ -27,7 +27,7 @@ function Publicacion({
       <div className="w-full flex justify-between px-4 h-[125px] ">
         <div className="w-full flex items-center">
           <img
-            src={urlFor(publicacion.modelo.fotoPerfil).url()}
+            src={urlFor(publicacion.modelo.fotoPerfil || publicacion.compras.modelo.fotoPerfil).url()}
             alt={publicacion.modelo.nombre}
             className="w-[60px] h-[60px] bg-gray-400 rounded-full mr-4 object-cover"
           />
