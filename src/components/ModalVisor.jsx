@@ -13,8 +13,7 @@ function ModalVisor({ isOpen, onClose, fotografias }) {
   const { data: session, status } = useSession();
 
 
-  if (!isOpen) return null;
-
+  
 /*   const nextPhoto = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % fotografias.length);
   };
@@ -59,6 +58,8 @@ const [posicion, setPosicion] = useState(0);
   const handleMouseUp = () => {
     setDragging(false);
   };
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50" onClick={onClose}>
