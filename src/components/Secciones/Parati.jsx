@@ -16,6 +16,7 @@ const Parati = ({ title }) => {
                 const query = `*[_type == "modelos" && defined(publicacionesGratuitas)]{
                     nombre,
                     fotoPerfil,
+                    slug,
                     publicacionesGratuitas[]->{
                         _id,
                         fotografias,
@@ -36,14 +37,14 @@ const Parati = ({ title }) => {
     }, []);
 
     const handlePublicacionClick = (modeloSlug, publicacionSlug) => {
-        router.push(`/Modelo/${modeloSlug}/Publicacion/${publicacionSlug}`);
+        router.push(`/Modelo/${modeloSlug}`);
     };
 
     if (loading) return <div className="text-center p-6">Loading...</div>;
     if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
 
     return (
-        <div className='w-full h-[450px] flex flex-col  gap-[26px] '>
+        <div className='w-full h-[450px] flex flex-col  gap-[26px] cursor-pointer '>
           <h1 className='text-[20px] font-bold '>
             {title}
           </h1>

@@ -18,7 +18,11 @@ const Packs = ({ title }) => {
                     precio,
                     portadas,
                     slug,
-                    copy
+                    copy,
+                    modelo->{
+                        nombre,
+                        slug
+                    }
                 }`;
                 const data = await client.fetch(query);
                 setPaquetes(data);
@@ -33,8 +37,8 @@ const Packs = ({ title }) => {
         fetchPaquetes();
     }, []);
 
-    const handlePublicacionClick = (paquetelug) => {
-        router.push(`/Modelo/${modeloSlug}`);
+    const handlePublicacionClick = (modeloSlug,paqueteSlug) => {
+        router.push(`/Modelo/${modeloSlug}/Paquete/${paqueteSlug}`);
     };
 
     if (loading) return <div className="text-center p-6">Loading...</div>;
@@ -48,7 +52,7 @@ const Packs = ({ title }) => {
                     <div
                         key={paquete.slug.current}
                         className='flex-shrink-0 w-full h-full relative cursor-pointer'
-                        onClick={() => handlePublicacionClick(paquete.slug.current)}
+                        onClick={() => handlePublicacionClick(paquete.modelo.slug.current, paquete.slug.current)}
                     >
                       <img
                             src={urlFor(paquete.portadas[0]).url()}
