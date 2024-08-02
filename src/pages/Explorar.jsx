@@ -95,10 +95,10 @@ const Explore = () => {
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
 
   return (
-    <div className="max-w-4xl w-full lg:w-1/3 h-screen overflow-y-scroll mx-auto px-[25px] ">
+    <div className="max-w-4xl w-full lg:w-1/3 h-screen overflow-y-scroll mx-auto px-[25px] mb-[100px] ">
 
       <div className="mb-8">
-      <div className="relative mb-4 lg:hidden"> 
+      <div className="relative mb-4 mt-4 lg:hidden"> 
             <input
               type="text"
               className="w-full p-2 pl-10 rounded-full bg-gray-200"
@@ -149,7 +149,7 @@ const Explore = () => {
                 ))
               }
           </div>
-          <h1 className='text-[20px] font-bold mb-[27px] mt-[90px] '>
+          <h1 className='text-[20px] font-bold mb-[27px] lg:mt-[90px] '>
             Tendencias
           </h1>
         <Slider {...settings}>
