@@ -87,6 +87,12 @@ box-shadow: 0px 4px 12.9px -5px rgba(0, 0, 0, 0.31);
 .suscriptionShadow{
   box-shadow: 0px 4px 12.9px -5px rgba(0, 0, 0, 0.31);
 }
+
+.faqs{
+  border-radius: 30px;
+background: rgba(185, 185, 185, 0.13);
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

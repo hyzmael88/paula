@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 const faqs = [
   {
@@ -24,14 +25,38 @@ const faqs = [
 ];
 
 const Faqs = () => {
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const toggleFaq = (index) => {
+    if (index === activeIndex) {
+      setActiveIndex(null);
+    } else {
+      setActiveIndex(index);
+    }
+  };
+
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-4xl font-bold mb-8 text-center">Preguntas Frecuentes (FAQs)</h1>
+    <div className="p-6 max-w-4xl w-full lg:w-1/3 mx-auto">
+      <h1 className="text-4xl font-bold mb-8 text-center">FAQs</h1>
       <div className="space-y-4">
         {faqs.map((faq, index) => (
-          <div key={index} className="p-4 border border-gray-200 rounded-lg shadow-sm">
-            <h2 className="text-2xl font-semibold mb-2">{faq.question}</h2>
-            <p className="text-gray-700">{faq.answer}</p>
+          <div key={index} className="border  rounded-lg s faqs"
+          
+          >
+            <div
+              className="px-[31px] py-3 flex justify-between items-center cursor-pointer"
+              onClick={() => toggleFaq(index)}
+            >
+              <h2 className="text-[16px] font-semibold">{faq.question}</h2>
+              <span>
+                {activeIndex === index ? <img src='/icons/zoomLess.svg' className='w-[10px]' /> : <img src='/icons/zoomPlus.svg' className='w-[10px]' />}
+              </span>
+            </div>
+            {activeIndex === index && (
+              <div className="p-4 border-t border-gray-200 px-[31px]">
+                <p className="text-gray-700 text-[12px]">{faq.answer}</p>
+              </div>
+            )}
           </div>
         ))}
       </div>
