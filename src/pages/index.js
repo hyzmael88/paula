@@ -73,14 +73,14 @@ export default function Home() {
         <Link href={"/Auth/Signup"}
         
         >
-        <button className='w-[145px] h-[50px] bg-[#602AB1] m-4 text-white font-inter font-bold rounded-[34px] text-[16px] xl:text-[20px] shadowButton '>
+        <button className='w-[145px] lg:w-[164px] h-[50px] lg:h-[63px] bg-[#602AB1] m-4 text-white font-inter font-bold rounded-[34px] text-[16px] lg:text-[20px] shadowButton '>
           Registrate
         </button>
         </Link>
         <Link href={"/Auth/Login"}
         
         >
-        <button className='w-[145px] h-[50px] m-4 text-white font-inter font-bold rounded-[34px] text-[16px] xl:text-[20px] shadowButton flex-nowrap'
+        <button className='w-[145px] lg:w-[164px] h-[50px] lg:h-[63px] m-4 text-white font-inter font-bold rounded-[34px] text-[16px] xl:text-[20px] shadowButton flex-nowrap'
         style={{ background: 'linear-gradient(180deg, #FF66AE 0%, #6E26B6 100%)' }}
         >
           Iniciar Sesión
