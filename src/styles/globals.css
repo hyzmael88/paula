@@ -77,6 +77,12 @@ box-shadow: 3px 4px 7.4px 0px rgba(0, 0, 0, 0.59);
   box-shadow: 2.84px 3.786px 7.005px 0px rgba(0, 0, 0, 0.59);
 }
 
+.perfilPaquete{
+  border-radius: 30px;
+background: #FFF;
+box-shadow: 0px 4px 12.9px -5px rgba(0, 0, 0, 0.31);
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
