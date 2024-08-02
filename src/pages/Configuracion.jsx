@@ -10,6 +10,8 @@ const Configuracion = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [updated, setUpdated] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+
   const router = useRouter();
 
   const sanityClient = createClient({
@@ -77,17 +79,18 @@ const Configuracion = () => {
 
   return (
     <div className="max-w-4xl w-full xl:w-1/3 h-[85vh] mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Configuración de la Cuenta</h1>
+      <h1 className="text-3xl font-bold mb-6">Configuración</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-gray-700">Nombre</label>
           <input
-            type="text"
-            name="name"
-            value={user.name || ''}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
+      type="text"
+      name="name"
+      value={user.name || ''}
+      onChange={handleChange}
+      onFocus={() => setIsFocused(true)}
+      className={`w-full px-[28px] py-4 border rounded faqs focus-visible:border-[#FF66AE] `}
+    />
         </div>
         <div>
           <label className="block text-gray-700">Email</label>
@@ -96,14 +99,21 @@ const Configuracion = () => {
             name="email"
             value={user.email || ''}
             onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
+      onFocus={() => setIsFocused(true)}
+      className={`w-full px-[28px] py-4 border rounded focus-visible:border-custom-focus faqs `}
+    />
+          
         </div>
         
-        <div>
-          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+        <div className='w-full flex justify-between items-center'>
+          <button type="submit" className="paqueteButton text-white px-4 py- rounded-[23px]">
             Guardar Cambios
           </button>
+          <span className='text-[12px] text-[#6E26B6] cursor-pointer'
+          onClick={() => router.push('/Auth/ResetPassword')}
+          >
+          ¿Olvidaste tu contraseña?
+          </span>
         </div>
         {updated && <p className="text-green-500">Datos actualizados correctamente.</p>}
       </form>

@@ -93,6 +93,10 @@ box-shadow: 0px 4px 12.9px -5px rgba(0, 0, 0, 0.31);
 background: rgba(185, 185, 185, 0.13);
 }
 
+.border-custom-focus {
+  border: 1px solid var(--Gradiente-4, #FF66AE);
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
