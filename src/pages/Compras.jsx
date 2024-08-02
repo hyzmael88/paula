@@ -128,7 +128,7 @@ const Compras = () => {
 
   return (
     <div className="max-w-4xl w-full lg:w-1/3 mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Mis Compras</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">Compras</h1>
       {compras.length === 0 && paquetes.length === 0 ? (
         <p>No has comprado ningún paquete o publicación.</p>
       ) : (
