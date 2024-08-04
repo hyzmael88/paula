@@ -1,17 +1,20 @@
 // components/Secciones/LoNuevo.js
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import { useRouter } from 'next/router';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const LoNuevo = ({ title }) => {
     const [modelos, setModelos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const router = useRouter();
+    const scrollContainerRef = useRef(null);
+
 
     const settings = {
         className: "center",
@@ -62,14 +65,57 @@ const LoNuevo = ({ title }) => {
         router.push(`/Modelo/${modeloSlug}`);
     };
 
+
+    const handleNext = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({ left: 390, behavior: 'smooth' });
+        }
+    };
+
+    const handlePrev = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({ left: -390, behavior: 'smooth' });
+        }
+    };
+
+    const [showPrevButton, setShowPrevButton] = useState(false);
+    const [showNextButton, setShowNextButton] = useState(true);
+
+    const updateButtonsVisibility = () => {
+        if (scrollContainerRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+            setShowPrevButton(scrollLeft > 0);
+            setShowNextButton(scrollLeft < scrollWidth - clientWidth);
+        }
+    };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            updateButtonsVisibility();
+        };
+
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.addEventListener('scroll', handleScroll);
+            // Initial check to set button visibility on mount
+            updateButtonsVisibility();
+        }
+
+        return () => {
+            if (scrollContainerRef.current) {
+                scrollContainerRef.current.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, [scrollContainerRef.current]);
+
     if (loading) return <div className="text-center p-6">Loading...</div>;
     if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
 
     return (
         <div className='w-full h-auto flex flex-col gap-[26px] mb-8'>
             <h1 className='text-[20px] font-bold'>{title}</h1>
-            <div className='w-full flex items-center gap-[22px] overflow-x-auto no-scrollbar'>
-              
+            <div className='w-full h-full relative'>
+                
+            <div className='w-full flex items-center gap-[22px] overflow-x-auto no-scrollbar py-4 relative' ref={scrollContainerRef}>
                     {modelos.map(modelo => (
                         <div
                             key={modelo.slug.current}
@@ -86,6 +132,18 @@ const LoNuevo = ({ title }) => {
                             </div>
                         </div>
                     ))}
+            </div>
+            {showPrevButton && (
+                    <div className="absolute left-4 top-1/2 transform -translate-y-1/2 w-[47px] h-[47px] rounded-full z-10 bg-[#B9B9B98C] flex justify-center items-center cursor-pointer" onClick={handlePrev}>
+                        <FaChevronLeft className="text-white" />
+                    </div>
+                )}
+               {showNextButton && (
+                    <div className="absolute right-4 top-1/2 transform -translate-y-1/2 w-[47px] h-[47px] rounded-full z-10 bg-[#B9B9B98C] flex justify-center items-center cursor-pointer" onClick={handleNext}>
+                        <FaChevronRight className="text-white" />
+                    </div>
+                )}
+              
             </div>
         </div>
     );
