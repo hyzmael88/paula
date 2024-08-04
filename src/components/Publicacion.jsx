@@ -87,14 +87,25 @@ function Publicacion({
         ) ? (
         publicacion.fotografias && publicacion.fotografias.length > 0 && (
           <div className="fotografias mb-4 relative">
-            <div className="absolute top-4 right-4 bg-[#2222228F] rounded-[27px] text-white px-2 py-1 z-10">
-              <p>1/{publicacion.fotografias.length}</p>
-            </div>
+           
+            {publicacion.fotografias.length > 1 && (
+              <>
+                <div className="absolute top-4 right-4 bg-[#2222228F] rounded-[27px] text-white px-2 py-1 z-10">
+                  <p className="text-[12px]">{posicion + 1}/{publicacion.fotografias.length}</p>
+                </div>
+                <div className="absolute right-4 top-1/2 transform -translate-y-1/2 w-[47px] h-[47px] rounded-full z-10 bg-[#B9B9B98C] flex justify-center items-center" onClick={handleNext}>
+                  <FaChevronRight className="text-white"/>
+                </div>
+                <div className="absolute left-4 top-1/2 transform -translate-y-1/2 w-[47px] h-[47px] rounded-full z-10 bg-[#B9B9B98C] flex justify-center items-center" onClick={handlePrev}>
+                  <FaChevronLeft className="text-white"/>
+                </div>
+              </>
+            )}
             <img
               key={publicacion.fotografias[0]}
-              src={urlFor(publicacion.fotografias[0]).url()}
+              src={urlFor(publicacion.fotografias[posicion]).url()}
               alt={`Fotografía `}
-              className="w-full h-[330px] object-cover mb-2 cursor-pointer"
+              className="w-full h-[330px]  mb-2 cursor-pointer object-cover"
               onClick={() =>
                 openVisor(
                   publicacion.fotografias.map((foto) => urlFor(foto).url())
