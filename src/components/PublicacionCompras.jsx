@@ -2,6 +2,7 @@ import moment from "moment";
 import React, { useState } from "react";
 import { FaChevronLeft, FaChevronRight, FaHeart, FaMoneyBillWave, FaRegCommentDots } from "react-icons/fa";
 import { CiBookmark } from "react-icons/ci";
+import Link from "next/link";
 
 function PublicacionCompras({
   publicacion,
