@@ -23,6 +23,7 @@ function Modelo() {
   const { data: session, status } = useSession();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
   const [selector, setSelector] = useState("Publicaciones");
   const [isVisorOpen, setIsVisorOpen] = useState(false);
   const [currentFotos, setCurrentFotos] = useState([]);
@@ -38,6 +39,9 @@ function Modelo() {
     if (session && modelo) {
       const isSubscribed = session.user.subscribedModels.some((subscribedModel) => subscribedModel._ref === modelo._id);
       setSubscribed(isSubscribed);
+      const isFollowing = session.user.follows.some((followedModel) => followedModel._ref === modelo._id);
+      setIsFollowing(isFollowing);
+      console.log(session)
     }
   }, [session, modelo]);
 
@@ -150,6 +154,27 @@ function Modelo() {
     router.push(`/Modelo/${slug}/Paquete/${paqueteSlug}`);
   };
 
+
+  const followModelo = async () => {
+    try {
+      const response = await fetch('/api/follow', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ modeloId: modelo._id, email: session.user.email }),
+      });
+  
+      if (response.ok) {
+        setIsFollowing(!isFollowing);
+      } else {
+        console.error('Error al seguir al modelo');
+      }
+    } catch (error) {
+      console.error('Error al seguir al modelo:', error);
+    }
+  };
+  
   if (loading) return <Spinner />; // Muestra el loader mientras los datos se cargan
 
   if (error) return <div className="text-red-500">{error}</div>; // Muestra el mensaje de error
@@ -195,9 +220,9 @@ function Modelo() {
         )}
        
 
-        <div className="mt-[50px] lg:mt-[95px] font-bold modeloButton text-white w-[112px] h-[24px] text-center  ">
-          Follow
-        </div>
+       <div className="mt-[50px] lg:mt-[95px] font-bold modeloButton text-white w-[112px] h-[24px] text-center cursor-pointer" onClick={followModelo}>
+  {isFollowing ? 'Unfollow' : 'Follow'}
+</div>
        
         </div>
       </div>

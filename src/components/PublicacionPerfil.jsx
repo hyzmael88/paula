@@ -32,9 +32,7 @@ function PublicacionPerfil({
       <Link href={`/Modelo/${modelo.slug.current}`}>
       <div className="w-full flex justify-between px-4 h-[125px] ">
         <div className="w-full flex items-center">
-            {
-                console.log(publicacion)
-            }
+          
           <img
             src={urlFor(modelo.fotoPerfil).url()}
             alt={modelo.nombre}

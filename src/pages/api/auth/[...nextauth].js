@@ -76,6 +76,7 @@ export default NextAuth({
         session.user.paquetesAdquiridos = userData?.paquetesAdquiridos || [];
         session.user.subscribedModels = userData?.subscribedModels || [];
         session.user.compras = userData?.compras || [];
+        session.user.follows = userData?.follows || [];
         console.log(userData);
       }
       return session;

@@ -70,6 +70,12 @@ export default {
                 type: 'array',
                 of: [{ type: 'reference', to: [{ type: 'paquetes' }] }],
             },
+            {
+                name:'follows',
+                title:'Follows',
+                type:'array',
+                of: [{ type: 'reference', to: [{ type: 'modelos' }] }],
+            }
     ],
     
 };
