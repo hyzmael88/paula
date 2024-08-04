@@ -42,13 +42,13 @@ const Categorias = ({ title }) => {
 
     const handleNext = () => {
         if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({ left: 390, behavior: 'smooth' });
+            scrollContainerRef.current.scrollBy({ left: 283, behavior: 'smooth' });
         }
     };
 
     const handlePrev = () => {
         if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({ left: -390, behavior: 'smooth' });
+            scrollContainerRef.current.scrollBy({ left: -283, behavior: 'smooth' });
         }
     };
 

@@ -44,13 +44,13 @@ const Packs = ({ title }) => {
     };
     const handleNext = () => {
         if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({ left: 390, behavior: 'smooth' });
+            scrollContainerRef.current.scrollBy({ left: scrollContainerRef.current.clientWidth+22, behavior: 'smooth' });
         }
     };
 
     const handlePrev = () => {
         if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({ left: -390, behavior: 'smooth' });
+            scrollContainerRef.current.scrollBy({ left: -scrollContainerRef.current.clientWidth-22, behavior: 'smooth' });
         }
     };
 
@@ -60,7 +60,6 @@ const Packs = ({ title }) => {
     const updateButtonsVisibility = () => {
         if (scrollContainerRef.current) {
             const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-            console.log(scrollLeft, scrollWidth, clientWidth);	
             setShowPrevButton(scrollLeft > 0);
             setShowNextButton(scrollLeft < scrollWidth - clientWidth);
         }
