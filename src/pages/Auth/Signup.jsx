@@ -113,7 +113,7 @@ function Signup() {
         <p className="mt-6 text-left text-[#602AB1] text-[14px]">
           ¿Ya tienes una cuenta? <Link href="/Auth/Login"> <span className="text-[#602AB1]">Inicia sesión aquí</span></Link>
         </p>
-        <div className='hidden lg:block'>
+        <div className='hidden lg:block w-full'>
           <PieLogin />
         </div>
       </div>

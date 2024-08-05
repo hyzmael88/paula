@@ -109,7 +109,7 @@ function Login() {
         <p className="mt-6 text-left text-[#602AB1] text-[14px] ">
           ¿No tienes una cuenta? <Link href="/Auth/Signup"> <span  className="text-[#602AB1]">Regístrate aquí</span></Link>
         </p>
-        <div className='hidden lg:block'>
+        <div className='hidden lg:block w-full'>
           <PieLogin/>
         </div>
         
