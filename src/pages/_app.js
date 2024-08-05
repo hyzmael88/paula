@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <Providers>
-      <div className="w-full max-w-[1440px] mx-auto lg:h-screen flex justify-between">
+      <div className={`w-full max-w-[1440px] mx-auto ${router.pathname == "/" ? "h-[95vh] lg:h-[90vh]": "lg:h-screen"} flex justify-between`}>
         {shouldShowSidebar && <SideBarLeft />}
         <DefaultSeo {...SEO} />
       

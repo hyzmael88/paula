@@ -65,10 +65,10 @@ export default function Home() {
         ],
       }}
     />
-    <div className='w-full h-full xl:h-[94vh] relative overflow-hidden'>
+    <div className='w-full h-full relative overflow-hidden'>
       <ParticlesComponent/>
    <CarrouselIndex photos={photos} />
-    <div className='w-full h-[95vh] flex flex-col justify-end items-center pb-[39px]  px-4 '>
+    <div className='w-full h-full flex flex-col justify-end lg:justify-center lg:pt-[150px] items-center   px-4 '>
       <img src='/Logo.png' alt='logo' className=' object-cover' />
       <p className='max-w-sm xl:max-w-xl text-center text-[13px] xl:text-[16px] mt-[10px] xl:mt-[27px]'>Explora contenido exclusivo y personalizado, creado por talentosos influencers y potenciado por inteligencia artificial. Suscríbete para una experiencia única y atrevida que va más allá de lo convencional.</p>
       <div className='w-full max-w-sm mt-[20px] xl:mt-[39px] flex justify-between gap-4 xl:gap-[50px]'>

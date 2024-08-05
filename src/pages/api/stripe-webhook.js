@@ -1,18 +1,3 @@
-import { buffer } from 'micro';
-import { createClient } from 'next-sanity';
-
-const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
-
-const sanityClient = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  useCdn: false,
-  apiVersion: '2021-03-25',
-  token: process.env.SANITY_WRITE_TOKEN,
-});
-
-
-
 export const config = {
   api: {
     bodyParser: false,
@@ -42,7 +27,7 @@ export default async function handler(req, res) {
       const paqueteId = session.metadata.paqueteId;
       const modeloId = session.metadata.modeloId;
       const publicacionId = session.metadata.publicacionId;
-
+      const subscriptionId = session.subscription; // Obtener el ID de la suscripción de Stripe
 
       try {
         const user = await sanityClient.fetch(`*[_type == "usuario" && email == $email][0]`, { email });
@@ -84,10 +69,11 @@ export default async function handler(req, res) {
           .insert('after', 'subscribedModels[-1]', [{
             _type: 'reference',
             _ref: modeloId,
-            _key: modeloId
+            _key: modeloId,
+            subscriptionId // Añadir el ID de la suscripción de Stripe
           }])
           .commit({ publish: true });
-          console.log(`Paquete ${paqueteId} añadido al usuario ${user._id}`);
+          console.log(`Modelo ${modeloId} añadido al usuario ${user._id}`);
 
         }
         
