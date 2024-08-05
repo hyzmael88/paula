@@ -5,7 +5,6 @@ import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import moment from "moment";
 
-
 const Suscripciones = () => {
   const { data: session } = useSession();
   const [subscriptions, setSubscriptions] = useState([]);
@@ -23,7 +22,8 @@ const Suscripciones = () => {
               nombre,
               slug,
               fotoPerfil,
-              _createdAt
+              _createdAt,
+              subscriptionId
             }
           }`, {
             email: session.user.email,
@@ -47,6 +47,29 @@ const Suscripciones = () => {
     router.push(`/Modelo/${slug}`);
   };
 
+  const handleUnsubscribe = async (modelId, subscriptionId) => {
+    if (!session) return;
+
+    try {
+      const response = await fetch('/api/unsubscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ modelId, subscriptionId }),
+      });
+
+      if (response.ok) {
+        setSubscriptions(subscriptions.filter(model => model._id !== modelId));
+      } else {
+        const data = await response.json();
+        console.error('Error al desuscribirse del modelo:', data.error);
+      }
+    } catch (error) {
+      console.error('Error al desuscribirse del modelo:', error);
+    }
+  };
+
   useEffect(() => {
     if (!session) {
       router.push('/Auth/Login');
@@ -59,8 +82,6 @@ const Suscripciones = () => {
 
   if (loading) return <div className="text-center p-6">Cargando...</div>;
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
-
-  console.log(subscriptions);
 
   return (
     <div className="max-w-4xl w-full lg:w-1/3 mx-auto p-6">
@@ -80,16 +101,20 @@ const Suscripciones = () => {
                 alt={model.nombre} 
                 className="w-[59px] h-[59px] rounded-full object-cover"
               />
-              <div className="p-4">
+              <div className="p-4 flex-1">
                 <h2 className="text-xl font-bold">{model.nombre}</h2>
-                <p className="text-[10px] font-bold text-[#B9B9B9] ">@{model.slug.current}</p>
-                <p className='text-[10px]'>Suscrito desde el {
-                
-                moment(model.createdAt).format('DD/MM/YY')
-                
-                }</p>
+                <p className="text-[10px] font-bold text-[#B9B9B9]">@{model.slug.current}</p>
+                <p className='text-[10px]'>Suscrito desde el {moment(model._createdAt).format('DD/MM/YY')}</p>
               </div>
-              <p></p>
+              <button
+                className="bg-red-500 text-white px-4 py-2 rounded-[20px] text-[12px] font-bold"
+                onClick={(e) => {
+                  e.stopPropagation(); // Para evitar que el click en el botón navegue al modelo
+                  handleUnsubscribe(model._id, model.subscriptionId);
+                }}
+              >
+                Desuscribirse
+              </button>
             </div>
           ))}
         </div>

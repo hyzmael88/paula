@@ -52,11 +52,19 @@ export default {
             title: 'Reset Token',
             type: 'string',
           },
-        {
+          {
             name: 'subscribedModels',
             title: 'Subscribed Models',
             type: 'array',
-            of: [{ type: 'reference', to: [{ type: 'modelos' }] }],
+            of: [{
+                type: 'object',
+                fields: [
+                    { name: '_type', type: 'string' },
+                    { name: '_ref', type: 'reference', to: [{ type: 'modelos' }] },
+                    { name: '_key', type: 'string' },
+                    { name: 'subscriptionId', type: 'string' }
+                ]
+            }],
         },
             {
                 name: 'compras',

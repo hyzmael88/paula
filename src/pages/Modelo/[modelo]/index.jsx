@@ -317,6 +317,7 @@ function Modelo() {
                 urlFor={urlFor}
                 subscribed={subscribed}
                 modelo={modelo}
+                suscribeStripe={suscribeStripe}
               />
               ))
             )
