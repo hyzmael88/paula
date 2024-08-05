@@ -10,7 +10,7 @@ const Parati = ({ title }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const router = useRouter();
-    const scrollContainerRef = useRef(null);
+    const scrollContainerParaTiRef = useRef(null);
 
 
     useEffect(() => {
@@ -45,14 +45,14 @@ const Parati = ({ title }) => {
 
     
     const handleNext = () => {
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({ left: 390, behavior: 'smooth' });
+        if (scrollContainerParaTiRef.current) {
+            scrollContainerParaTiRef.current.scrollBy({ left: 390, behavior: 'smooth' });
         }
     };
 
     const handlePrev = () => {
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({ left: -390, behavior: 'smooth' });
+        if (scrollContainerParaTiRef.current) {
+            scrollContainerParaTiRef.current.scrollBy({ left: -390, behavior: 'smooth' });
         }
     };
 
@@ -60,8 +60,8 @@ const Parati = ({ title }) => {
     const [showNextButton, setShowNextButton] = useState(true);
 
     const updateButtonsVisibility = () => {
-        if (scrollContainerRef.current) {
-            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+        if (scrollContainerParaTiRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerParaTiRef.current;
             setShowPrevButton(scrollLeft > 0);
             setShowNextButton(scrollLeft < scrollWidth - clientWidth);
         }
@@ -72,18 +72,18 @@ const Parati = ({ title }) => {
             updateButtonsVisibility();
         };
 
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.addEventListener('scroll', handleScroll);
+        if (scrollContainerParaTiRef.current) {
+            scrollContainerParaTiRef.current.addEventListener('scroll', handleScroll);
             // Initial check to set button visibility on mount
             updateButtonsVisibility();
         }
 
         return () => {
-            if (scrollContainerRef.current) {
-                scrollContainerRef.current.removeEventListener('scroll', handleScroll);
+            if (scrollContainerParaTiRef.current) {
+                scrollContainerParaTiRef.current.removeEventListener('scroll', handleScroll);
             }
         };
-    }, [scrollContainerRef.current]);
+    }, [scrollContainerParaTiRef.current]);
 
     if (loading) return <div className="text-center p-6">Loading...</div>;
     if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
@@ -96,7 +96,7 @@ const Parati = ({ title }) => {
           <div className='w-full h-full relative'>
 
           <div className='w-full h-full flex items-center gap-[26px] overflow-x-scroll overflow-y-hidden no-scrollbar'
-          ref={scrollContainerRef}
+          ref={scrollContainerParaTiRef}
           >
           {
             publicacionesGratuitas.map(publicacion => (

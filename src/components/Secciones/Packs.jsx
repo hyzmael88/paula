@@ -10,7 +10,7 @@ const Packs = ({ title }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const router = useRouter();
-    const scrollContainerRef = useRef(null);
+    const scrollContainerPacksRef = useRef(null);
 
     useEffect(() => {
         const fetchPaquetes = async () => {
@@ -43,14 +43,14 @@ const Packs = ({ title }) => {
         router.push(`/Modelo/${modeloSlug}/Paquete/${paqueteSlug}`);
     };
     const handleNext = () => {
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({ left: scrollContainerRef.current.clientWidth+22, behavior: 'smooth' });
+        if (scrollContainerPacksRef.current) {
+            scrollContainerPacksRef.current.scrollBy({ left: scrollContainerPacksRef.current.clientWidth+22, behavior: 'smooth' });
         }
     };
 
     const handlePrev = () => {
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({ left: -scrollContainerRef.current.clientWidth-22, behavior: 'smooth' });
+        if (scrollContainerPacksRef.current) {
+            scrollContainerPacksRef.current.scrollBy({ left: -scrollContainerPacksRef.current.clientWidth-22, behavior: 'smooth' });
         }
     };
 
@@ -58,8 +58,8 @@ const Packs = ({ title }) => {
     const [showNextButton, setShowNextButton] = useState(true);
 
     const updateButtonsVisibility = () => {
-        if (scrollContainerRef.current) {
-            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+        if (scrollContainerPacksRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerPacksRef.current;
             setShowPrevButton(scrollLeft > 0);
             setShowNextButton(scrollLeft < scrollWidth - clientWidth);
         }
@@ -70,18 +70,18 @@ const Packs = ({ title }) => {
             updateButtonsVisibility();
         };
 
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.addEventListener('scroll', handleScroll);
+        if (scrollContainerPacksRef.current) {
+            scrollContainerPacksRef.current.addEventListener('scroll', handleScroll);
             // Initial check to set button visibility on mount
             updateButtonsVisibility();
         }
 
         return () => {
-            if (scrollContainerRef.current) {
-                scrollContainerRef.current.removeEventListener('scroll', handleScroll);
+            if (scrollContainerPacksRef.current) {
+                scrollContainerPacksRef.current.removeEventListener('scroll', handleScroll);
             }
         };
-    }, [scrollContainerRef.current]);
+    }, [scrollContainerPacksRef.current]);
 
     if (loading) return <div className="text-center p-6">Loading...</div>;
     if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
@@ -92,7 +92,7 @@ const Packs = ({ title }) => {
             <div className='w-full h-full relative'>
 
             <div className='w-full flex items-center gap-[22px] overflow-x-auto no-scrollbar'
-             ref={scrollContainerRef}
+             ref={scrollContainerPacksRef}
             >
                 {paquetes.map(paquete => (
                     <div

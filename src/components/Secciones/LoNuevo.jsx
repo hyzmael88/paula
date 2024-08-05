@@ -13,7 +13,7 @@ const LoNuevo = ({ title }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const router = useRouter();
-    const scrollContainerRef = useRef(null);
+    const scrollContainerLoNuevoRef = useRef(null);
 
 
     const settings = {
@@ -67,14 +67,14 @@ const LoNuevo = ({ title }) => {
 
 
     const handleNext = () => {
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({ left: 388, behavior: 'smooth' });
+        if (scrollContainerLoNuevoRef.current) {
+            scrollContainerLoNuevoRef.current.scrollBy({ left: 388, behavior: 'smooth' });
         }
     };
 
     const handlePrev = () => {
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({ left: -388, behavior: 'smooth' });
+        if (scrollContainerLoNuevoRef.current) {
+            scrollContainerLoNuevoRef.current.scrollBy({ left: -388, behavior: 'smooth' });
         }
     };
 
@@ -82,8 +82,8 @@ const LoNuevo = ({ title }) => {
     const [showNextButton, setShowNextButton] = useState(true);
 
     const updateButtonsVisibility = () => {
-        if (scrollContainerRef.current) {
-            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+        if (scrollContainerLoNuevoRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerLoNuevoRef.current;
             setShowPrevButton(scrollLeft > 0);
             setShowNextButton(scrollLeft < scrollWidth - clientWidth);
         }
@@ -94,18 +94,18 @@ const LoNuevo = ({ title }) => {
             updateButtonsVisibility();
         };
 
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.addEventListener('scroll', handleScroll);
+        if (scrollContainerLoNuevoRef.current) {
+            scrollContainerLoNuevoRef.current.addEventListener('scroll', handleScroll);
             // Initial check to set button visibility on mount
             updateButtonsVisibility();
         }
 
         return () => {
-            if (scrollContainerRef.current) {
-                scrollContainerRef.current.removeEventListener('scroll', handleScroll);
+            if (scrollContainerLoNuevoRef.current) {
+                scrollContainerLoNuevoRef.current.removeEventListener('scroll', handleScroll);
             }
         };
-    }, [scrollContainerRef.current]);
+    }, [scrollContainerLoNuevoRef.current]);
 
     if (loading) return <div className="text-center p-6">Loading...</div>;
     if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
@@ -115,7 +115,7 @@ const LoNuevo = ({ title }) => {
             <h1 className='text-[20px] font-bold'>{title}</h1>
             <div className='w-full h-full relative'>
                 
-            <div className='w-full flex items-center gap-[22px] overflow-x-auto no-scrollbar py-4 relative' ref={scrollContainerRef}>
+            <div className='w-full flex items-center gap-[22px] overflow-x-auto no-scrollbar py-4 relative' ref={scrollContainerLoNuevoRef}>
                     {modelos.map(modelo => (
                         <div
                             key={modelo.slug.current}

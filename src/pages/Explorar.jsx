@@ -89,6 +89,7 @@ const Explore = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     adaptiveHeight: true,
+    autoplay: true,
   };
 
   if (loading) return <div className="text-center p-6">Loading...</div>;
