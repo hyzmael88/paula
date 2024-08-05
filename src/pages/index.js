@@ -7,6 +7,7 @@ import { NextSeo } from 'next-seo';
 import CarrouselIndex from '@/components/CarrouselIndex';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
+import ParticlesComponent from '@/components/ParticlesComponent';
 
 
 const inter = Inter({ subsets: ['latin'] });
@@ -65,6 +66,7 @@ export default function Home() {
       }}
     />
     <div className='w-full h-full xl:h-[94vh] relative overflow-hidden'>
+      <ParticlesComponent/>
    <CarrouselIndex photos={photos} />
     <div className='w-full h-[95vh] flex flex-col justify-end items-center pb-[39px]  px-4 '>
       <img src='/Logo.png' alt='logo' className=' object-cover' />
