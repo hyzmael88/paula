@@ -14,8 +14,10 @@ function SideBarLeft() {
         <div className='w-full h-[160px] flex justify-center items-center  '>
           <img src='/Logo.png' alt='Logo' className='w-[166px] h-[100px] mx-auto' />
         </div>
-          <nav>
-            <ul className="space-y-4 pl-[50px]">
+          <nav className="w-full flex flex-col justify-center items-center">
+            <ul className="space-y-4   "
+            
+            >
               <li>
                 <Link href="/Home">
                   <p className="flex items-center text-lg font-medium text-black hover:text-purple-600">
@@ -98,7 +100,7 @@ function SideBarLeft() {
                 </p>
               </li>
             </ul>
-            <div className="flex  items-center  text-[20px] gap-[25px] pl-[50px] my-[40px]">
+            <div className="flex  items-center  text-[20px] gap-[25px]  my-[40px]">
             <a href="#" className="text-black hover:text-purple-600">
               <FaFacebook className="" />
             </a>
@@ -112,7 +114,7 @@ function SideBarLeft() {
               <FaTiktok className="" />
             </a>
           </div>
-          <div className="mt-6 text-center">
+          <div className="mt-6 text-left">
             <Link href="/Politicas" className="block text-black hover:text-purple-600">
               Políticas de privacidad
             </Link>
