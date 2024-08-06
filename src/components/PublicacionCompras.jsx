@@ -10,7 +10,6 @@ function PublicacionCompras({
   urlFor,
 }) {
 
-    console.log(publicacion)
   const [posicion, setPosicion] = useState(0);
 
   const handleNext = () => {

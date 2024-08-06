@@ -1,4 +1,3 @@
-// pages/Home.js
 import { useEffect, useState } from 'react';
 import { useSession, signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -9,12 +8,10 @@ import { NextSeo } from 'next-seo';
 import ModalVisor from '@/components/ModalVisor';
 import moment from 'moment';
 import 'moment/locale/es'; // Importa el idioma español
-import { FaRegImage } from 'react-icons/fa';
 import Publicacion from '@/components/Publicacion';
 import getStripe from '@/sanity/lib/getStripe';
 
 moment.locale('es');
-
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -36,19 +33,21 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const user = await client.fetch(`*[_type == "usuario" && email == $email][0]{
-          subscribedModels[]->{
-            publicaciones[]->{
-              _id,
-              fotografias,
-              copy,
-              slug,
-              precio,
-              _createdAt,
-              modelo->{
-                nombre,
-                fotoPerfil,
+          subscribedModels[]{
+            modelRef->{
+              publicaciones[]->{
+                _id,
+                fotografias,
+                copy,
                 slug,
-                _id
+                precio,
+                _createdAt,
+                modelo->{
+                  nombre,
+                  fotoPerfil,
+                  slug,
+                  _id
+                }
               }
             }
           },
@@ -63,7 +62,7 @@ export default function Home() {
         }
 
         // Concatenar todas las publicaciones de los modelos suscritos y ordenarlas por fecha
-        const allPublicaciones = user.subscribedModels.flatMap(modelo => modelo.publicaciones).sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt));
+        const allPublicaciones = user.subscribedModels.flatMap(model => model.modelRef.publicaciones).sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt));
         
         setPublicaciones(allPublicaciones);
         setLoading(false);
@@ -130,21 +129,18 @@ export default function Home() {
         <div className='w-full h-[160px] flex lg:hidden justify-center items-center  '>
           <img src='/Logo.png' alt='Logo' className='w-[205px] mx-auto' />
         </div>
-        {/* <h1 className="text-3xl font-bold mb-6">Publicaciones Recientes</h1> */}
         {publicaciones.length === 0 ? (
           <p>No hay publicaciones disponibles.</p>
         ) : (
           <div className="flex flex-col gap-4">
             {publicaciones.map((publicacion) => (
               <Publicacion
-              key={publicacion._id}
-              publicacion={publicacion}
-              comprarPublicacionStripe={comprarPublicacionStripe}
-              openVisor={openVisor}
-              session={session}
-              urlFor={urlFor}
-
-
+                key={publicacion._id}
+                publicacion={publicacion}
+                comprarPublicacionStripe={comprarPublicacionStripe}
+                openVisor={openVisor}
+                session={session}
+                urlFor={urlFor}
               />
             ))}
           </div>

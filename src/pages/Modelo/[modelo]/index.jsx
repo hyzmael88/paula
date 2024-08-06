@@ -37,7 +37,7 @@ function Modelo() {
 
   useEffect(() => {
     if (session && modelo) {
-      console.log(session);
+     
   
       // Verificar si el usuario está suscrito al modelo
       const isSubscribed = session.user.subscribedModels.some((subscribedModel) => 
@@ -52,7 +52,6 @@ function Modelo() {
       );
       setIsFollowing(isFollowing);
       
-      console.log(session);
     }
   }, [session, modelo]);
   
@@ -71,7 +70,6 @@ function Modelo() {
             },
             paquetes[]->{
               _id,
-              fotografias,
               portadas,
               nombre,
               copy,

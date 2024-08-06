@@ -23,7 +23,6 @@ const Categorias = ({ title }) => {
                     descripcion
                 }`;
                 const data = await client.fetch(query);
-                console.log(data);
                 setCategorias(data);
                 setLoading(false);
             } catch (error) {
