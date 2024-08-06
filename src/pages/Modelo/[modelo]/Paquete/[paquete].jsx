@@ -84,22 +84,23 @@ function Paquete() {
     );
 
   return (
-    <div className="w-full min-h-screen lg:w-1/3 flex flex-col items-center py-10 px-4 pb-[75px] ">
-      <div className="w-full max-w-4xl bg-white rounded-lg  overflow-hidden">
+    <div className="w-full h-screen overflow-y-scroll lg:w-1/3 flex flex-col items-center py-10 px-[17px] mb-[50px] lg:mb-[0]  ">
+      <div className="w-full max-w-4xl bg-white rounded-lg  overflow-hidden lg:mt-[50px]">
         {paqueteState.portadas && (
           <div className="w-full overflow-hidden flex">
             {paqueteState.portadas.map((portada, index) => (
               <img
                 key={index}
                 src={urlFor(portada).url()}
-                className="w-full h-[477px] object-cover rounded-[30px]"
+                className="w-full h-[35vh] object-cover rounded-[30px]"
                 alt={`Portada ${index + 1}`}
               />
             ))}
           </div>
         )}
-        <div className="p-6 text-center flex flex-col items-center justify-center ">
+        <div className="pt-[50px] text-center flex flex-col items-center justify-center ">
           <Link href={`/Modelo/${paqueteState.modelo.slug.current}`}>
+          
           <div className="flex p-[19px] gap-[19px] w-[191px] h-[95px] perfilPaquete cursor-pointer"
           
           >
@@ -113,15 +114,16 @@ function Paquete() {
             </div>
           </div>
           </Link>
-          <h1 className="text-[26px] uppercase font-bold mb-4">{paqueteState.nombre}</h1>
+          <h1 className="text-[26px] uppercase font-bold mb-[11px]">{paqueteState.nombre}</h1>
           {paqueteState.precio && (
-            <p className="text-[18px] font-bold mb-4">
+            <p className="text-[18px] font-bold mb-[14px]">
               Precio: ${paqueteState.precio}
             </p>
           )}
-          {paqueteState.copy && <p className="mb-4 text-[12px]">{paqueteState.copy}</p>}
+          {paqueteState.copy && <p className="mb-[15px] text-[12px]">{paqueteState.copy}</p>}
+          <div className="w-full px-4">
           <button
-            className="bg-orange-500 text-white h-[30px] rounded-lg  transition duration-300 mb-4 w-full paqueteButton"
+            className={` text-white h-[30px] rounded-[13px]  transition duration-300 mb-4 w-full loginButton flex ${!comprado? "justify-between": "justify-center"} items-center px-8 text-[11px] uppercase`}
             onClick={() => {
               if (comprado) {
                 setIsVisorOpen(true);
@@ -130,8 +132,22 @@ function Paquete() {
               }
             }}
           >
-            {comprado ? "Ver" : "Comprar"}
+            {comprado ? 
+            <span>
+              Ver Fotos
+            </span>
+            : 
+            <>
+            <span>
+              Comprar
+            </span>
+            <span>
+              por ${paqueteState.precio}
+            </span>
+            </>
+            }
           </button>
+          </div>
           {/* <button
             className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-300"
             onClick={() =>
