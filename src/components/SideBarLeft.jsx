@@ -20,7 +20,7 @@ function SideBarLeft() {
             <ul className="space-y-4">
               <li>
                 <Link href="/Home">
-                  <p className={`flex items-center text-lg font-medium ${pathname === '/Home' ? 'text-purple-600' : 'text-black hover:text-purple-600'}`}>
+                  <p className={`flex items-center text-lg font-bold ${pathname === '/Home' ? 'text-[#602AB1]' : 'text-black hover:text-[#602AB1]'}`}>
                     <FaHome className="mr-2" />
                     Inicio
                   </p>
@@ -28,7 +28,7 @@ function SideBarLeft() {
               </li>
               <li>
                 <Link href="/Explorar">
-                  <p className={`flex items-center text-lg font-medium ${pathname === '/Explorar' ? 'text-purple-600' : 'text-black hover:text-purple-600'}`}>
+                  <p className={`flex items-center text-lg font-bold ${pathname === '/Explorar' ? 'text-[#602AB1]' : 'text-black hover:text-[#602AB1]'}`}>
                     <FaCompass className="mr-2" />
                     Explorar
                   </p>
@@ -36,7 +36,7 @@ function SideBarLeft() {
               </li>
               <li>
                 <Link href="/Suscripciones">
-                  <p className={`flex items-center text-lg font-medium ${pathname === '/Suscripciones' ? 'text-purple-600' : 'text-black hover:text-purple-600'}`}>
+                  <p className={`flex items-center text-lg font-bold ${pathname === '/Suscripciones' ? 'text-[#602AB1]' : 'text-black hover:text-[#602AB1]'}`}>
                     <FaHeart className="mr-2" />
                     Suscripciones
                   </p>
@@ -44,7 +44,7 @@ function SideBarLeft() {
               </li>
               <li>
                 <Link href="/Compras">
-                  <p className={`flex items-center text-lg font-medium ${pathname === '/Compras' ? 'text-purple-600' : 'text-black hover:text-purple-600'}`}>
+                  <p className={`flex items-center text-lg font-bold ${pathname === '/Compras' ? 'text-[#602AB1]' : 'text-black hover:text-[#602AB1]'}`}>
                     <FaShoppingCart className="mr-2" />
                     Compras
                   </p>
@@ -52,7 +52,7 @@ function SideBarLeft() {
               </li>
               <li>
                 <Link href="/Faqs">
-                  <p className={`flex items-center text-lg font-medium ${pathname === '/Faqs' ? 'text-purple-600' : 'text-black hover:text-purple-600'}`}>
+                  <p className={`flex items-center text-lg font-bold ${pathname === '/Faqs' ? 'text-[#602AB1]' : 'text-black hover:text-[#602AB1]'}`}>
                     <FaQuestionCircle className="mr-2" />
                     FAQS
                   </p>
@@ -60,7 +60,7 @@ function SideBarLeft() {
               </li>
               <li>
                 <Link href="https://www.instagram.com/luvmy_pack/">
-                  <p className="flex items-center text-lg font-medium text-black hover:text-purple-600">
+                  <p className="flex items-center text-lg font-bold text-black hover:text-[#602AB1]">
                     <FaHeadset className="mr-2" />
                     Soporte
                   </p>
@@ -68,7 +68,7 @@ function SideBarLeft() {
               </li>
               <li>
                 <Link href="/Configuracion">
-                  <p className={`flex items-center text-lg font-medium ${pathname === '/Configuracion' ? 'text-purple-600' : 'text-black hover:text-purple-600'}`}>
+                  <p className={`flex items-center text-lg font-bold ${pathname === '/Configuracion' ? 'text-[#602AB1]' : 'text-black hover:text-[#602AB1]'}`}>
                     <FaCog className="mr-2" />
                     Configuracion
                   </p>
@@ -76,7 +76,7 @@ function SideBarLeft() {
               </li>
               <li>
                 <p
-                  className="flex items-center text-lg font-medium text-black hover:text-purple-600 cursor-pointer"
+                  className="flex items-center text-lg font-bold text-black hover:text-[#602AB1] cursor-pointer"
                   onClick={() => signOut({ callbackUrl: "/" })}
                 >
                   <FaSignOutAlt className="mr-2" />
@@ -85,27 +85,27 @@ function SideBarLeft() {
               </li>
             </ul>
             <div className="flex items-center text-[20px] gap-[25px] my-[40px]">
-              <a href="#" className="text-black hover:text-purple-600">
+              <a href="#" className="text-black hover:text-[#602AB1]">
                 <FaFacebook />
               </a>
-              <a href="#" className="text-black hover:text-purple-600">
+              <a href="#" className="text-black hover:text-[#602AB1]">
                 <FaInstagram />
               </a>
-              <a href="#" className="text-black hover:text-purple-600">
+              <a href="#" className="text-black hover:text-[#602AB1]">
                 <FaXTwitter />
               </a>
-              <a href="#" className="text-black hover:text-purple-600">
+              <a href="#" className="text-black hover:text-[#602AB1]">
                 <FaTiktok />
               </a>
             </div>
             <div className="mt-6 text-left">
               <Link href="/Politicas">
-                <p className="block text-black hover:text-purple-600">
+                <p className="block text-black hover:text-[#602AB1]">
                   Políticas de privacidad
                 </p>
               </Link>
               <Link href="/Terminos">
-                <p className="block text-black hover:text-purple-600">
+                <p className="block text-black hover:text-[#602AB1]">
                   Términos y condiciones
                 </p>
               </Link>

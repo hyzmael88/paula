@@ -90,7 +90,7 @@ const Parati = ({ title }) => {
 
     return (
         <div className='w-full h-[450px] flex flex-col  gap-[26px] cursor-pointer '>
-          <h1 className='text-[20px] font-bold '>
+          <h1 className='text-[27px] font-bold '>
             {title}
           </h1>
           <div className='w-full h-full relative'>

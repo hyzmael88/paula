@@ -112,7 +112,7 @@ const LoNuevo = ({ title }) => {
 
     return (
         <div className='w-full h-auto flex flex-col gap-[26px] mb-8'>
-            <h1 className='text-[20px] font-bold'>{title}</h1>
+            <h1 className='text-[27px] font-bold'>{title}</h1>
             <div className='w-full h-full relative'>
                 
             <div className='w-full flex items-center gap-[22px] overflow-x-auto no-scrollbar py-4 relative' ref={scrollContainerLoNuevoRef}>

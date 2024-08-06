@@ -150,7 +150,7 @@ const Explore = () => {
                 ))
               }
           </div>
-          <h1 className='text-[20px] font-bold mb-[27px] lg:mt-[90px] '>
+          <h1 className='text-[27px] font-bold mb-[27px] lg:mt-[90px] '>
             Tendencias
           </h1>
         <Slider {...settings}>
@@ -165,10 +165,10 @@ const Explore = () => {
                 alt={paquete.nombre} 
                 className="w-full h-[400px] object-cover rounded-[38px] "
               />
-              <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white p-4 rounded-b-[38px]">
-                <h2 className="text-xl font-bold">{paquete.nombre}</h2>
-                <p>Ver ${paquete.precio}</p>
-              </div>
+               <div className='absolute bottom-8 left-0 right-0 mx-auto w-[164px]'>
+                                <p className='text-[16px] text-white font-bold modeloButton text-center'>Ver por ${paquete.precio}</p>
+                            </div>
+              
             </div>
           ))}
         </Slider>
