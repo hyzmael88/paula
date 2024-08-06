@@ -98,7 +98,7 @@ const Explore = () => {
   return (
     <div className="max-w-4xl w-full lg:w-1/3 h-screen overflow-y-scroll mx-auto px-[25px] mb-[100px] ">
 
-      <div className="mb-8">
+      <div className="mb-8 ">
       <div className="relative mb-4 mt-4 lg:hidden"> 
             <input
               type="text"

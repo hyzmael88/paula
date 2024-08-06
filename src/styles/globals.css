@@ -129,7 +129,7 @@ background: rgba(185, 185, 185, 0.13);
 
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
 }
  
 /* Track */
@@ -139,11 +139,11 @@ background: rgba(185, 185, 185, 0.13);
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: #FF66AE;
     border-radius: 5px;
 }
  
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: #6E26B6;
 }
