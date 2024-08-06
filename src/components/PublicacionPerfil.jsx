@@ -29,6 +29,7 @@ function PublicacionPerfil({
     
   return (
     <div className="bg-white publicacionShadow overflow-hidden cursor-pointer rounded-[27px]">
+      {console.log(publicacion)}
       <Link href={`/Modelo/${modelo.slug.current}`}>
       <div className="w-full flex justify-between px-4 h-[125px] ">
         <div className="w-full flex items-center">
@@ -54,7 +55,7 @@ function PublicacionPerfil({
       <div className="p-4">
         <h2 className="text-[11px] leading-[13px]">{publicacion.copy}</h2>
       </div>
-      {subscribed ? (
+      {subscribed || publicacion.tipo == "gratuita" ? (
         !publicacion.precio ? (
           publicacion.fotografias &&
           publicacion.fotografias.length > 0 && (

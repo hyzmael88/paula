@@ -14,7 +14,9 @@ import { LuShare } from "react-icons/lu";
 
 function Modelo() {
   const [modelo, setModelo] = useState(null);
+  const [allPublicaciones, setAllPublicaciones] = useState([]);
   const [publicaciones, setPublicaciones] = useState([]);
+  const [publicacionesGratuitas, setPublicacionesGratuitas] = useState([]);
   const [paquetes, setPaquetes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -101,6 +103,16 @@ function Modelo() {
           }
           if (data.paquetes) {
             setPaquetes(data.paquetes);
+          }
+          if (data.publicacionesGratuitas) {
+            const publicacionesGratuitasConTipo = data.publicacionesGratuitas.map(pub => ({
+              ...pub,
+              tipo: 'gratuita'
+            }));
+            setPublicacionesGratuitas(publicacionesGratuitasConTipo);
+            setAllPublicaciones([...data.publicaciones, ...publicacionesGratuitasConTipo]);
+          } else {
+            setAllPublicaciones(data.publicaciones);
           }
           setLoading(false);
         })
@@ -210,6 +222,9 @@ function Modelo() {
 
   return (
     <div className="p-4 w-full lg:w-1/3 mx-auto bg-white rounded-lg shadow-lg h-screen overflow-y-auto pb-[150px]">
+      {
+        console.log(allPublicaciones)
+      }
       <div className="relative">
         {modelo.fotoPortada && (
           <img
@@ -316,10 +331,11 @@ function Modelo() {
         </div>
         <div className="publicaciones">
           {selector === "Publicaciones" ? (
-            publicaciones.length === 0 ? (
+            allPublicaciones.length === 0 ? (
               <p>No hay publicaciones disponibles.</p>
             ) : (
-              publicaciones.map((publicacion) => (
+              allPublicaciones.map((publicacion) => (
+                
                <PublicacionPerfil
                 key={publicacion._id}
                 publicacion={publicacion}
