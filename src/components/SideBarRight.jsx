@@ -123,7 +123,7 @@ const SidebarRight = () => {
                       alt={model.nombre}
                       className="w-[78px] h-[78px] bg-gray-400 rounded-full mr-4 object-cover z-20"
                     />
-                    <button className='absolute top-4 right-4 text-white visitButton rounded-[23px] w-[112px] h-[23px] '>
+                    <button className='absolute top-4 right-4 text-white visitButton rounded-[23px] w-[112px] h-[23px] text-[13px] font-bold '>
                       Follow
                     </button>
                     <div className='z-20 text-white mt-8 '>

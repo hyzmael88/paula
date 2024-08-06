@@ -2,7 +2,7 @@ import React from 'react';
 
 const Terminos = () => {
   return (
-    <div className="p-4 w-full lg:w-1/3">
+    <div className="p-4 w-full lg:w-1/3 h-screen overflow-y-scroll">
       <h1 className="text-3xl font-bold text-center mb-4">Términos y Condiciones</h1>
       <p className="mb-4 text-[12px]">
         Bienvenido a nuestro sitio web. Si continúa navegando y utilizando este sitio web, acepta cumplir y estar sujeto a los siguientes términos y condiciones de uso, que junto con nuestra política de privacidad rigen la relación de [Nombre de la Empresa] con usted en relación con este sitio web. Si no está de acuerdo con alguna parte de estos términos y condiciones, no utilice nuestro sitio web.
