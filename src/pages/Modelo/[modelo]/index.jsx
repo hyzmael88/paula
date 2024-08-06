@@ -296,10 +296,11 @@ function Modelo() {
         <div className="flex flex-row gap-x-4 my-4">
           {!subscribed ? (
             <button
-              className="bg-pink-500 text-white w-full h-[33px]  rounded-2xl cursor-pointer"
+              className="bg-pink-500 text-white w-full h-[33px]  rounded-2xl cursor-pointer px-8 flex justify-between items-center loginButton font-bold text-[11px] uppercase"
               onClick={suscribeStripe}
             >
-              Suscribete
+              <span>Suscribete</span>
+              <span>${modelo.precioSuscripcion} por 30 días</span>
             </button>
           ) : (
             <button
