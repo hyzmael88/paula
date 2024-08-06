@@ -1,4 +1,3 @@
-
 export default {
     name: 'usuario',
     title: 'Usuarios',
@@ -40,7 +39,6 @@ export default {
             name: 'createdAt',
             title: 'Created At',
             type: 'datetime',
-            
         },
         {
             name: 'updatedAt',
@@ -51,39 +49,30 @@ export default {
             name: 'resetToken',
             title: 'Reset Token',
             type: 'string',
-          },
-          {
+        },
+        {
             name: 'subscribedModels',
             title: 'Subscribed Models',
             type: 'array',
-            of: [{
-                type: 'object',
-                fields: [
-                    { name: '_type', type: 'string' },
-                    { name: '_ref', type: 'reference', to: [{ type: 'modelos' }] },
-                    { name: '_key', type: 'string' },
-                    { name: 'subscriptionId', type: 'string' }
-                ]
-            }],
+            of: [{ type: 'reference', to: [{ type: 'publicaciones' }] }]
         },
-            {
-                name: 'compras',
-                title: 'Compras',
-                type: 'array',
-                of: [{ type: 'reference', to: [{ type: 'publicaciones' }] }],
-            },
-            {
-                name: 'paquetesAdquiridos',
-                title: 'Paquetes Adquiridos',
-                type: 'array',
-                of: [{ type: 'reference', to: [{ type: 'paquetes' }] }],
-            },
-            {
-                name:'follows',
-                title:'Follows',
-                type:'array',
-                of: [{ type: 'reference', to: [{ type: 'modelos' }] }],
-            }
+        {
+            name: 'compras',
+            title: 'Compras',
+            type: 'array',
+            of: [{ type: 'reference', to: [{ type: 'publicaciones' }] }],
+        },
+        {
+            name: 'paquetesAdquiridos',
+            title: 'Paquetes Adquiridos',
+            type: 'array',
+            of: [{ type: 'reference', to: [{ type: 'paquetes' }] }],
+        },
+        {
+            name: 'follows',
+            title: 'Follows',
+            type: 'array',
+            of: [{ type: 'reference', to: [{ type: 'modelos' }] }],
+        }
     ],
-    
 };

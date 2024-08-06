@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 
     try {
       // Cancelar suscripción en Stripe
-      const deletedSubscription = await stripe.subscriptions.del(subscriptionId);
+      const deletedSubscription = await stripe.subscriptions.cancel(subscriptionId);
 
       // Actualizar Sanity
       const userId = session.user.id;

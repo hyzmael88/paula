@@ -158,7 +158,7 @@ function PublicacionPerfil({
               <div
                 className="w-[149px] h-[60px] bg-pink-500 text-center  rounded-3xl text-white cursor-pointer loginButton flex items-center justify-center font-bold desbloquearButton "
                 onClick={suscribeStripe}              >
-            Suscríbete para ver el contenido
+            Suscríbete para ver el contenido 
             </div>
             </div>
           </div>

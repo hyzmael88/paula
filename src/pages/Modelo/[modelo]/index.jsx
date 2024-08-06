@@ -115,9 +115,11 @@ function Modelo() {
         nombre: modelo.nombre,
         email: session.user.email,
         fotoPerfil: modelo.fotoPerfil,
-        _id: modelo._id,
+        modelo_id: modelo._id,
       }),
     });
+
+    
 
     if (response.status === 500) return;
 
@@ -277,7 +279,7 @@ function Modelo() {
           ) : (
             <button
               className="bg-pink-300 text-white w-full h-[33px] rounded-2xl"
-              onClick={suscribeStripe}
+              
             >
               Suscrito
             </button>
