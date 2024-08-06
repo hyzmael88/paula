@@ -51,18 +51,38 @@ export default function Home() {
               }
             }
           },
+          follows[]->{
+            publicacionesGratuitas[]->{
+              _id,
+              fotografias,
+              copy,
+              slug,
+              _createdAt,
+              modelo->{
+                nombre,
+                fotoPerfil,
+                slug,
+                _id
+              }
+            }
+          },
           compras[]->{
             _id
           }
         }`, { email: session.user.email });
 
-        if (!user || !user.subscribedModels || user.subscribedModels.length === 0) {
-          router.push('/Explorar'); // Si no hay suscripciones, redirigir a explorar
+        if (!user || (!user.subscribedModels && !user.follows)) {
+          router.push('/Explorar'); // Si no hay suscripciones ni follows, redirigir a explorar
           return;
         }
 
         // Concatenar todas las publicaciones de los modelos suscritos y ordenarlas por fecha
-        const allPublicaciones = user.subscribedModels.flatMap(model => model.modelRef.publicaciones).sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt));
+        const allSubscribedPublicaciones = user.subscribedModels ? user.subscribedModels.flatMap(model => model.modelRef.publicaciones).sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt)) : [];
+
+        // Concatenar todas las publicaciones gratuitas de los modelos seguidos y ordenarlas por fecha
+        const allFollowedPublicacionesGratuitas = user.follows ? user.follows.flatMap(model => model.publicacionesGratuitas).sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt)) : [];
+
+        const allPublicaciones = [...allSubscribedPublicaciones, ...allFollowedPublicacionesGratuitas].sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt));
         
         setPublicaciones(allPublicaciones);
         setLoading(false);
@@ -125,8 +145,8 @@ export default function Home() {
           ],
         }}
       />
-      <div className="max-w-4xl w-full lg:w-1/3 h-full pb-[100px] overflow-y-auto  mx-auto">
-        <div className='w-full h-[160px] flex lg:hidden justify-center items-center  '>
+      <div className="max-w-4xl w-full lg:w-1/3 h-full pb-[100px] overflow-y-auto mx-auto">
+        <div className='w-full h-[160px] flex lg:hidden justify-center items-center'>
           <img src='/Logo.png' alt='Logo' className='w-[205px] mx-auto' />
         </div>
         {publicaciones.length === 0 ? (
