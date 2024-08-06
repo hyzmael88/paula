@@ -88,7 +88,7 @@ const Suscripciones = () => {
 
   return (
     <div className="max-w-4xl w-full lg:w-1/3 mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Mis Suscripciones</h1>
+      <h1 className="text-[32px] font-bold text-center lg:mt-[75px] mb-6"> Suscripciones</h1>
       {subscriptions.length === 0 ? (
         <p>No estás suscrito a ningún modelo.</p>
       ) : (
@@ -96,21 +96,21 @@ const Suscripciones = () => {
           {subscriptions.map((model) => (
             <div 
               key={model.modelRef._id} 
-              className="bg-white rounded-[30px] suscriptionShadow overflow-hidden cursor-pointer flex flex-row items-center gap-[15px] px-[37px]" 
+              className="bg-white h-[95px] rounded-[30px] suscriptionShadow overflow-hidden cursor-pointer flex flex-row items-center gap-[15px] px-[37px] " 
               onClick={() => handleModelClick(model.modelRef.slug.current)}
             >
               <img 
                 src={model.modelRef.fotoPerfil ? urlFor(model.modelRef.fotoPerfil).url() : '/default-profile.png'} 
                 alt={model.modelRef.nombre} 
-                className="w-[59px] h-[59px] rounded-full object-cover"
+                className="w-[59px] h-[59px]  rounded-full object-cover"
               />
-              <div className="p-4 flex-1">
-                <h2 className="text-xl font-bold">{model.modelRef.nombre}</h2>
+              <div className=" flex-1">
+                <h2 className="text-[16px] font-bold">{model.modelRef.nombre}</h2>
                 <p className="text-[10px] font-bold text-[#B9B9B9]">@{model.modelRef.slug.current}</p>
                 <p className='text-[10px]'>Suscrito desde el {moment(model.modelRef._createdAt).format('DD/MM/YY')}</p>
               </div>
               <button
-                className="bg-red-500 text-white px-4 py-2 rounded-[20px] text-[12px] font-bold"
+                className="loginButton text-white px-4 py-2 rounded-[20px] text-[12px] font-bold"
                 onClick={(e) => {
                   e.stopPropagation(); // Para evitar que el click en el botón navegue al modelo
                   handleUnsubscribe(model.modelRef._id, model.subscriptionId);
