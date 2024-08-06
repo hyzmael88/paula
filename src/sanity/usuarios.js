@@ -54,7 +54,13 @@ export default {
             name: 'subscribedModels',
             title: 'Subscribed Models',
             type: 'array',
-            of: [{ type: 'reference', to: [{ type: 'modelos' }] }]
+            of: [{ 
+                type: 'object',
+                fields: [
+                    { name: 'ref', title: 'Reference', type: 'reference', to: [{ type: 'modelos' }] },
+                    { name: 'subscriptionId', title: 'Subscription ID', type: 'string' }
+                ]
+            }],
         },
         {
             name: 'compras',

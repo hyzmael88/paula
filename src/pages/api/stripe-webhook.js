@@ -65,18 +65,20 @@ export default async function handler(req, res) {
 
         console.log(`Publicacion ${publicacionId} añadido al usuario ${user._id}`);
          }
-         if(session.mode == "subscription"){
-          console.log("entre en modelo")
+         if (session.mode === "subscription") {
+          console.log("entre en modelo");
+          console.log(subscriptionId);
           await sanityClient
-          .patch(user._id)
-          .setIfMissing({ subscribedModels: [] })
-          .insert('after', 'subscribedModels[-1]', [{
-            _type: 'reference',
-            _ref: modeloId,
-            _key: modeloId
-          }])
-          .commit({ publish: true });
-          console.log(`Paquete ${paqueteId} añadido al usuario ${user._id}`);
+            .patch(user._id)
+            .setIfMissing({ subscribedModels: [] })
+            .insert('after', 'subscribedModels[-1]', [{
+              ref: { _type: 'reference', _ref: modeloId },
+              key: modeloId,
+              subscriptionId // Añadir el ID de la suscripción de Stripe
+            }])
+            .commit({ publish: true });
+
+          console.log(`Modelo ${modeloId} añadido al usuario ${user._id}`);
         }
         
       }
