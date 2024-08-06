@@ -69,7 +69,7 @@ function Login() {
           <img src="/logoLoginImgMovil.png" alt="Logo" className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
         
       </div>
-      <div className="flex flex-col justify-center lg:items-center w-full md:w-1/2 p-8 ">
+      <div className="flex flex-col justify-center items-center lg:items-start w-full md:w-1/2 p-8 ">
         <h1 className="text-4xl font-bold mb-6">Inicia Sesión</h1>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="w-full  space-y-4">
@@ -80,7 +80,7 @@ function Login() {
               type="email"
               placeholder="Correo electrónico"
               required
-              className="w-full p-2 mt-1 rounded-[34px] bg-[#F2F4F8] inputLogin placeholder:text-[#B9B9B9] placeholder:text-[16px]"
+              className="w-full p-2 mt-1 rounded-[34px] bg-[#F2F4F8] inputLogin placeholder:text-[#B9B9B9] placeholder:text-[16px] transition-all duration-300"
             />
           </div>
           <div>
@@ -90,7 +90,7 @@ function Login() {
               type="password"
               placeholder="Contraseña"
               required
-              className="w-full p-2  mt-1  rounded-[34px] bg-[#F2F4F8] inputLogin placeholder:text-[#B9B9B9] placeholder:text-[16px]"
+              className="w-full p-2  mt-1  rounded-[34px] bg-[#F2F4F8] inputLogin placeholder:text-[#B9B9B9] placeholder:text-[16px] transition-all duration-300"
             />
             {/* <p className="text-xs text-gray-500 mt-1">It must be a combination of minimum 8 letters, numbers, and symbols.</p> */}
           </div>
@@ -101,7 +101,7 @@ function Login() {
         </form>
         <button
           onClick={() => signIn('google', { callbackUrl: '/Home' })}
-          className="w-full  bg-[#4F70D0] border border-gray-300 text-white font-bold py-2 rounded flex items-center justify-center rounded-[34px] mt-2"
+          className="w-full loginGoogleButton   text-white font-bold py-2 rounded flex items-center justify-center rounded-[34px] mt-2"
         >
           <img src="/icons/google.svg" alt="Google Logo" className="w-5 h-5 mr-2  " />
           Inicia sesión con Google

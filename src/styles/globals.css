@@ -46,12 +46,33 @@
   box-shadow: 3px 4px 7.4px 0px rgba(0, 0, 0, 0.59);
 }
 
-.loginButton{
-  background:  linear-gradient(180deg, #FF66AE 0%, #6E26B6 100%)
+.loginButton {
+  background: linear-gradient(180deg, #FF66AE 0%, #6E26B6 100%);
+  box-shadow: 3px 4px 7.4px 0px rgba(0, 0, 0, 0.59);
+  border-radius: 30px; /* Ajusta según la imagen proporcionada */
+  
+}
+
+.loginButton:hover {
+  background: linear-gradient(180deg, #c302c9 0%, #4e0151 100%);
+  box-shadow: 3px 4px 7.4px 0px rgba(0, 0, 0, 0.59);
+}
+
+.loginGoogleButton{
+  box-shadow: 3px 4px 7.4px 0px rgba(0, 0, 0, 0.59);
+  background-color: #4F70D0;
+}
+.loginGoogleButton:hover{
+  box-shadow: 3px 4px 7.4px 0px rgba(0, 0, 0, 0.59);
+  background-color: #1b378a;
 }
 
 .inputLogin{
   box-shadow: 0px 4px 1.1px -3px rgba(0, 0, 0, 0.25);
+}
+.inputLogin:focus{
+  box-shadow: 0px 4px 1.1px -3px rgba(0, 0, 0, 0.25);
+  border: linear-gradient(180deg, #FF66AE 0%, #6E26B6 100%);
 }
 .desbloquearButton{
   box-shadow: 2.739px 3.652px 6.756px 0px rgba(0, 0, 0, 0.59);

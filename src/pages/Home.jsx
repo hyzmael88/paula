@@ -145,7 +145,7 @@ export default function Home() {
           ],
         }}
       />
-      <div className="max-w-4xl w-full lg:w-1/3 h-full pb-[100px] overflow-y-auto mx-auto">
+      <div className="max-w-4xl w-full lg:w-1/3 h-full pb-[100px] lg:p-[40px] lg:mt-[80px] overflow-y-auto mx-auto">
         <div className='w-full h-[160px] flex lg:hidden justify-center items-center'>
           <img src='/Logo.png' alt='Logo' className='w-[205px] mx-auto' />
         </div>
