@@ -79,7 +79,7 @@ const Configuracion = () => {
 
   return (
     <div className="max-w-4xl w-full lg:w-1/3 h-[85vh] mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Configuración</h1>
+      <h1 className="text-[35px] text-center font-bold mb-6 lg:mt-[75px]">Configuración</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-gray-700">Nombre</label>
