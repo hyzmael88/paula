@@ -59,11 +59,11 @@ const Suscripciones = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ modelId, subscriptionId }),
+        body: JSON.stringify({ modelId, subscriptionId,email:session.user.email }),
       });
 
       if (response.ok) {
-        setSubscriptions(subscriptions.filter(model => model._id !== modelId));
+        setSubscriptions(subscriptions.filter(model => model.modelRef._id !== modelId));
       } else {
         const data = await response.json();
         console.error('Error al desuscribirse del modelo:', data.error);
@@ -95,25 +95,25 @@ const Suscripciones = () => {
         <div className="flex flex-col gap-6">
           {subscriptions.map((model) => (
             <div 
-              key={model._id} 
+              key={model.modelRef._id} 
               className="bg-white rounded-[30px] suscriptionShadow overflow-hidden cursor-pointer flex flex-row items-center gap-[15px] px-[37px]" 
-              onClick={() => handleModelClick(model.slug.current)}
+              onClick={() => handleModelClick(model.modelRef.slug.current)}
             >
               <img 
-                src={model.fotoPerfil ? urlFor(model.fotoPerfil).url() : '/default-profile.png'} 
-                alt={model.nombre} 
+                src={model.modelRef.fotoPerfil ? urlFor(model.modelRef.fotoPerfil).url() : '/default-profile.png'} 
+                alt={model.modelRef.nombre} 
                 className="w-[59px] h-[59px] rounded-full object-cover"
               />
               <div className="p-4 flex-1">
-                <h2 className="text-xl font-bold">{model.nombre}</h2>
-                <p className="text-[10px] font-bold text-[#B9B9B9]">@{model.slug.current}</p>
-                <p className='text-[10px]'>Suscrito desde el {moment(model._createdAt).format('DD/MM/YY')}</p>
+                <h2 className="text-xl font-bold">{model.modelRef.nombre}</h2>
+                <p className="text-[10px] font-bold text-[#B9B9B9]">@{model.modelRef.slug.current}</p>
+                <p className='text-[10px]'>Suscrito desde el {moment(model.modelRef._createdAt).format('DD/MM/YY')}</p>
               </div>
               <button
                 className="bg-red-500 text-white px-4 py-2 rounded-[20px] text-[12px] font-bold"
                 onClick={(e) => {
                   e.stopPropagation(); // Para evitar que el click en el botón navegue al modelo
-                  handleUnsubscribe(model._id, model.subscriptionId);
+                  handleUnsubscribe(model.modelRef._id, model.subscriptionId);
                 }}
               >
                 Desuscribirse
