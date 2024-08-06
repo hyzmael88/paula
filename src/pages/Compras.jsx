@@ -130,7 +130,7 @@ const Compras = () => {
     <div className="max-w-4xl w-full lg:w-1/3 mx-auto py-[100px]">
       <h1 className="text-3xl font-bold mb-6 text-center">Compras</h1>
       {compras.length === 0 && paquetes.length === 0 ? (
-        <p>No has comprado ningún paquete o publicación.</p>
+        <p className='text-center'>No has comprado ningún paquete o publicación.</p>
       ) : (
         <>
         <div className="w-full flex text-center mb-4">

@@ -23,14 +23,14 @@ function PublicacionCompras({
   return (
     <div className="bg-white publicacionShadow overflow-hidden cursor-pointer rounded-[27px]">
       <Link href={`/Modelo/${publicacion.modelo.slug.current}`}>
-      <div className="w-full flex justify-between px-4 h-[125px]">
-        <div className="w-full flex items-center">
+      <div className="w-full flex justify-between px-4 h-full">
+        <div className="w-full h-full flex items-center">
           <img
             src={urlFor(publicacion.modelo.fotoPerfil || publicacion.compras.modelo.fotoPerfil).url()}
             alt={publicacion.modelo.nombre}
-            className="w-[60px] h-[60px] bg-gray-400 rounded-full mr-4 object-cover"
+            className="w-[60px] h-[60px] flex-shrink-0 bg-gray-400 rounded-full mr-4 object-cover"
           />
-          <div className="w-full flex flex-col">
+          <div className="w-full  flex flex-col">
             <div className="w-full flex justify-between items-center">
               <span className="font-black text-[16px]">{publicacion.modelo.nombre}</span>
               <span className="text-[#B9B9B9] font-bold text-[11px] pt-3">

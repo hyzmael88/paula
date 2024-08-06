@@ -234,7 +234,7 @@ function Modelo() {
             onContextMenu={(e) => e.preventDefault()}
           />
         )}
-        <div className="flex absolute -bottom-12 left-4 ">
+        <div className="flex absolute -bottom-14 left-4 ">
           
         {modelo.fotoPerfil && (
           <img
@@ -246,10 +246,26 @@ function Modelo() {
           
         )}
        
+        <div className="flex flex-col gap-[8px] ">
 
-       <div className="mt-[50px] lg:mt-[95px] font-bold modeloButton text-white w-[112px] h-[24px] text-center cursor-pointer" onClick={followModelo}>
+       <div className="mt-[50px] lg:mt-[95px]  font-bold modeloButton text-white w-[112px] h-[24px] text-center cursor-pointer" onClick={followModelo}>
   {isFollowing ? 'Unfollow' : 'Follow'}
 </div>
+<div className="flex gap-[7px] ">
+        <div className="flex items-center gap-[2px]">
+          <img src="/icons/posts.svg" className="w-[16px] h-[16px] text-gray-600" />
+          <span className="text-[11px]">post</span>
+        </div>
+        <div className="flex items-center gap-[4px]">
+          <img src="/icons/packs.svg" className="w-[16px] h-[16px] text-gray-600" />
+          <span className="text-[11px]">packs</span>
+        </div>
+        <div className="flex items-center gap-[2px]">
+          <img src="/icons/likes.svg" className="w-[16px] h-[16px] text-gray-600" />
+          <span className="text-[11px]">likes</span>
+        </div>
+</div>
+        </div>
        
         </div>
       </div>
@@ -303,12 +319,12 @@ function Modelo() {
               <span>${modelo.precioSuscripcion} por 30 días</span>
             </button>
           ) : (
-            <button
-              className="bg-[#6E26B6] text-white w-full h-[33px] rounded-2xl font-bold text-[11px] uppercase "
+            <div
+              className="bg-[#6E26B6] text-white w-full h-[33px] rounded-2xl font-bold text-[11px] uppercase flex items-center justify-center "
               
             >
               Suscrito
-            </button>
+            </div>
           )}
         </div>
         <div>
@@ -335,8 +351,10 @@ function Modelo() {
             allPublicaciones.length === 0 ? (
               <p>No hay publicaciones disponibles.</p>
             ) : (
+              <div className="flex flex-col gap-8">
+                {
               allPublicaciones.map((publicacion) => (
-                
+               
                <PublicacionPerfil
                 key={publicacion._id}
                 publicacion={publicacion}
@@ -348,7 +366,10 @@ function Modelo() {
                 modelo={modelo}
                 suscribeStripe={suscribeStripe}
               />
-              ))
+              )
+              )
+            }
+              </div>
             )
           ) : (
             <div>

@@ -26,14 +26,14 @@ function Publicacion({
   return (
     <div className="bg-white publicacionShadow overflow-hidden cursor-pointer rounded-[27px]">
       <Link href={`/Modelo/${publicacion.modelo.slug.current}`}>
-      <div className="w-full flex justify-between px-4 h-[125px] "
+      <div className="w-full flex justify-between px-4 h-full "
       
       >
-        <div className="w-full flex items-center">
+        <div className="w-full h-full flex items-center">
           <img
             src={urlFor(publicacion.modelo.fotoPerfil || publicacion.compras.modelo.fotoPerfil).url()}
             alt={publicacion.modelo.nombre}
-            className="w-[60px] h-[60px] bg-gray-400 rounded-full mr-4 object-cover"
+            className="w-[60px] h-[60px] flex-shrink-0 bg-gray-400 rounded-full mr-4 object-cover"
           />
           <div className="w-full flex flex-col">
             <div className="w-full flex justify-between items-center  ">
@@ -116,7 +116,9 @@ function Publicacion({
           </div>
         )
       ) : (
-        <div className="w-full h-[494px] bg-pink-300 object-cover mb-2 flex flex-col items-center justify-center">
+        <div className="w-full h-[494px]  object-cover mb-2 flex flex-col items-center justify-center relative">
+              <img src="/unlockImg.png" alt="lock" className=" absolute top-0 w-full h-full" />
+
           <div
             className="flex flex-col items-center w-[346px] h-[212px] justify-center gap-y-[7px] bg-[#39383980] rounded-[27px] relative"
             style={{

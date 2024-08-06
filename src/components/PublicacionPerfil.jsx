@@ -31,13 +31,13 @@ function PublicacionPerfil({
     <div className="bg-white publicacionShadow overflow-hidden cursor-pointer rounded-[27px]">
       {console.log(publicacion)}
       <Link href={`/Modelo/${modelo.slug.current}`}>
-      <div className="w-full flex justify-between px-4 h-[125px] ">
-        <div className="w-full flex items-center">
+      <div className="w-full flex justify-between px-4 h-full ">
+        <div className="w-full h-full flex items-center">
           
           <img
             src={urlFor(modelo.fotoPerfil).url()}
             alt={modelo.nombre}
-            className="w-[60px] h-[60px] bg-gray-400 rounded-full mr-4 object-cover"
+            className="w-[60px] h-[60px] flex-shrink-0 bg-gray-400 rounded-full mr-4 object-cover"
           />
           <div className="w-full flex flex-col">
             <div className="w-full flex justify-between items-center  ">
@@ -122,7 +122,8 @@ function PublicacionPerfil({
           </div>
           )
         ) : (
-            <div className="w-full h-[494px] bg-pink-300 object-cover mb-2 flex flex-col items-center justify-center">
+            <div className="w-full h-[494px]  object-cover mb-2 flex flex-col items-center justify-center relative">
+              <img src="/unlockImg.png" alt="lock" className=" absolute top-0 w-full h-full" />
             <div
               className="flex flex-col items-center w-[346px] h-[212px] justify-center gap-y-[7px] bg-[#39383980] rounded-[27px] relative"
               style={{
@@ -147,14 +148,16 @@ function PublicacionPerfil({
           </div>
         )
       ) : (
-        <div className="w-full h-[494px] bg-pink-300 object-cover mb-2 flex flex-col items-center justify-center">
+        <div className="w-full h-[494px] object-cover mb-2 flex flex-col items-center justify-center relative">
+            <img src="/unlockImg.png" alt="lock" className=" absolute top-0 w-full h-full" />
+
             <div
               className="flex flex-col items-center w-[346px] h-[212px] justify-center gap-y-[7px] bg-[#39383980] rounded-[27px] relative"
               style={{
                 background: "rgba(57, 56, 57, 0.50)",
               }}
             >
-              <img src="/lock.png" alt="lock" className=" absolute -top-10" />
+              <img src="/lock.png" alt="lock" className=" absolute top-0" />
               
               <div
                 className="w-[149px] h-[60px] bg-pink-500 text-center  rounded-3xl text-white cursor-pointer loginButton flex items-center justify-center font-bold desbloquearButton "

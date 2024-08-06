@@ -152,7 +152,7 @@ export default function Home() {
         {publicaciones.length === 0 ? (
           <p>No hay publicaciones disponibles.</p>
         ) : (
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-8">
             {publicaciones.map((publicacion) => (
               <Publicacion
                 key={publicacion._id}
