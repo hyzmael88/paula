@@ -54,7 +54,7 @@ export default {
             name: 'subscribedModels',
             title: 'Subscribed Models',
             type: 'array',
-            of: [{ type: 'reference', to: [{ type: 'publicaciones' }] }]
+            of: [{ type: 'reference', to: [{ type: 'modelos' }] }]
         },
         {
             name: 'compras',
