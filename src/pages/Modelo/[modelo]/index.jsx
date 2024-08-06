@@ -41,6 +41,7 @@ function Modelo() {
   
       // Verificar si el usuario está suscrito al modelo
       const isSubscribed = session.user.subscribedModels.some((subscribedModel) => 
+        
         subscribedModel.modelRef._ref === modelo._id
       );
       setSubscribed(isSubscribed);
