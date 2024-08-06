@@ -57,7 +57,7 @@ export default {
             of: [{ 
                 type: 'object',
                 fields: [
-                    { name: 'ref', title: 'Reference', type: 'reference', to: [{ type: 'modelos' }] },
+                    { name: 'modelRef', title: 'Model Reference', type: 'reference', to: [{ type: 'modelos' }] },
                     { name: 'subscriptionId', title: 'Subscription ID', type: 'string' }
                 ]
             }],

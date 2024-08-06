@@ -16,8 +16,8 @@ const Suscripciones = () => {
     if (session) {
       const fetchSubscriptions = async () => {
         try {
-          const user = await client.fetch(`*[_type == "usuario" && email == $email][0]{
-            subscribedModels[]->{
+          const user = await client.fetch(   `*[_type == "usuario" && email == $email][0]{
+            "subscribedModels": subscribedModels[]{
               _id,
               nombre,
               slug,
@@ -30,6 +30,7 @@ const Suscripciones = () => {
           });
 
           if (user && user.subscribedModels) {
+            console.log(user)
             setSubscriptions(user.subscribedModels);
           }
           setLoading(false);
@@ -75,6 +76,8 @@ const Suscripciones = () => {
       router.push('/Auth/Login');
     }
   }, [session, router]);
+
+  
 
   if (!session) {
     return null; // Retorna null para evitar renderizar el componente antes de redirigir

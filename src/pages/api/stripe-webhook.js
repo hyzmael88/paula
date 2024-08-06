@@ -72,7 +72,7 @@ export default async function handler(req, res) {
             .patch(user._id)
             .setIfMissing({ subscribedModels: [] })
             .insert('after', 'subscribedModels[-1]', [{
-              ref: { _type: 'reference', _ref: modeloId },
+              modelRef: { _type: 'reference', _ref: modeloId },
               _key: modeloId,
               subscriptionId:subscriptionId // Añadir el ID de la suscripción de Stripe
             }])

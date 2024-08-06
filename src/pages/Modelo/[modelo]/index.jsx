@@ -37,13 +37,24 @@ function Modelo() {
 
   useEffect(() => {
     if (session && modelo) {
-      const isSubscribed = session.user.subscribedModels.some((subscribedModel) => subscribedModel._ref === modelo._id);
+      console.log(session);
+  
+      // Verificar si el usuario está suscrito al modelo
+      const isSubscribed = session.user.subscribedModels.some((subscribedModel) => 
+        subscribedModel.modelRef._ref === modelo._id
+      );
       setSubscribed(isSubscribed);
-      const isFollowing = session.user.follows.some((followedModel) => followedModel._ref === modelo._id);
+  
+      // Verificar si el usuario sigue al modelo
+      const isFollowing = session.user.follows.some((followedModel) => 
+        followedModel._ref === modelo._id
+      );
       setIsFollowing(isFollowing);
-      console.log(session)
+      
+      console.log(session);
     }
   }, [session, modelo]);
+  
 
   useEffect(() => {
     if (slug) {
