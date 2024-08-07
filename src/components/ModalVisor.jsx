@@ -71,29 +71,38 @@ const [posicion, setPosicion] = useState(0);
           <button onClick={nextPhoto} className="p-2">Siguiente</button> 
         </div> */}
         <div
-          className="relative overflow-hidden max-w-[90vw] max-h-[80vh] cursor-grab"
+          className="relative overflow-hidden max-w-[90vw] max-h-[80vh] w-[90%] h-[508px] lg:w-[684px] lg:h-[943px] cursor-grab"
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
         >
-           <div className="absolute bottom-4 right-4 text-white text-3xl opacity-75 z-10">mylove.ai/{session?.user?.email}</div>
-          <div className="absolute top-4 left-4 text-white text-[24px] opacity-65 z-10">luvmypack/{session?.user?.email}</div>
-
-        <div className="absolute top-4 right-4 bg-[#2222228F] rounded-[27px] text-white px-2 py-1 z-10">
+           <div className="absolute bottom-4 right-4 text-white text-3xl opacity-75 z-10">luvmypack.com/{session?.user?.email}</div>
+          <div className="absolute top-8 left-8 text-white text-[24px] opacity-65 z-10">luvmypack.com/{session?.user?.email}</div>
+          {
+          fotografias.length > 1 &&
+            <div className="absolute top-4 right-4 bg-[#2222228F] rounded-[27px] text-white px-2 py-1 z-10">
                   <p className="text-[12px]">{posicion + 1}/{fotografias.length}</p>
                 </div>
+        }
+                {
+                fotografias.length > 1 &&
                 <div className="absolute right-4 top-1/2 transform -translate-y-1/2 w-[47px] h-[47px] rounded-full z-10 bg-[#B9B9B98C] flex justify-center items-center" onClick={handleNext}>
                   <FaChevronRight className="text-white"/>
                 </div>
+}
+{
+                fotografias.length > 1 &&
                 <div className="absolute left-4 top-1/2 transform -translate-y-1/2 w-[47px] h-[47px] rounded-full z-10 bg-[#B9B9B98C] flex justify-center items-center" onClick={handlePrev}>
                   <FaChevronLeft className="text-white"/>
                 </div>
+}
+
           <img
             ref={imgRef}
             src={fotografias[posicion]}
             alt={`Fotografía ${posicion + 1}`}
-            className="object-contain"
+            className="object-contain w-full h-full"
             style={{
               transform: `scale(${zoom / 100}) translate(${position.x}px, ${position.y}px)`,
               transition: dragging ? 'none' : 'transform 0.2s ease-in-out',

@@ -198,6 +198,25 @@ function Modelo() {
       console.error('Error al seguir al modelo:', error);
     }
   };
+  const unfollowModelo = async () => {
+    try {
+      const response = await fetch('/api/unfollow', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ modeloId: modelo._id, email: session.user.email }),
+      });
+
+      if (response.ok) {
+        setIsFollowing(false);
+      } else {
+        console.error('Error al dejar de seguir al modelo');
+      }
+    } catch (error) {
+      console.error('Error al dejar de seguir al modelo:', error);
+    }
+  };
   
   if (loading) return <Spinner />; // Muestra el loader mientras los datos se cargan
 
@@ -248,7 +267,7 @@ function Modelo() {
        
         <div className="flex flex-col gap-[8px] ">
 
-       <div className="mt-[50px] lg:mt-[95px]  font-bold modeloButton text-white w-[112px] h-[24px] text-center cursor-pointer" onClick={followModelo}>
+       <div className="mt-[50px] lg:mt-[95px]  font-bold modeloButton text-white w-[112px] h-[24px] text-center cursor-pointer" onClick={isFollowing ? unfollowModelo: followModelo}>
   {isFollowing ? 'Unfollow' : 'Follow'}
 </div>
 <div className="flex gap-[7px] ">

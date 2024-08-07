@@ -89,33 +89,33 @@ const Parati = ({ title }) => {
     if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
 
     return (
-        <div className='w-full h-[450px] flex flex-col  gap-[26px] cursor-pointer '>
+        <div className='w-full  flex flex-col justify-start  gap-[23px] cursor-pointer '>
           <h1 className='text-[27px] font-bold '>
             {title}
           </h1>
-          <div className='w-full h-full relative'>
+          <div className='w-full  relative'>
 
-          <div className='w-full h-full flex items-center gap-[26px] overflow-x-scroll overflow-y-hidden no-scrollbar'
+          <div className='w-full h-full flex items-center gap-[26px] overflow-x-scroll  no-scrollbar pb-[50px]'
           ref={scrollContainerParaTiRef}
           >
           {
             publicacionesGratuitas.map(publicacion => (
                 <div
                     key={publicacion._id}
-                    className='flex flex-col items-center justify-center  relative'
+                    className='w-[159px] h-[236px] lg:w-[201px] lg:h-[299px] flex flex-col items-center justify-center  relative'
                     onClick={() => handlePublicacionClick(publicacion.modelo.slug.current, publicacion.slug.current)}
                 >
                     <img
                         src={urlFor(publicacion.fotografias[0].asset).url()}
                         alt={publicacion.titulo}
-                        className='flex-shrink-0 w-[201px] h-[299px] object-cover rounded-[30px]'
+                        className='w-full h-full object-cover rounded-[30px]'
                     />
                     
                     
                     <img
                         src={urlFor(publicacion.modelo.fotoPerfil).width(300).height(300).url()}
                         alt={publicacion.titulo}
-                        className='absolute w-[98px] h-[98px] object-cover rounded-full -bottom-8'
+                        className='absolute w-[98px] h-[98px] object-cover rounded-full -bottom-8 '
                     /> 
                     
                     

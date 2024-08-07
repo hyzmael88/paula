@@ -111,7 +111,7 @@ const LoNuevo = ({ title }) => {
     if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
 
     return (
-        <div className='w-full h-auto flex flex-col gap-[26px] mb-8'>
+        <div className='w-full h-auto flex flex-col gap-[23px] mb-4'>
             <h1 className='text-[27px] font-bold'>{title}</h1>
             <div className='w-full h-full relative'>
                 

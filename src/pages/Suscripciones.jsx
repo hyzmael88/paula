@@ -110,7 +110,7 @@ const Suscripciones = () => {
                 <p className='text-[10px]'>Suscrito desde el {moment(model.modelRef._createdAt).format('DD/MM/YY')}</p>
               </div>
               <button
-                className="loginButton text-white px-4 py-2 rounded-[20px] text-[12px] font-bold"
+                className="loginButton text-white px-4 py-2 rounded-[20px] text-[8px] lg:text-[12px] font-bold w-[67px] lg:w-[112px] h-[14px]lg:h-[23px]  flex justify-center items-center  "
                 onClick={(e) => {
                   e.stopPropagation(); // Para evitar que el click en el botón navegue al modelo
                   handleUnsubscribe(model.modelRef._id, model.subscriptionId);
