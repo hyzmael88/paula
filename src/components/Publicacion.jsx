@@ -26,7 +26,7 @@ function Publicacion({
   return (
     <div className="bg-white publicacionShadow overflow-hidden cursor-pointer rounded-[27px]">
       <Link href={`/Modelo/${publicacion.modelo.slug.current}`}>
-      <div className="w-full flex justify-between px-4 h-full "
+      <div className="w-full flex justify-between px-4 h-full pt-[20px] "
       
       >
         <div className="w-full h-full flex items-center">

@@ -31,7 +31,7 @@ function PublicacionPerfil({
     <div className="bg-white publicacionShadow overflow-hidden cursor-pointer rounded-[27px]">
       {console.log(publicacion)}
       <Link href={`/Modelo/${modelo.slug.current}`}>
-      <div className="w-full flex justify-between px-4 h-full ">
+      <div className="w-full flex justify-between px-4 h-full pt-[20px] ">
         <div className="w-full h-full flex items-center">
           
           <img
