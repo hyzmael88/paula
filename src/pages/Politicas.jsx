@@ -8,7 +8,7 @@ const Privacidad = () => {
         Esta política de privacidad establece cómo [Nombre de la Empresa] usa y protege cualquier información que usted proporciona cuando usa este sitio web.
       </p>
       <h2 className="text-2xl text-[#602AB1] text-[12px] font-bold mb-2">Información que Recopilamos</h2>
-      <p className="mb-4 text-[12px]">
+      <div className="mb-4 text-[12px]">
         Podemos recopilar la siguiente información:
         <ul className="list-disc list-inside">
           <li>Nombre y título del trabajo</li>
@@ -16,9 +16,9 @@ const Privacidad = () => {
           <li>Información demográfica como código postal, preferencias e intereses</li>
           <li>Otra información relevante para encuestas y/o ofertas de clientes</li>
         </ul>
-      </p>
+      </div>
       <h2 className="text-2xl text-[#602AB1] text-[12px] font-bold mb-2">Qué Hacemos con la Información que Recopilamos</h2>
-      <p className="mb-4 text-[12px]">
+      <div className="mb-4 text-[12px]">
         Necesitamos esta información para comprender sus necesidades y brindarle un mejor servicio, y en particular por las siguientes razones:
         <ul className="list-disc list-inside">
           <li>Mantenimiento de registros internos.</li>
@@ -26,11 +26,11 @@ const Privacidad = () => {
           <li>Podemos enviar periódicamente correos electrónicos promocionales sobre nuevos productos, ofertas especiales u otra información que creemos que puede resultarle interesante utilizando la dirección de correo electrónico que usted ha proporcionado.</li>
           <li>De vez en cuando, también podemos usar su información para contactarlo con fines de investigación de mercado. Podemos contactarlo por correo electrónico, teléfono, fax o correo.</li>
         </ul>
-      </p>
+      </div>
       <h2 className="text-2xl text-[#602AB1] text-[12px] font-bold mb-2">Seguridad</h2>
-      <p className="mb-4 text-[12px]">
+      <div className="mb-4 text-[12px]">
         Nos comprometemos a garantizar que su información esté segura. Con el fin de prevenir el acceso no autorizado o divulgación, hemos puesto en lugar procedimientos físicos, electrónicos y administrativos adecuados para salvaguardar y asegurar la información que recopilamos en línea.
-      </p>
+      </div>
       <h2 className="text-2xl text-[#602AB1] text-[12px] font-bold mb-2">Cómo Usamos las Cookies</h2>
       <p className="mb-4 text-[12px]">
         Una cookie es un pequeño archivo que pide permiso para ser colocado en el disco duro de su computadora. Una vez que acepta, el archivo se agrega y la cookie ayuda a analizar el tráfico web o le permite saber cuándo visita un sitio en particular. Las cookies permiten que las aplicaciones web le respondan como individuo. La aplicación web puede adaptar sus operaciones a sus necesidades, gustos y disgustos reuniendo y recordando información sobre sus preferencias.

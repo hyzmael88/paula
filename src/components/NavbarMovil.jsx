@@ -125,12 +125,12 @@ const NavbarMovil = () => {
             </a>
           </div>
           <div className="mt-6 text-center">
-            <Link href="/PoliticaPrivacidad">
+            <Link href="/Politicas">
               <p className="block text-black hover:text-purple-600">
                 Políticas de privacidad
               </p>
             </Link>
-            <Link href="/TerminosCondiciones">
+            <Link href="/Terminos">
               <p className="block text-black hover:text-purple-600">
                 Términos y condiciones
               </p>
