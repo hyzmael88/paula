@@ -6,7 +6,7 @@ import { urlFor } from '@/sanity/lib/image';
 import moment from "moment";
 
 const Suscripciones = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [subscriptions, setSubscriptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -74,10 +74,16 @@ const Suscripciones = () => {
   };
 
   useEffect(() => {
+    if (status === 'loading') {
+      // Esperar a que la sesión termine de cargar
+      return;
+    }
     if (!session) {
+      // Redirigir al login si no hay sesión
       router.push('/Auth/Login');
     }
-  }, [session, router]);
+  }, [session, status, router]);
+
 
   if (!session) {
     return null; // Retorna null para evitar renderizar el componente antes de redirigir

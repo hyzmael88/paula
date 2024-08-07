@@ -59,7 +59,7 @@ function SideBarLeft() {
                 </Link>
               </li>
               <li>
-                <Link href="https://www.instagram.com/luvmy_pack/">
+                <Link href="https://www.instagram.com/luvmy_pack/" target="_blank">
                   <p className="flex items-center text-lg font-bold text-black hover:text-[#602AB1]">
                     <FaHeadset className="mr-2" />
                     Soporte

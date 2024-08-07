@@ -85,7 +85,7 @@ const NavbarMovil = () => {
               </Link>
             </li>
             <li onClick={toggleMenu}>
-              <Link href="/Soporte">
+              <Link href="https://www.instagram.com/luvmy_pack/" target="_blank">
                 <p className={`flex items-center text-lg font-medium ${pathname === '/Soporte' ? 'text-purple-600' : 'text-black hover:text-purple-600'}`}>
                   <FaHeadset className="mr-2" />
                   Soporte

@@ -6,14 +6,17 @@ import { urlFor } from '@/sanity/lib/image';
 import { Spinner } from '@/components/Spinner';
 import Publicacion from '@/components/Publicacion';
 import PublicacionCompras from '@/components/PublicacionCompras';
+import ModalVisor from '@/components/ModalVisor';
 
 const Compras = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [compras, setCompras] = useState([]);
   const [paquetes, setPaquetes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selector, setSelector] = useState("Publicaciones");
+  const [isVisorOpen, setIsVisorOpen] = useState(false);
+  const [currentFotos, setCurrentFotos] = useState([]);
   const router = useRouter();
 
   const openVisor = (fotografias) => {
@@ -44,6 +47,7 @@ const Compras = () => {
             paquetesAdquiridos[]->{
               _id,
               nombre,
+              fotografias,
               portadas,
               slug,
               precio,
@@ -78,45 +82,31 @@ const Compras = () => {
     }
   }, [session]);
 
-  const obtenerSlugDeModeloPorRef = async (modeloRef) => {
-    try {
-      const query = `*[_type == "modelos" && _id == $modeloRef][0]{
-        "slug": slug.current
-      }`;
-      const params = { modeloRef };
-      const data = await client.fetch(query, params);
-      if (data && data.slug) {
-      
-        return data.slug;
-      } else {
-        console.error("No se encontró la modelo con el _ref proporcionado.");
-        return null;
-      }
-    } catch (error) {
-      console.error("Error al obtener el slug de la modelo:", error);
-      return null;
-    }
-  };
+  
 
-  const handlePaqueteClick = async (modeloRef, paqueteSlug) => {
-    const modeloSlug = await obtenerSlugDeModeloPorRef(modeloRef);
-    if (modeloSlug) {
+  const handlePaqueteClick = async (modeloSlug, paqueteSlug) => {
+   
+    if (modeloSlug, paqueteSlug) {
       router.push(`/Modelo/${modeloSlug}/Paquete/${paqueteSlug}`);
     }
   };
 
-  const handlePublicacionClick = async (modeloRef, publicacionSlug) => {
-    const modeloSlug = await obtenerSlugDeModeloPorRef(modeloRef);
-    if (modeloSlug) {
+  const handlePublicacionClick = async (modeloSlug, publicacionSlug) => {
+    if (modeloSlug, publicacionSlug) {
       router.push(`/Modelo/${modeloSlug}/Publicacion/${publicacionSlug}`);
     }
   };
 
   useEffect(() => {
+    if (status === 'loading') {
+      // Esperar a que la sesión termine de cargar
+      return;
+    }
     if (!session) {
+      // Redirigir al login si no hay sesión
       router.push('/Auth/Login');
     }
-  }, [session, router]);
+  }, [session, status, router]);
 
   if (!session) {
     return null; // Retorna null para evitar renderizar el componente antes de redirigir
@@ -127,7 +117,7 @@ const Compras = () => {
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>; // Muestra el mensaje de error
 
   return (
-    <div className="max-w-4xl w-full lg:w-1/3 mx-auto h-screen overflow-y-scroll pb-[100px] lg:px-[40px] lg:pb-[150px]  lg:mt-[80px] mx-auto">
+    <div className="max-w-4xl w-full lg:w-1/3 mx-auto h-screen overflow-y-scroll pb-[100px] lg:px-[40px] lg:pb-[150px]  lg:mt-[80px] ">
       <h1 className="text-3xl font-bold mb-6 text-center">Compras</h1>
       {
         console.log(compras)
@@ -157,7 +147,7 @@ const Compras = () => {
             selector === "Publicaciones" && (
           <div className="flex flex-col gap-6 mb-8 ">
           
-            {compras.map((publicacion, index) => (
+            {compras.length>0? compras.map((publicacion, index) => (
               
               <PublicacionCompras
               publicacion={publicacion}
@@ -166,7 +156,10 @@ const Compras = () => {
               key={index}
               />
               
-            ))}
+            ))
+          :
+          <p className='text-center'>No has comprado ninguna publicación</p>
+          }
           </div>
             )
           } 
@@ -178,7 +171,12 @@ const Compras = () => {
                <div
                key={index}
                className="w-full h-full relative cursor-pointer"
-               onClick={() => handlePaqueteClick(paquete.slug.current)}
+               onClick={() =>
+                openVisor(
+                  paquete.fotografias.map((foto) => urlFor(foto).url())
+                )
+              }
+              onContextMenu={(e) => e.preventDefault()}
              >
                <div className="w-full absolute left-0 bottom-4 z-10 flex flex-col justify-center items-center">
                  {paquete.nombre && (
@@ -187,7 +185,7 @@ const Compras = () => {
                    </h3>
                  )}
                  <div className="w-[152px] h-[33px] paqueteButton text-center rounded-[32px] text-white font-bold flex items-center justify-center">
-                   Ver por ${paquete.precio}
+                   Ver 
                  </div>
                </div>
                <img
@@ -203,6 +201,13 @@ const Compras = () => {
             
         </>
       )}
+      {isVisorOpen && (
+          <ModalVisor
+            isOpen={isVisorOpen}
+            onClose={() => setIsVisorOpen(false)}
+            fotografias={currentFotos}
+          />
+        )}
     </div>
   );
 };
