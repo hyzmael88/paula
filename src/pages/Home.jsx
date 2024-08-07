@@ -76,14 +76,13 @@ export default function Home() {
           return;
         }
 
-        // Concatenar todas las publicaciones de los modelos suscritos y ordenarlas por fecha
-        const allSubscribedPublicaciones = user.subscribedModels ? user.subscribedModels.flatMap(model => model.modelRef.publicaciones).sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt)) : [];
-
-        // Concatenar todas las publicaciones gratuitas de los modelos seguidos y ordenarlas por fecha
-        const allFollowedPublicacionesGratuitas = user.follows ? user.follows.flatMap(model => model.publicacionesGratuitas).sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt)) : [];
-
-        const allPublicaciones = [...allSubscribedPublicaciones, ...allFollowedPublicacionesGratuitas].sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt));
-        
+      // Concatenar todas las publicaciones de los modelos suscritos y ordenarlas por fecha
+      const allSubscribedPublicaciones = user.subscribedModels ? user.subscribedModels.flatMap(model => model.modelRef.publicaciones).filter(pub => pub && pub._createdAt).sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt)) : [];
+      // Concatenar todas las publicaciones gratuitas de los modelos seguidos y ordenarlas por fecha
+      const allFollowedPublicacionesGratuitas = user.follows ? user.follows.flatMap(model => model.publicacionesGratuitas).filter(pub => pub && pub._createdAt).sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt)) : [];
+      
+      const allPublicaciones = [...allSubscribedPublicaciones, ...allFollowedPublicacionesGratuitas].sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt));
+      
         setPublicaciones(allPublicaciones);
         setLoading(false);
       } catch (error) {
