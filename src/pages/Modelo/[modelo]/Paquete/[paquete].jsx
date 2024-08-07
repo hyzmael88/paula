@@ -98,19 +98,18 @@ function Paquete() {
             ))}
           </div>
         )}
-        <div className="pt-[50px] text-center flex flex-col items-center justify-center ">
+        <div className="pt-[20px] text-center flex flex-col items-center justify-center ">
           <Link href={`/Modelo/${paqueteState.modelo.slug.current}`}>
           
           <div className="flex p-[19px] gap-[19px] w-[191px] h-[95px] perfilPaquete cursor-pointer"
           
           >
-            <div>
-              <img src={urlFor(paqueteState.modelo.fotoPerfil).url()} alt="" className="w-[60px] h-[60px] rounded-full object-cover" />
-            </div>
-            <div className="flex-col text-left flex-shrink-0 space-y-[px]">
+              <img src={urlFor(paqueteState.modelo.fotoPerfil).url()} alt="" className="w-[60px] h-[60px] flex-shrink-0 bg-gray-400 rounded-full object-cover" />
+            
+            <div className="h-full flex flex-col justify-between text-left flex-shrink-0 ">
                 <h2 className="text-[16px] font-bold ">{paqueteState.modelo.nombre}</h2>
                 <p className="text-[10px]  ">@{paqueteState.modelo.slug.current}</p>
-                <div className="modeloButton text-white  text-[8px] text-center">Ver Perfil</div>
+                <div className="modeloButton text-white  text-[8px] text-center mt-1">Ver Perfil</div>
             </div>
           </div>
           </Link>
