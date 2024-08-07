@@ -129,10 +129,10 @@ export default function Home() {
   return (
     <>
       <NextSeo
-        title="Prime Beauties | Home"
+        title="Luvyourpack | Home"
         description="Esta es la descripción de la página de inicio"
         openGraph={{
-          title: 'Prime Beauties | Home',
+          title: 'Luvyourpack | Home',
           description: 'Esta es la descripción de la página de inicio',
           images: [
             {
