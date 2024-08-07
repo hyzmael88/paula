@@ -63,7 +63,7 @@ const [posicion, setPosicion] = useState(0);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50" onClick={onClose}>
-      <div className="bg-white rounded-[50px] overflow-hidden" onClick={stopPropagation}>
+      <div className="bg-white rounded-[50px] overflow-hidden flex flex-col items-center" onClick={stopPropagation}>
         {/* <div className="flex justify-between items-center p-4">
           
          <button onClick={prevPhoto} className="p-2">Anterior</button>
@@ -71,7 +71,7 @@ const [posicion, setPosicion] = useState(0);
           <button onClick={nextPhoto} className="p-2">Siguiente</button> 
         </div> */}
         <div
-          className="relative overflow-hidden max-w-[90vw] max-h-[80vh] w-[90%] h-[508px] lg:w-[684px] lg:h-[943px] cursor-grab"
+          className="relative overflow-hidden max-w-[90vw] max-h-[80vh] w-full h-[508px] lg:w-[684px] lg:h-[943px] cursor-grab"
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
