@@ -50,21 +50,58 @@ export default function Home() {
   return (
     <>
     <NextSeo
-      title="Inicio"
-      description="Esta es la descripción de la página de inicio"
-      openGraph={{
-        title: 'Página de Inicio',
-        description: 'Esta es la descripción de la página de inicio',
-        images: [
+        title="Luvyourpack | Inicio"
+        description="Explora contenido exclusivo y personalizado, creado por talentosos influencers y potenciado por inteligencia artificial. Suscríbete para una experiencia única y atrevida que va más allá de lo convencional."
+        canonical="https://www.tusitioweb.com"
+        openGraph={{
+          url: 'https://www.tusitioweb.com',
+          title: 'Luvyourpack | Inicio',
+          description: 'Explora contenido exclusivo y personalizado, creado por talentosos influencers y potenciado por inteligencia artificial. Suscríbete para una experiencia única y atrevida que va más allá de lo convencional.',
+          images: [
+            {
+              url: 'https://www.tusitioweb.com/imagen-inicio-og.png',
+              width: 800,
+              height: 600,
+              alt: 'Imagen de Inicio',
+            },
+          ],
+          site_name: 'Luvyourpack',
+        }}
+        twitter={{
+          handle: '@tu_twitter_handle',
+          site: '@tu_twitter_handle',
+          cardType: 'summary_large_image',
+        }}
+        additionalMetaTags={[
           {
-            url: 'https://www.tusitioweb.com/imagen-inicio-og.png',
-            width: 800,
-            height: 600,
-            alt: 'Imagen de Inicio',
+            name: 'keywords',
+            content: 'contenido exclusivo, influencers, inteligencia artificial, suscripción, personalización, experiencia única, atrevida',
           },
-        ],
-      }}
-    />
+          {
+            name: 'author',
+            content: 'Luvyourpack Team',
+          },
+          {
+            name: 'robots',
+            content: 'index, follow',
+          },
+        ]}
+        additionalLinkTags={[
+          {
+            rel: 'icon',
+            href: '/favicon.ico',
+          },
+          {
+            rel: 'apple-touch-icon',
+            href: '/apple-touch-icon.png',
+            sizes: '180x180',
+          },
+          {
+            rel: 'manifest',
+            href: '/site.webmanifest',
+          },
+        ]}
+      />
     <div className='w-full h-full relative overflow-hidden'>
       <ParticlesComponent/>
    <CarrouselIndex photos={photos} />
