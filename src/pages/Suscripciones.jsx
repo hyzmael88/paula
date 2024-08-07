@@ -3,7 +3,9 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
-import moment from "moment";
+import moment from 'moment';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'; // Asegúrate de importar el CSS de SweetAlert2
 
 const Suscripciones = () => {
   const { data: session, status } = useSession();
@@ -32,7 +34,6 @@ const Suscripciones = () => {
           });
 
           if (user && user.subscribedModels) {
-            console.log(user)
             setSubscriptions(user.subscribedModels);
           }
           setLoading(false);
@@ -53,24 +54,52 @@ const Suscripciones = () => {
   const handleUnsubscribe = async (modelId, subscriptionId) => {
     if (!session) return;
 
-    try {
-      const response = await fetch('/api/unsubscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ modelId, subscriptionId,email:session.user.email }),
-      });
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "No podrás revertir esta acción y en este momento perderas el acceso al contenido.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#FF66AE', // Usa el color de tu estilo
+      cancelButtonColor: '#6E26B6', // Usa el color de tu estilo
+      confirmButtonText: 'Sí, desuscribirme',
+      cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch('/api/unsubscribe', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ modelId, subscriptionId, email: session.user.email }),
+          });
 
-      if (response.ok) {
-        setSubscriptions(subscriptions.filter(model => model.modelRef._id !== modelId));
-      } else {
-        const data = await response.json();
-        console.error('Error al desuscribirse del modelo:', data.error);
+          if (response.ok) {
+            setSubscriptions(subscriptions.filter(model => model.modelRef._id !== modelId));
+            Swal.fire(
+              'Desuscrito',
+              'Te has desuscrito correctamente.',
+              'success'
+            );
+          } else {
+            const data = await response.json();
+            console.error('Error al desuscribirse del modelo:', data.error);
+            Swal.fire(
+              'Error',
+              'Hubo un problema al desuscribirse. Por favor, inténtalo de nuevo.',
+              'error'
+            );
+          }
+        } catch (error) {
+          console.error('Error al desuscribirse del modelo:', error);
+          Swal.fire(
+            'Error',
+            'Hubo un problema al desuscribirse. Por favor, inténtalo de nuevo.',
+            'error'
+          );
+        }
       }
-    } catch (error) {
-      console.error('Error al desuscribirse del modelo:', error);
-    }
+    });
   };
 
   useEffect(() => {
@@ -83,7 +112,6 @@ const Suscripciones = () => {
       router.push('/Auth/Login');
     }
   }, [session, status, router]);
-
 
   if (!session) {
     return null; // Retorna null para evitar renderizar el componente antes de redirigir
