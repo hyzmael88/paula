@@ -10,6 +10,8 @@ import { FaInstagram, FaTwitter, FaTiktok, FaShareAlt } from 'react-icons/fa';
 import ModalVisor from "@/components/ModalVisor";
 import PublicacionPerfil from "@/components/PublicacionPerfil";
 import { LuShare } from "react-icons/lu";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss';
 
 
 function Modelo() {
@@ -199,23 +201,51 @@ function Modelo() {
     }
   };
   const unfollowModelo = async () => {
-    try {
-      const response = await fetch('/api/unfollow', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ modeloId: modelo._id, email: session.user.email }),
-      });
-
-      if (response.ok) {
-        setIsFollowing(false);
-      } else {
-        console.error('Error al dejar de seguir al modelo');
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¿Quieres dejar de seguir a este modelo?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#FF66AE',
+      cancelButtonColor: '#6E26B6',
+      confirmButtonText: 'Sí, dejar de seguir',
+      cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch('/api/unfollow', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ modeloId: modelo._id, email: session.user.email }),
+          });
+  
+          if (response.ok) {
+            setIsFollowing(false);
+            Swal.fire(
+              '¡Unfollow!',
+              'Has dejado de seguir al modelo.',
+              'success'
+            );
+          } else {
+            console.error('Error al dejar de seguir al modelo');
+            Swal.fire(
+              'Error',
+              'No se pudo dejar de seguir al modelo.',
+              'error'
+            );
+          }
+        } catch (error) {
+          console.error('Error al dejar de seguir al modelo:', error);
+          Swal.fire(
+            'Error',
+            'No se pudo dejar de seguir al modelo.',
+            'error'
+          );
+        }
       }
-    } catch (error) {
-      console.error('Error al dejar de seguir al modelo:', error);
-    }
+    });
   };
   
   if (loading) return <Spinner />; // Muestra el loader mientras los datos se cargan
@@ -271,7 +301,7 @@ function Modelo() {
   {isFollowing ? 'Unfollow' : 'Follow'}
 </div>
 <div className="flex gap-[7px] ">
-        <div className="flex items-center gap-[2px]">
+       {/*  <div className="flex items-center gap-[2px]">
           <img src="/icons/posts.svg" className="w-[16px] h-[16px] text-gray-600" />
           <span className="text-[11px]">post</span>
         </div>
@@ -282,7 +312,7 @@ function Modelo() {
         <div className="flex items-center gap-[2px]">
           <img src="/icons/likes.svg" className="w-[16px] h-[16px] text-gray-600" />
           <span className="text-[11px]">likes</span>
-        </div>
+        </div> */}
 </div>
         </div>
        

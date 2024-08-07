@@ -157,12 +157,15 @@ function PublicacionPerfil({
                 background: "rgba(57, 56, 57, 0.50)",
               }}
             >
-              <img src="/lock.png" alt="lock" className=" absolute top-0" />
-              
+              <img src="/lock.png" alt="lock" className=" absolute -top-10" />
+              <p className="text-[15px] text-white flex gap-2 items-center ">
+                Suscribete para ver el contenido
+              </p>
+              <p className="text-white ">${modelo.precioSuscripcion} mxn al mes</p>
               <div
-                className="w-[149px] h-[60px] bg-pink-500 text-center  rounded-3xl text-white cursor-pointer loginButton flex items-center justify-center font-bold desbloquearButton "
+                className="w-[149px] h-[35px] bg-pink-500 text-center  rounded-3xl text-white cursor-pointer loginButton flex items-center justify-center font-bold desbloquearButton "
                 onClick={suscribeStripe}              >
-            Suscríbete para ver el contenido 
+            Suscríbete 
             </div>
             </div>
           </div>
