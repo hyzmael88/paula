@@ -100,7 +100,7 @@ function Paquete() {
             .replace("-jpg", ".jpg"),
             width: 800,
             height: 600,
-            alt: `Portada de ${modelo.nombre}`,
+            alt: `Portada de ${paqueteState.modelo.nombre}`,
           },
         ],
       }}
