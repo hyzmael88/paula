@@ -112,8 +112,10 @@ function Modelo() {
               tipo: 'gratuita'
             }));
             setPublicacionesGratuitas(publicacionesGratuitasConTipo);
-            setAllPublicaciones([...data.publicaciones, ...publicacionesGratuitasConTipo]);
-          } else {
+            setAllPublicaciones(
+              [...data.publicaciones, ...publicacionesGratuitasConTipo].sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt))
+            );
+            } else {
             setAllPublicaciones(data.publicaciones);
           }
           setLoading(false);

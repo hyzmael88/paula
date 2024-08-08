@@ -58,7 +58,12 @@ export default {
                 type: 'object',
                 fields: [
                     { name: 'modelRef', title: 'Model Reference', type: 'reference', to: [{ type: 'modelos' }] },
-                    { name: 'subscriptionId', title: 'Subscription ID', type: 'string' }
+                    { name: 'subscriptionId', title: 'Subscription ID', type: 'string' },
+                    {
+                        name: "suscriptionCreatedAt",
+                        title: "Fecha de creación",
+                        type: "datetime",
+                      },
                 ]
             }],
         },

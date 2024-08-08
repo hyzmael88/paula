@@ -14,6 +14,18 @@ const Suscripciones = () => {
   const [error, setError] = useState(null);
   const router = useRouter();
 
+  const getNextRenewalDate = (createdAt) => {
+    const createdDate = moment(createdAt);
+    const now = moment();
+  
+    while (createdDate.isBefore(now)) {
+      createdDate.add(1, 'month');
+    }
+  
+    return createdDate.format('DD/MM/YY');
+  };
+  
+
   useEffect(() => {
     if (session) {
       const fetchSubscriptions = async () => {
@@ -27,13 +39,16 @@ const Suscripciones = () => {
                 fotoPerfil,
                 _createdAt
               },
-              subscriptionId
+              subscriptionId,
+              suscriptionCreatedAt
+
             }
           }`, {
             email: session.user.email,
           });
 
           if (user && user.subscribedModels) {
+            console.log(user)
             setSubscriptions(user.subscribedModels);
           }
           setLoading(false);
@@ -124,7 +139,7 @@ const Suscripciones = () => {
     <div className="max-w-4xl w-full lg:w-1/3 mx-auto p-6">
       <h1 className="text-[32px] font-bold text-center lg:mt-[75px] mb-6"> Suscripciones</h1>
       {subscriptions.length === 0 ? (
-        <p>No estás suscrito a ningún modelo.</p>
+        <p className='text-center'>No estás suscrito a ningún modelo.</p>
       ) : (
         <div className="flex flex-col gap-6">
           {subscriptions.map((model) => (
@@ -141,7 +156,8 @@ const Suscripciones = () => {
               <div className=" flex-1">
                 <h2 className="text-[16px] font-bold">{model.modelRef.nombre}</h2>
                 <p className="text-[10px] font-bold text-[#B9B9B9]">@{model.modelRef.slug.current}</p>
-                <p className='text-[10px]'>Suscrito desde el {moment(model.modelRef._createdAt).format('DD/MM/YY')}</p>
+                <p className='text-[10px]'>Tu suscripción se renovará el día {getNextRenewalDate(model.modelRef._createdAt)}</p>
+                {}
               </div>
               <button
                 className="loginButton text-white px-4 py-2 rounded-[20px] text-[8px] lg:text-[12px] font-bold w-[67px] lg:w-[112px] h-[14px]lg:h-[23px]  flex justify-center items-center  "

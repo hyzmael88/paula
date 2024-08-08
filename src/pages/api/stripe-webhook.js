@@ -33,6 +33,7 @@ export default async function handler(req, res) {
       const modeloId = session.metadata.modeloId;
       const publicacionId = session.metadata.publicacionId;
        const subscriptionId = session.subscription; // Obtener el ID de la suscripción de Stripe 
+       const createdDate = new Date(session.created * 1000);
 
       try {
         const user = await sanityClient.fetch(`*[_type == "usuario" && email == $email][0]`, { email });
@@ -74,7 +75,8 @@ export default async function handler(req, res) {
             .insert('after', 'subscribedModels[-1]', [{
               modelRef: { _type: 'reference', _ref: modeloId },
               _key: modeloId,
-              subscriptionId:subscriptionId // Añadir el ID de la suscripción de Stripe
+              subscriptionId:subscriptionId,
+              suscriptionCreatedAt: createdDate
             }])
             .commit({ publish: true });
 
