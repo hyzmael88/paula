@@ -115,10 +115,10 @@ const [posicion, setPosicion] = useState(0);
           />
         </div>
         <div className="flex justify-center gap-8 p-4">
-          <button onClick={zoomOut} className="p">
+          <button onClick={zoomOut} className="p hidden md:block">
             <img src='/icons/zoomLess.svg'  alt="zoomOut" />
           </button>
-          <button onClick={zoomIn} className="p">
+          <button onClick={zoomIn} className="p hidden md:block">
             <img src='/icons/zoomPlus.svg'  alt="zoomIn" />
           </button>
         </div>
