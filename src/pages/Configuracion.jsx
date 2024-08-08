@@ -51,6 +51,7 @@ const Configuracion = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(user)
     try {
       await sanityClient.patch(user._id)
         .set({
@@ -60,6 +61,7 @@ const Configuracion = () => {
         .commit();
       setUpdated(true);
     } catch (error) {
+      console.log(error)
       setError('Error al actualizar los datos del usuario.');
     }
   };

@@ -206,7 +206,7 @@ function Modelo() {
   const unfollowModelo = async () => {
     Swal.fire({
       title: '¿Estás seguro?',
-      text: "¿Quieres dejar de seguir a este modelo?",
+      text: "¿Quieres dejar de seguir a esta cuenta?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#FF66AE',
@@ -228,22 +228,22 @@ function Modelo() {
             setIsFollowing(false);
             Swal.fire(
               '¡Unfollow!',
-              'Has dejado de seguir al modelo.',
+              'Has dejado de seguir la cuenta.',
               'success'
             );
           } else {
-            console.error('Error al dejar de seguir al modelo');
+            console.error('Error al dejar de seguir la cuenta');
             Swal.fire(
               'Error',
-              'No se pudo dejar de seguir al modelo.',
+              'No se pudo dejar de seguir la cuenta.',
               'error'
             );
           }
         } catch (error) {
-          console.error('Error al dejar de seguir al modelo:', error);
+          console.error('Error al dejar de seguir la cuenta:', error);
           Swal.fire(
             'Error',
-            'No se pudo dejar de seguir al modelo.',
+            'No se pudo dejar de seguir la cuenta.',
             'error'
           );
         }
@@ -255,7 +255,7 @@ function Modelo() {
 
   if (error) return <div className="text-red-500">{error}</div>; // Muestra el mensaje de error
 
-  if (!modelo) return <div>No se encontró el modelo.</div>;
+  if (!modelo) return <div>No se encontró la cuenta.</div>;
 
   const handleShare = () => {
     if (navigator.share) {
