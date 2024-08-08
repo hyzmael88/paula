@@ -101,7 +101,7 @@ function Paquete() {
         <div className="pt-[20px] text-center flex flex-col items-center justify-center ">
           <Link href={`/Modelo/${paqueteState.modelo.slug.current}`}>
           
-          <div className="flex p-[19px] gap-[19px] w-[191px] h-[95px] perfilPaquete cursor-pointer"
+          <div className="flex p-[19px] gap-[19px] w-[225px] h-[95px] perfilPaquete cursor-pointer"
           
           >
               <img src={urlFor(paqueteState.modelo.fotoPerfil).url()} alt="" className="w-[60px] h-[60px] flex-shrink-0 bg-gray-400 rounded-full object-cover" />
