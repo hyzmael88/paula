@@ -46,7 +46,9 @@ const NavbarMovil = () => {
           <div className="w-full flex flex-col justify-center items-center">
             <ul className="space-y-4">
               <li>
-                <Link href="/Home">
+                <Link href="/Home" 
+                onClick={toggleMenu}
+                >
                   <p className={`flex items-center text-lg font-bold ${pathname === '/Home' ? 'text-[#602AB1]' : 'text-black hover:text-[#602AB1]'}`}>
                     <FaHome className="mr-2" />
                     Inicio
@@ -54,7 +56,9 @@ const NavbarMovil = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/Explorar">
+                <Link href="/Explorar"
+                onClick={toggleMenu}
+                >
                   <p className={`flex items-center text-lg font-bold ${pathname === '/Explorar' ? 'text-[#602AB1]' : 'text-black hover:text-[#602AB1]'}`}>
                     <FaCompass className="mr-2" />
                     Explorar
@@ -62,7 +66,9 @@ const NavbarMovil = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/Suscripciones">
+                <Link href="/Suscripciones"
+                onClick={toggleMenu}
+                >
                   <p className={`flex items-center text-lg font-bold ${pathname === '/Suscripciones' ? 'text-[#602AB1]' : 'text-black hover:text-[#602AB1]'}`}>
                     <FaHeart className="mr-2" />
                     Suscripciones
@@ -70,7 +76,9 @@ const NavbarMovil = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/Compras">
+                <Link href="/Compras"
+                onClick={toggleMenu}
+                >
                   <p className={`flex items-center text-lg font-bold ${pathname === '/Compras' ? 'text-[#602AB1]' : 'text-black hover:text-[#602AB1]'}`}>
                     <FaShoppingCart className="mr-2" />
                     Compras
@@ -78,7 +86,9 @@ const NavbarMovil = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/Faqs">
+                <Link href="/Faqs"
+                onClick={toggleMenu}
+                >
                   <p className={`flex items-center text-lg font-bold ${pathname === '/Faqs' ? 'text-[#602AB1]' : 'text-black hover:text-[#602AB1]'}`}>
                     <FaQuestionCircle className="mr-2" />
                     FAQS
@@ -86,7 +96,9 @@ const NavbarMovil = () => {
                 </Link>
               </li>
               <li>
-                <Link href="https://www.instagram.com/luvmy_pack/" target="_blank">
+                <Link href="https://www.instagram.com/luvmy_pack/" target="_blank"
+                onClick={toggleMenu}
+                >
                   <p className="flex items-center text-lg font-bold text-black hover:text-[#602AB1]">
                     <FaHeadset className="mr-2" />
                     Soporte
@@ -94,7 +106,9 @@ const NavbarMovil = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/Configuracion">
+                <Link href="/Configuracion"
+                onClick={toggleMenu}
+                >
                   <p className={`flex items-center text-lg font-bold ${pathname === '/Configuracion' ? 'text-[#602AB1]' : 'text-black hover:text-[#602AB1]'}`}>
                     <FaCog className="mr-2" />
                     Configuracion
@@ -106,32 +120,36 @@ const NavbarMovil = () => {
                   className="flex items-center text-lg font-bold text-black hover:text-[#602AB1] cursor-pointer"
                   onClick={() => signOut({ callbackUrl: "/" })}
                 >
-                  <FaSignOutAlt className="mr-2" />
+                  <FaSignOutAlt className="mr-2"
+                  onClick={toggleMenu}
+                   />
                   Cerrar sesión
                 </p>
               </li>
             </ul>
             <div className="flex items-center text-[20px] gap-[25px] my-[40px]">
-              <a href="#" className="text-black hover:text-[#602AB1]">
+              <Link href="#" className="text-black hover:text-[#602AB1]"
+              
+              >
                 <FaFacebook />
-              </a>
-              <a href="#" className="text-black hover:text-[#602AB1]">
+              </Link>
+              <Link onClick={toggleMenu} href="#" className="text-black hover:text-[#602AB1]">
                 <FaInstagram />
-              </a>
-              <a href="#" className="text-black hover:text-[#602AB1]">
+              </Link>
+              <Link onClick={toggleMenu} href="#" className="text-black hover:text-[#602AB1]">
                 <FaXTwitter />
-              </a>
-              <a href="#" className="text-black hover:text-[#602AB1]">
+              </Link>
+              <Link onClick={toggleMenu} href="#" className="text-black hover:text-[#602AB1]">
                 <FaTiktok />
-              </a>
+              </Link>
             </div>
             <div className="mt-6 text-left">
-              <Link href="/Politicas">
+              <Link href="/Politicas" onClick={toggleMenu}>
                 <p className="block text-black hover:text-[#602AB1]">
                   Políticas de privacidad
                 </p>
               </Link>
-              <Link href="/Terminos">
+              <Link href="/Terminos" onClick={toggleMenu}>
                 <p className="block text-black hover:text-[#602AB1]">
                   Términos y condiciones
                 </p>
