@@ -92,15 +92,21 @@ function Paquete() {
       openGraph={{
         title: `Luvyourpack | ${paqueteState.nombre}`,
         description: paqueteState.copy,
-        images: paqueteState.portadas.map((portada) => ({
-          url: urlFor(portada).url(),
-          width: 800,
-          height: 600,
-          alt: `Portada de ${paqueteState.nombre}`,
-        })),
+        images: [
+          {
+            url: "https://cdn.sanity.io/images/aw6296fu/production/"+paqueteState.portadas[0].asset._ref
+            .replace("image-", "https://cdn.sanity.io/images/aw6296fu/production/")
+            .replace("-png", ".png")
+            .replace("-jpg", ".jpg"),
+            width: 800,
+            height: 600,
+            alt: `Portada de ${modelo.nombre}`,
+          },
+        ],
       }}
     />
-    
+    {console.log(paqueteState.portadas)}
+
     <div className="w-full h-screen overflow-y-scroll lg:w-1/3 flex flex-col items-center py-10 px-[17px] mb-[50px] lg:mb-[0]  ">
       <div className="w-full max-w-4xl bg-white rounded-lg  overflow-hidden lg:mt-[50px]">
         {paqueteState.portadas && (

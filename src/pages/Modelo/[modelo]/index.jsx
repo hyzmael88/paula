@@ -272,10 +272,7 @@ function Modelo() {
     setIsVisorOpen(true);
   };
 
-  const imageUrl = modelo.fotoPortada._ref
-  .replace("image-", "https://cdn.sanity.io/images/aw6296fu/production/")
-  .replace("-png", ".png");
-
+ 
   return (
     <>
     <NextSeo
@@ -286,7 +283,7 @@ function Modelo() {
         description: `Conoce el perfil de ${modelo.nombre}, te encantarán sus publicaciones.`,
         images: [
           {
-            url: "https://cdn.sanity.io/images/aw6296fu/production/"+modelo.fotoPortada._ref
+            url: "https://cdn.sanity.io/images/aw6296fu/production/"+modelo.fotoPortada.asset._ref
             .replace("image-", "https://cdn.sanity.io/images/aw6296fu/production/")
             .replace("-png", ".png")
             .replace("-jpg", ".jpg"),
@@ -298,11 +295,7 @@ function Modelo() {
       }}
     />
     <div className="p-4 w-full lg:w-1/3 mx-auto bg-white rounded-lg shadow-lg h-screen overflow-y-auto pb-[150px]">
-      {
-        console.log(allPublicaciones)
-      }
-      {console.log(modelo.fotoPortada)
-      }
+      
       <div className="relative">
         {modelo.fotoPortada && (
           <img
