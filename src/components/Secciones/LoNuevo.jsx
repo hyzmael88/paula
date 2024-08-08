@@ -40,14 +40,12 @@ const LoNuevo = ({ title }) => {
   const handleNext = () => {
     if (scrollContainerLoNuevoRef.current) {
       scrollContainerLoNuevoRef.current.scrollBy({ left: 388, behavior: 'smooth' });
-      updateButtonsVisibility();
     }
   };
 
   const handlePrev = () => {
     if (scrollContainerLoNuevoRef.current) {
       scrollContainerLoNuevoRef.current.scrollBy({ left: -388, behavior: 'smooth' });
-      updateButtonsVisibility();
     }
   };
 
@@ -86,7 +84,10 @@ const LoNuevo = ({ title }) => {
 
   return (
     <div className='w-full h-auto flex flex-col gap-[23px] mb-4'>
-      <h1 className='text-[27px] font-bold'>{title}</h1>
+      <div className="flex justify-between items-center">
+        <h1 className='text-[27px] font-bold'>{title}</h1>
+        <a href="#" className='text-black text-[14px]'>ver todo</a>
+      </div>
       <div className='w-full h-full relative'>
         <div className='w-full flex items-center gap-[22px] overflow-x-auto no-scrollbar py-4 relative' ref={scrollContainerLoNuevoRef}>
           {modelos.map(modelo => (
