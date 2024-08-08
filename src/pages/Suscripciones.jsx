@@ -76,8 +76,8 @@ const Suscripciones = () => {
       showCancelButton: true,
       confirmButtonColor: '#FF66AE', // Usa el color de tu estilo
       cancelButtonColor: '#6E26B6', // Usa el color de tu estilo
-      confirmButtonText: 'Sí, desuscribirme',
-      cancelButtonText: 'Cancelar'
+      confirmButtonText: 'Sí, estoy seguro',
+      cancelButtonText: 'Atras'
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -98,7 +98,7 @@ const Suscripciones = () => {
             );
           } else {
             const data = await response.json();
-            console.error('Error al desuscribirse del modelo:', data.error);
+            console.error('Error al cancelar suscripcion:', data.error);
             Swal.fire(
               'Error',
               'Hubo un problema al desuscribirse. Por favor, inténtalo de nuevo.',
@@ -106,7 +106,7 @@ const Suscripciones = () => {
             );
           }
         } catch (error) {
-          console.error('Error al desuscribirse del modelo:', error);
+          console.error('Error al cancelar suscripcion del modelo:', error);
           Swal.fire(
             'Error',
             'Hubo un problema al desuscribirse. Por favor, inténtalo de nuevo.',
@@ -156,7 +156,8 @@ const Suscripciones = () => {
               <div className=" flex-1">
                 <h2 className="text-[16px] font-bold">{model.modelRef.nombre}</h2>
                 <p className="text-[10px] font-bold text-[#B9B9B9]">@{model.modelRef.slug.current}</p>
-                <p className='text-[10px]'>Tu suscripción se renovará el día {getNextRenewalDate(model.modelRef._createdAt)}</p>
+                <p className='text-[10px]'>Tu suscripción se renovará el día {getNextRenewalDate(model.suscriptionCreatedAt)}</p>
+
                 {}
               </div>
               <button
@@ -166,7 +167,7 @@ const Suscripciones = () => {
                   handleUnsubscribe(model.modelRef._id, model.subscriptionId);
                 }}
               >
-                Desuscribirse
+                Cancelar
               </button>
             </div>
           ))}
