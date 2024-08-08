@@ -117,7 +117,7 @@ const Compras = () => {
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>; // Muestra el mensaje de error
 
   return (
-    <div className="max-w-4xl w-full lg:w-1/3 mx-auto h-full lg:h-screen overflow-y-scroll pb-[100px] lg:px-[40px] lg:pb-[150px]  lg:mt-[80px] ">
+    <div className="max-w-4xl w-full lg:w-1/3 mx-auto h-full lg:h-screen lg:overflow-y-scroll pb-[100px] lg:px-[40px] lg:pb-[150px]  lg:mt-[80px] ">
       <h1 className="text-3xl font-bold mb-6 text-center">Compras</h1>
       {
         console.log(compras)

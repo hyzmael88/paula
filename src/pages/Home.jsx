@@ -144,7 +144,7 @@ export default function Home() {
           ],
         }}
       />
-      <div className="max-w-4xl w-full lg:w-1/3  h-full lg:h-screen overflow-y-scroll pb-[100px] lg:px-[40px] lg:pb-[150px]  lg:mt-[80px] mx-auto">
+      <div className="max-w-4xl w-full lg:w-1/3  h-full lg:h-screen lg:overflow-y-scroll pb-[100px] lg:px-[40px] lg:pb-[150px]  lg:mt-[80px] mx-auto">
         <div className='w-full h-[160px] flex lg:hidden justify-center items-center'>
           <img src='/Logo.png' alt='Logo' className='w-[205px] mx-auto' />
         </div>
