@@ -11,6 +11,7 @@ import Parati from '@/components/Secciones/Parati';
 import LoNuevo from '@/components/Secciones/LoNuevo';
 import Packs from '@/components/Secciones/Packs';
 import Categorias from '@/components/Secciones/Categorias';
+import { NextSeo } from 'next-seo';
 
 const Explore = () => {
   const [paquetes, setPaquetes] = useState([]);
@@ -96,6 +97,10 @@ const Explore = () => {
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
 
   return (
+    <>
+    <NextSeo
+      title="Luvyourpack | Explorar  "
+    />
     <div className="max-w-4xl w-full h-full lg:w-1/3 lg:h-screen overflow-y-scroll mx-auto px-[25px] pb-[100px] ">
 
       <div className="mb-8 ">
@@ -179,6 +184,7 @@ const Explore = () => {
       <Packs title="Packs" paquetes={paquetes}  />
       <Categorias title="Categorías"  />
     </div>
+    </>
   );
 };
 

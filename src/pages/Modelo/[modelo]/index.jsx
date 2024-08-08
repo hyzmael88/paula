@@ -12,6 +12,7 @@ import PublicacionPerfil from "@/components/PublicacionPerfil";
 import { LuShare } from "react-icons/lu";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss';
+import { NextSeo } from "next-seo";
 
 
 function Modelo() {
@@ -272,6 +273,23 @@ function Modelo() {
   };
 
   return (
+    <>
+    <NextSeo
+      title={`Luvyourpack | Perfil de ${modelo.nombre}`}
+      description={`Perfil de ${modelo.nombre}`}
+      openGraph={{
+        title: `Luvyourpack | Perfil de ${modelo.nombre}`,
+        description: `Conoce el perfil de ${modelo.nombre}, te encantarán sus publicaciones.`,
+        images: [
+          {
+            url: urlFor(modelo.fotoPortada).url(),
+            width: 800,
+            height: 600,
+            alt: `Portada de ${modelo.nombre}`,
+          },
+        ],
+      }}
+    />
     <div className="p-4 w-full lg:w-1/3 mx-auto bg-white rounded-lg shadow-lg h-screen overflow-y-auto pb-[150px]">
       {
         console.log(allPublicaciones)
@@ -466,6 +484,7 @@ function Modelo() {
         )}
       </div>
     </div>
+    </>
   );
 }
 

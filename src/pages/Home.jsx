@@ -130,10 +130,10 @@ export default function Home() {
     <>
       <NextSeo
         title="Luvyourpack | Home"
-        description="Esta es la descripción de la página de inicio"
+        description="Explora contenido exclusivo y personalizado, creado por talentosos influencers y potenciado por inteligencia artificial. Suscríbete para una experiencia única y atrevida que va más allá de lo convencional."
         openGraph={{
           title: 'Luvyourpack | Home',
-          description: 'Esta es la descripción de la página de inicio',
+          description: 'Explora contenido exclusivo y personalizado, creado por talentosos influencers y potenciado por inteligencia artificial. Suscríbete para una experiencia única y atrevida que va más allá de lo convencional.',
           images: [
             {
               url: 'https://www.tusitioweb.com/imagen-inicio-og.png',

@@ -8,6 +8,7 @@ import ModalVisor from "@/components/ModalVisor";
 import getStripe from "@/sanity/lib/getStripe";
 import { client } from "@/sanity/lib/client";
 import Link from "next/link";
+import { NextSeo } from "next-seo";
 
 function Paquete() {
   const [paqueteState, setPaqueteState] = useState(null);
@@ -84,6 +85,22 @@ function Paquete() {
     );
 
   return (
+    <>
+    <NextSeo
+      title={`Luvyourpack | ${paqueteState.nombre}`}
+      description={paqueteState.copy}
+      openGraph={{
+        title: `Luvyourpack | ${paqueteState.nombre}`,
+        description: paqueteState.copy,
+        images: paqueteState.portadas.map((portada) => ({
+          url: urlFor(portada).url(),
+          width: 800,
+          height: 600,
+          alt: `Portada de ${paqueteState.nombre}`,
+        })),
+      }}
+    />
+    
     <div className="w-full h-screen overflow-y-scroll lg:w-1/3 flex flex-col items-center py-10 px-[17px] mb-[50px] lg:mb-[0]  ">
       <div className="w-full max-w-4xl bg-white rounded-lg  overflow-hidden lg:mt-[50px]">
         {paqueteState.portadas && (
@@ -173,6 +190,7 @@ function Paquete() {
         />
       )}
     </div>
+  </>
   );
 }
 

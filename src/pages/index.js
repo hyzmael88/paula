@@ -52,14 +52,14 @@ export default function Home() {
     <NextSeo
         title="Luvyourpack | Inicio"
         description="Explora contenido exclusivo y personalizado, creado por talentosos influencers y potenciado por inteligencia artificial. Suscríbete para una experiencia única y atrevida que va más allá de lo convencional."
-        canonical="https://www.tusitioweb.com"
+        canonical="https://www.luvyourpack.com"
         openGraph={{
-          url: 'https://www.tusitioweb.com',
+          url: 'https://www.luvyourpack.com',
           title: 'Luvyourpack | Inicio',
           description: 'Explora contenido exclusivo y personalizado, creado por talentosos influencers y potenciado por inteligencia artificial. Suscríbete para una experiencia única y atrevida que va más allá de lo convencional.',
           images: [
             {
-              url: 'https://www.tusitioweb.com/imagen-inicio-og.png',
+              url: 'https://www.luvyourpack.com/ogimagen.png',
               width: 800,
               height: 600,
               alt: 'Imagen de Inicio',
@@ -67,40 +67,7 @@ export default function Home() {
           ],
           site_name: 'Luvyourpack',
         }}
-        twitter={{
-          handle: '@tu_twitter_handle',
-          site: '@tu_twitter_handle',
-          cardType: 'summary_large_image',
-        }}
-        additionalMetaTags={[
-          {
-            name: 'keywords',
-            content: 'contenido exclusivo, influencers, inteligencia artificial, suscripción, personalización, experiencia única, atrevida',
-          },
-          {
-            name: 'author',
-            content: 'Luvyourpack Team',
-          },
-          {
-            name: 'robots',
-            content: 'index, follow',
-          },
-        ]}
-        additionalLinkTags={[
-          {
-            rel: 'icon',
-            href: '/favicon.ico',
-          },
-          {
-            rel: 'apple-touch-icon',
-            href: '/apple-touch-icon.png',
-            sizes: '180x180',
-          },
-          {
-            rel: 'manifest',
-            href: '/site.webmanifest',
-          },
-        ]}
+        
       />
     <div className='w-full h-full relative overflow-hidden'>
       <ParticlesComponent/>
