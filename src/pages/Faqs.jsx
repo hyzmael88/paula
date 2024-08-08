@@ -36,7 +36,7 @@ const Faqs = () => {
   };
 
   return (
-    <div className="p-6 max-w-4xl w-full lg:w-1/3 mx-auto">
+    <div className="p-6 max-w-4xl w-full lg:w-1/3  h-full lg:h-screen mx-auto">
       <h1 className="text-[32px] font-bold mb-8 text-center lg:mt-[75px]">FAQs</h1>
       <div className="space-y-4">
         {faqs.map((faq, index) => (

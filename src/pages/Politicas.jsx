@@ -2,7 +2,7 @@ import React from 'react';
 
 const Privacidad = () => {
   return (
-    <div className="p-4 w-full h-screen overflow-y-scroll lg:w-1/3">
+    <div className="p-4 w-full  h-full lg:h-screen overflow-y-scroll lg:w-1/3">
       <h1 className="text-[32px] font-bold text-center mb-4 ">Política de Privacidad</h1>
       <p className="mb-4 text-[12px]">
         Esta política de privacidad establece cómo [Nombre de la Empresa] usa y protege cualquier información que usted proporciona cuando usa este sitio web.

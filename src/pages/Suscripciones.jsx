@@ -136,7 +136,7 @@ const Suscripciones = () => {
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
 
   return (
-    <div className="max-w-4xl w-full lg:w-1/3 mx-auto p-6">
+    <div className="max-w-4xl w-full lg:w-1/3  h-full lg:h-screen mx-auto p-6">
       <h1 className="text-[32px] font-bold text-center lg:mt-[75px] mb-6"> Suscripciones</h1>
       {subscriptions.length === 0 ? (
         <p className='text-center'>No estás suscrito a ningún modelo.</p>

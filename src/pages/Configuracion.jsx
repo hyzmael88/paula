@@ -5,7 +5,7 @@ import { createClient } from 'next-sanity';
 
 
 const Configuracion = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -65,10 +65,17 @@ const Configuracion = () => {
   };
 
   useEffect(() => {
+    if (status === 'loading') {
+      // Esperar a que la sesión termine de cargar
+      return;
+    }
     if (!session) {
+      // Redirigir al login si no hay sesión
       router.push('/Auth/Login');
     }
-  }, [session, router]);
+  }, [session, status, router]);
+
+  
 
   if (!session) {
     return null; // Retorna null para evitar renderizar el componente antes de redirigir
@@ -78,7 +85,7 @@ const Configuracion = () => {
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
 
   return (
-    <div className="max-w-4xl w-full lg:w-1/3 h-[85vh] mx-auto p-6">
+    <div className="max-w-4xl w-full lg:w-1/3  h-full lg:h-[85vh] mx-auto p-6">
       <h1 className="text-[35px] text-center font-bold mb-6 lg:mt-[75px]">Configuración</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
