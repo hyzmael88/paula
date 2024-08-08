@@ -109,6 +109,7 @@ const [posicion, setPosicion] = useState(0);
               cursor: dragging ? 'grabbing' : 'grab',
             }}
             onContextMenu={(e) => e.preventDefault()}
+            loading='lazy'
 
           />
         </div>
