@@ -101,6 +101,7 @@ const [posicion, setPosicion] = useState(0);
           <img
             ref={imgRef}
             src={fotografias[posicion]}
+            key={fotografias[posicion]}
             alt={`Fotografía ${posicion + 1}`}
             className="object-contain w-full h-full"
             style={{
