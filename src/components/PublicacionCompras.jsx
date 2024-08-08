@@ -80,7 +80,8 @@ function PublicacionCompras({
           />
         </div>
       )}
-      <div className="w-full flex justify-between items-center px-8 h-[52px]">
+      {/* Proximamente */}
+      {/* <div className="w-full flex justify-between items-center px-8 h-[52px]">
         <div className="flex gap-4">
           <div className="flex">
             <span className="text-[11px] flex items-center gap-1"><FaHeart />200</span>
@@ -90,7 +91,7 @@ function PublicacionCompras({
           </div>
         </div>
         <div className="text-[20px] flex gap-2"><FaMoneyBillWave /> <CiBookmark /></div>
-      </div>
+      </div> */}
     </div>
   );
 }

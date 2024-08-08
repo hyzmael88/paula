@@ -19,7 +19,7 @@ const NavbarMovil = () => {
 
   return (
     <div className="relative">
-      <div className="fixed lg:hidden bottom-0 left-0 right-0 navbarMovil  h-[71px] z-40">
+      <div className="fixed lg:hidden bottom-0 left-0 right-0 navbarMovil  h-[71px] z-40 backdrop-blur-md">
         <div className="w-full h-full flex justify-around items-center pb-4">
           <Link href="/Home">
             <TiHome className={`text-2xl ${pathname === '/Home' ? 'text-purple-600' : 'text-black hover:text-purple-600'}`} />
