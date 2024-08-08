@@ -14,6 +14,7 @@ const LoNuevo = ({ title }) => {
     const [error, setError] = useState(null);
     const router = useRouter();
     const scrollContainerLoNuevoRef = useRef(null);
+    const modeloRef = useRef(null);
     const [posicion, setPosicion] = useState(0)
     
 
@@ -44,6 +45,7 @@ const LoNuevo = ({ title }) => {
     };
 
     useEffect(() => {
+        if(modelos.length > 0){
         if(posicion === 0){
             setShowPrevButton(false);
         }
@@ -56,15 +58,20 @@ const LoNuevo = ({ title }) => {
         if(posicion < modelos.length - 1){
             setShowNextButton(true);
         }
+    }
+    else{
+        setShowPrevButton(false);
+        setShowNextButton(false);
+    }
         
-    }, [posicion]);
+    }, [posicion, modelos]);
 
 
     const handleNext = () => {
         console.log("entre mas posicion", posicion);
         setPosicion(prevPosicion => {
             const newPosicion = prevPosicion + 1;
-            scrollContainerLoNuevoRef.current.scrollBy({ left: 388, behavior: 'smooth' });
+            scrollContainerLoNuevoRef.current.scrollBy({ left: modeloRef.current.width+8, behavior: 'smooth' });
             return newPosicion;
         });
     };
@@ -73,7 +80,7 @@ const LoNuevo = ({ title }) => {
         console.log("entre menos posicion", posicion);
         setPosicion(prevPosicion => {
             const newPosicion = prevPosicion - 1;
-            scrollContainerLoNuevoRef.current.scrollBy({ left: -388, behavior: 'smooth' });
+            scrollContainerLoNuevoRef.current.scrollBy({ left: -modeloRef.current.width-8, behavior: 'smooth' });
             return newPosicion;
         });
     };
@@ -99,6 +106,7 @@ const LoNuevo = ({ title }) => {
                            
                         >
                             <img
+                            ref={modeloRef}
                                 src={urlFor(modelo.fotoPerfil).url()}
                                 alt={modelo.nombre}
                                 className='w-[384px] h-[258px] object-cover rounded-[30px]'

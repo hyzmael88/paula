@@ -11,6 +11,8 @@ const Categorias = ({ title }) => {
     const [error, setError] = useState(null);
     const router = useRouter();
     const scrollContainerRef = useRef(null);
+    const categoriaRef = useRef(null);
+    const [posicion, setPosicion] = useState(0)
 
 
     useEffect(() => {
@@ -39,47 +41,51 @@ const Categorias = ({ title }) => {
         router.push(`/Categoria/${categoriaSlug}`);
     };
 
-    const handleNext = () => {
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({ left: 283, behavior: 'smooth' });
+    useEffect(() => {
+        if(categorias.length > 0){
+        if(posicion === 0){
+            setShowPrevButton(false);
         }
-    };
+        if(posicion === categorias.length - 1){
+            setShowNextButton(false);
+        }
+        if(posicion > 0){
+            setShowPrevButton(true);
+        }
+        if(posicion < categorias.length - 1){
+            setShowNextButton(true);
+        }
+        }
+        else{
+            setShowPrevButton(false);
+            setShowNextButton(false);
+        }
+            
+        
+    }, [posicion,categorias]);
 
-    const handlePrev = () => {
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({ left: -283, behavior: 'smooth' });
-        }
+
+    const handleNext = () => {
+        console.log("entre mas posicion", posicion);
+        setPosicion(prevPosicion => {
+            const newPosicion = prevPosicion + 1;
+            scrollContainerRef.current.scrollBy({ left: categoriaRef.current.width+4, behavior: 'smooth' });
+            return newPosicion;
+        });
     };
+    
+    const handlePrev = () => {
+        console.log("entre menos posicion", posicion);
+        setPosicion(prevPosicion => {
+            const newPosicion = prevPosicion - 1;
+            scrollContainerRef.current.scrollBy({ left: -categoriaRef.current.width-4, behavior: 'smooth' });
+            return newPosicion;
+        });
+    };
+    
 
     const [showPrevButton, setShowPrevButton] = useState(false);
     const [showNextButton, setShowNextButton] = useState(true);
-
-    const updateButtonsVisibility = () => {
-        if (scrollContainerRef.current) {
-            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-            setShowPrevButton(scrollLeft > 0);
-            setShowNextButton(scrollLeft < scrollWidth - clientWidth);
-        }
-    };
-
-    useEffect(() => {
-        const handleScroll = () => {
-            updateButtonsVisibility();
-        };
-
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.addEventListener('scroll', handleScroll);
-            // Initial check to set button visibility on mount
-            updateButtonsVisibility();
-        }
-
-        return () => {
-            if (scrollContainerRef.current) {
-                scrollContainerRef.current.removeEventListener('scroll', handleScroll);
-            }
-        };
-    }, [scrollContainerRef.current]);
-
 
     if (loading) return <div className="text-center p-6">Loading...</div>;
     if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
@@ -99,6 +105,7 @@ const Categorias = ({ title }) => {
                         onClick={() => handlePublicacionClick(categoria.slug.current)}
                     >
                         <img
+                        ref={categoriaRef}
                             src={urlFor(categoria.portada).url()}
                             alt={categoria.nombre}
                             className='w-[279px] h-[125px] object-cover rounded-[30px]'

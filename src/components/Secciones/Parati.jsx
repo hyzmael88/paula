@@ -11,6 +11,8 @@ const Parati = ({ title }) => {
     const [error, setError] = useState(null);
     const router = useRouter();
     const scrollContainerParaTiRef = useRef(null);
+    const publicacionRef = useRef(null);
+    const [posicion, setPosicion] = useState(0)
 
 
     useEffect(() => {
@@ -44,46 +46,50 @@ const Parati = ({ title }) => {
     };
 
     
-    const handleNext = () => {
-        if (scrollContainerParaTiRef.current) {
-            scrollContainerParaTiRef.current.scrollBy({ left: 390, behavior: 'smooth' });
+    useEffect(() => {
+        if(publicacionesGratuitas.length > 0){
+        if(posicion === 0){
+            setShowPrevButton(false);
         }
-    };
+        if(posicion === publicacionesGratuitas.length - 1){
+            setShowNextButton(false);
+        }
+        if(posicion > 0){
+            setShowPrevButton(true);
+        }
+        if(posicion < publicacionesGratuitas.length - 1){
+            setShowNextButton(true);
+        }
+    }
+    else{
+        setShowPrevButton(false);
+        setShowNextButton(false);
+    }
+        
+    }, [posicion, publicacionesGratuitas]);
 
-    const handlePrev = () => {
-        if (scrollContainerParaTiRef.current) {
-            scrollContainerParaTiRef.current.scrollBy({ left: -390, behavior: 'smooth' });
-        }
+
+    const handleNext = () => {
+        console.log("entre mas posicion", posicion);
+        setPosicion(prevPosicion => {
+            const newPosicion = prevPosicion + 1;
+            scrollContainerParaTiRef.current.scrollBy({ left: publicacionRef.current.width*2, behavior: 'smooth' });
+            return newPosicion;
+        });
     };
+    
+    const handlePrev = () => {
+        console.log("entre menos posicion", posicion);
+        setPosicion(prevPosicion => {
+            const newPosicion = prevPosicion - 1;
+            scrollContainerParaTiRef.current.scrollBy({ left: -publicacionRef.current.width*2, behavior: 'smooth' });
+            return newPosicion;
+        });
+    };
+    
 
     const [showPrevButton, setShowPrevButton] = useState(false);
     const [showNextButton, setShowNextButton] = useState(true);
-
-    const updateButtonsVisibility = () => {
-        if (scrollContainerParaTiRef.current) {
-            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerParaTiRef.current;
-            setShowPrevButton(scrollLeft > 0);
-            setShowNextButton(scrollLeft < scrollWidth - clientWidth);
-        }
-    };
-
-    useEffect(() => {
-        const handleScroll = () => {
-            updateButtonsVisibility();
-        };
-
-        if (scrollContainerParaTiRef.current) {
-            scrollContainerParaTiRef.current.addEventListener('scroll', handleScroll);
-            // Initial check to set button visibility on mount
-            updateButtonsVisibility();
-        }
-
-        return () => {
-            if (scrollContainerParaTiRef.current) {
-                scrollContainerParaTiRef.current.removeEventListener('scroll', handleScroll);
-            }
-        };
-    }, [scrollContainerParaTiRef.current]);
 
     if (loading) return <div className="text-center p-6">Loading...</div>;
     if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
@@ -101,6 +107,7 @@ const Parati = ({ title }) => {
           {
             publicacionesGratuitas.map(publicacion => (
                 <div
+                ref={publicacionRef}
                     key={publicacion._id}
                     className='w-[159px] h-[236px] lg:w-[201px] lg:h-[299px] flex flex-col items-center justify-center  relative'
                     onClick={() => handlePublicacionClick(publicacion.modelo.slug.current, publicacion.slug.current)}

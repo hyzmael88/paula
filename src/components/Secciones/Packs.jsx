@@ -11,6 +11,7 @@ const Packs = ({ title }) => {
     const [error, setError] = useState(null);
     const router = useRouter();
     const scrollContainerPacksRef = useRef(null);
+    const [posicion, setPosicion] = useState(0)
 
     useEffect(() => {
         const fetchPaquetes = async () => {
@@ -42,46 +43,51 @@ const Packs = ({ title }) => {
     const handlePublicacionClick = (modeloSlug,paqueteSlug) => {
         router.push(`/Modelo/${modeloSlug}/Paquete/${paqueteSlug}`);
     };
-    const handleNext = () => {
-        if (scrollContainerPacksRef.current) {
-            scrollContainerPacksRef.current.scrollBy({ left: scrollContainerPacksRef.current.clientWidth+22, behavior: 'smooth' });
-        }
-    };
 
-    const handlePrev = () => {
-        if (scrollContainerPacksRef.current) {
-            scrollContainerPacksRef.current.scrollBy({ left: -scrollContainerPacksRef.current.clientWidth-22, behavior: 'smooth' });
+    useEffect(() => {
+        if(paquetes.length > 0){
+        if(posicion === 0){
+            setShowPrevButton(false);
         }
+        if(posicion === paquetes.length - 1){
+            setShowNextButton(false);
+        }
+        if(posicion > 0){
+            setShowPrevButton(true);
+        }
+        if(posicion < paquetes.length - 1){
+            setShowNextButton(true);
+        }
+        }
+        else{
+            setShowPrevButton(false);
+            setShowNextButton(false);
+        }
+        
+    }, [posicion, paquetes]);
+    
+    const handleNext = () => {
+        console.log("entre mas posicion", posicion);
+        setPosicion(prevPosicion => {
+            const newPosicion = prevPosicion + 1;
+            scrollContainerPacksRef.current.scrollBy({ left: scrollContainerPacksRef.current.clientWidth+22, behavior: 'smooth' });
+            return newPosicion;
+        });
     };
+    
+    const handlePrev = () => {
+        console.log("entre menos posicion", posicion);
+        setPosicion(prevPosicion => {
+            const newPosicion = prevPosicion - 1;
+            scrollContainerPacksRef.current.scrollBy({ left: -scrollContainerPacksRef.current.clientWidth-22, behavior: 'smooth' });
+            return newPosicion;
+        });
+    };
+    
 
     const [showPrevButton, setShowPrevButton] = useState(false);
     const [showNextButton, setShowNextButton] = useState(true);
-
-    const updateButtonsVisibility = () => {
-        if (scrollContainerPacksRef.current) {
-            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerPacksRef.current;
-            setShowPrevButton(scrollLeft > 0);
-            setShowNextButton(scrollLeft < scrollWidth - clientWidth);
-        }
-    };
-
-    useEffect(() => {
-        const handleScroll = () => {
-            updateButtonsVisibility();
-        };
-
-        if (scrollContainerPacksRef.current) {
-            scrollContainerPacksRef.current.addEventListener('scroll', handleScroll);
-            // Initial check to set button visibility on mount
-            updateButtonsVisibility();
-        }
-
-        return () => {
-            if (scrollContainerPacksRef.current) {
-                scrollContainerPacksRef.current.removeEventListener('scroll', handleScroll);
-            }
-        };
-    }, [scrollContainerPacksRef.current]);
+  
 
     if (loading) return <div className="text-center p-6">Loading...</div>;
     if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
