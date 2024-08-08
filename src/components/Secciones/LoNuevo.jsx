@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+// components/Secciones/LoNuevo.js
+import React, { useEffect, useRef, useState } from 'react';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import { useRouter } from 'next/router';
@@ -10,8 +11,6 @@ const LoNuevo = ({ title }) => {
   const [error, setError] = useState(null);
   const router = useRouter();
   const scrollContainerLoNuevoRef = useRef(null);
-  const [showPrevButton, setShowPrevButton] = useState(false);
-  const [showNextButton, setShowNextButton] = useState(true);
 
   useEffect(() => {
     const fetchPublicaciones = async () => {
@@ -38,25 +37,30 @@ const LoNuevo = ({ title }) => {
     router.push(`/Modelo/${modeloSlug}`);
   };
 
-  const handleNext = useCallback(() => {
+  const handleNext = () => {
     if (scrollContainerLoNuevoRef.current) {
       scrollContainerLoNuevoRef.current.scrollBy({ left: 388, behavior: 'smooth' });
+      updateButtonsVisibility();
     }
-  }, []);
+  };
 
-  const handlePrev = useCallback(() => {
+  const handlePrev = () => {
     if (scrollContainerLoNuevoRef.current) {
       scrollContainerLoNuevoRef.current.scrollBy({ left: -388, behavior: 'smooth' });
+      updateButtonsVisibility();
     }
-  }, []);
+  };
 
-  const updateButtonsVisibility = useCallback(() => {
+  const [showPrevButton, setShowPrevButton] = useState(false);
+  const [showNextButton, setShowNextButton] = useState(true);
+
+  const updateButtonsVisibility = () => {
     if (scrollContainerLoNuevoRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerLoNuevoRef.current;
       setShowPrevButton(scrollLeft > 0);
       setShowNextButton(scrollLeft < scrollWidth - clientWidth);
     }
-  }, []);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,6 +70,7 @@ const LoNuevo = ({ title }) => {
     const scrollContainer = scrollContainerLoNuevoRef.current;
     if (scrollContainer) {
       scrollContainer.addEventListener('scroll', handleScroll);
+      // Initial check to set button visibility on mount
       updateButtonsVisibility();
     }
 
@@ -74,7 +79,7 @@ const LoNuevo = ({ title }) => {
         scrollContainer.removeEventListener('scroll', handleScroll);
       }
     };
-  }, [updateButtonsVisibility]);
+  }, [scrollContainerLoNuevoRef.current]);
 
   if (loading) return <div className="text-center p-6">Loading...</div>;
   if (error) return <div className="text-center p-6 text-red-500">{error}</div>;
