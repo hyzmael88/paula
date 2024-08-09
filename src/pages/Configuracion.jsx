@@ -51,17 +51,26 @@ const Configuracion = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user)
     try {
-      await sanityClient.patch(user._id)
-        .set({
+      const response = await fetch('/api/updateUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: user._id,
           name: user.name,
-          email: user.email
-        })
-        .commit();
-      setUpdated(true);
+        }),
+      });
+
+      if (response.ok) {
+        setUpdated(true);
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || 'Error al actualizar los datos del usuario.');
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setError('Error al actualizar los datos del usuario.');
     }
   };
@@ -101,7 +110,7 @@ const Configuracion = () => {
       className={`w-full px-[28px] py-4 border rounded faqs focus-visible:border-[#FF66AE] `}
     />
         </div>
-        <div>
+        {/* <div>
           <label className="block text-gray-700">Email</label>
           <input
             type="email"
@@ -112,13 +121,13 @@ const Configuracion = () => {
       className={`w-full px-[28px] py-4 border rounded focus-visible:border-custom-focus faqs `}
     />
           
-        </div>
+        </div> */}
         
         <div className='w-full flex justify-between items-center'>
-          <button type="submit" className="paqueteButton text-white px-4 py- rounded-[23px]">
+          <button type="submit" className="paqueteButton text-white px-4 flex-shrink-0 rounded-[23px]">
             Guardar Cambios
           </button>
-          <span className='text-[12px] text-[#6E26B6] cursor-pointer'
+          <span className='text-[12px] text-[#6E26B6] cursor-pointer text-right'
           onClick={() => router.push('/Auth/ResetPassword')}
           >
           ¿Olvidaste tu contraseña?
