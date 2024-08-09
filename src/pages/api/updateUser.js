@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     try {
       await sanityClient
         .patch(userId)
-        .set({ name, email })
+        .set({ name })
         .commit({ publish: true });
 
       res.status(200).json({ message: 'Usuario actualizado con éxito' });
