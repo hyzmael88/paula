@@ -1,58 +1,50 @@
-// pages/api/auth/reset-password.js
-import { createTransport } from 'nodemailer';
-import { v4 as uuidv4 } from 'uuid';
-import { client } from '@/sanity/lib/client';
+import { createClient } from 'next-sanity';
+import bcrypt from 'bcryptjs';
 
-const transporter = createTransport({
-  service: 'Gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
+const sanityClient = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  useCdn: false,
+  apiVersion: '2021-03-25',
+  token: process.env.SANITY_WRITE_TOKEN,
 });
 
-export default async (req, res) => {
-  if (req.method === 'POST') {
-    const { email } = req.body;
-
-    try {
-      // Generar un token único
-      const resetToken = uuidv4();
-
-      // Buscar al usuario por email y agregar el token de restablecimiento
-      const user = await client.fetch(`*[_type == "usuario" && email == $email][0]`, { email });
-
-      if (!user) {
-        return res.status(400).json({ message: 'User not found' });
-      }
-
-      // Almacenar el token en Sanity con la dirección de correo electrónico del usuario
-      await client
-        .patch(user._id)
-        .set({ resetToken })
-        .commit();
-
-      // Crear la URL de restablecimiento de contraseña
-      const resetUrl = `${process.env.NEXT_PUBLIC_URL}/auth/reset-password?token=${resetToken}&email=${email}`;
-
-      // Configurar las opciones del correo electrónico
-      const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: email,
-        subject: 'Reset your password',
-        html: `<p>Click <a href="${resetUrl}">here</a> to reset your password</p>`,
-      };
-
-      // Enviar el correo electrónico
-      await transporter.sendMail(mailOptions);
-
-      res.status(200).json({ message: 'Password reset email sent' });
-    } catch (error) {
-        console.log(error)
-      res.status(500).json({ message: 'Error sending email', error });
-    }
-  } else {
-    res.setHeader('Allow', 'POST');
-    res.status(405).end('Method Not Allowed');
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
-};
+
+/*   const { token, email, newPassword } = req.body;
+ */  const {  email, newPassword } = req.body;
+
+ /*  if (!token || !email || !newPassword) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  } */
+  if ( !email || !newPassword) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  try {
+    // Verificar que el usuario exista y que el token sea válido
+    /* const user = await sanityClient.fetch(`*[_type == "usuario" && email == $email && resetToken == $token][0]`, { email, token }); */
+    const user = await sanityClient.fetch(`*[_type == "usuario" && email == $email][0]`, { email });
+
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid token or user not found' });
+    }
+
+    // Hash de la nueva contraseña
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Actualizar la contraseña en Sanity y eliminar el resetToken
+    await sanityClient.patch(user._id)
+      .set({ password: hashedPassword })
+      .unset(['resetToken'])
+      .commit({ publish: true });
+
+    return res.status(200).json({ message: 'Password updated successfully' });
+  } catch (error) {
+    console.error('Error updating password:', error);
+    return res.status(500).json({ error: 'Failed to update password' });
+  }
+}

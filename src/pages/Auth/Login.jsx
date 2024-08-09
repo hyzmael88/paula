@@ -95,7 +95,7 @@ function Login() {
             {/* <p className="text-xs text-gray-500 mt-1">It must be a combination of minimum 8 letters, numbers, and symbols.</p> */}
           </div>
           <p className="mt-6 text-right">
-          <a href="#" className="text-[#602AB1] text-[14px]" onClick={() => setResetMessage(true)}>¿Olvidaste la contraseña?</a>
+          <Link href="/Auth/ForgotPassword" className="text-[#602AB1] text-[14px]" onClick={() => setResetMessage(true)}>¿Olvidaste la contraseña?</Link>
         </p>
           <button type="submit" className="w-full loginButton font-bold text-white py-2 rounded-[34px]">Inicia Sesión</button>
         </form>

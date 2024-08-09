@@ -1,8 +1,6 @@
-// pages/auth/reset-password.js
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import Link from 'next/link';
 
 const ResetPassword = () => {
   const router = useRouter();
@@ -21,11 +19,12 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await axios.post('/api/auth/update-password', { token, email, newPassword });
+      const response = await axios.post('/api/auth/reset-password', { token, email, newPassword });
       setMessage('Contraseña actualizada exitosamente');
       setError(null);
       setNewPassword('');
       setConfirmPassword('');
+      router.push('/Auth/Login');
     } catch (error) {
       setError('Error al actualizar la contraseña. Por favor, inténtelo de nuevo.');
       setMessage(null);
@@ -35,7 +34,7 @@ const ResetPassword = () => {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4">
       <div className="w-full max-w-md bg-white p-8 rounded-[30px] shadow-lg">
-        <h1 className="text-3xl font-bold text-center mb-6">Restablecer Contraseña</h1>
+        <h1 className="text-3xl font-bold text-center mb-6">Cambiar Contraseña</h1>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         {message && <p className="text-green-500 text-center mb-4">{message}</p>}
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -67,14 +66,9 @@ const ResetPassword = () => {
             type="submit"
             className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white py-3 rounded-[20px] text-[16px] font-bold shadowButton hover:from-pink-600 hover:to-purple-700 transition-all duration-200"
           >
-            Restablecer Contraseña
+            Cambiar Contraseña
           </button>
         </form>
-        <div className="mt-6 text-center">
-          <Link href="/Auth/Login">
-            <p className="text-[14px] text-purple-600 hover:underline">Volver al inicio de sesión</p>
-          </Link>
-        </div>
       </div>
     </div>
   );
