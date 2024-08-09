@@ -128,9 +128,9 @@ const Configuracion = () => {
             Guardar Cambios
           </button>
           <span className='text-[12px] text-[#6E26B6] cursor-pointer text-right'
-          onClick={() => router.push('/Auth/ResetPassword')}
+          onClick={() => router.push('/Auth/UpdatePassword')}
           >
-          ¿Olvidaste tu contraseña?
+          Cambiar contraseña
           </span>
         </div>
         {updated && <p className="text-green-500">Datos actualizados correctamente.</p>}

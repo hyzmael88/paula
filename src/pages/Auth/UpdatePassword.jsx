@@ -1,16 +1,30 @@
 // pages/auth/reset-password.js
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
-const ResetPassword = () => {
+const UpdatePassword = () => {
   const router = useRouter();
   const { token, email } = router.query;
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === 'loading') {
+      // Esperar a que la sesión termine de cargar
+      return;
+    }
+    if (!session) {
+      // Redirigir al login si no hay sesión
+      router.push('/Auth/Login');
+    }
+  }, [session, status, router]);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,7 +35,7 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await axios.post('/api/auth/update-password', { token, email, newPassword });
+      const response = await axios.post('/api/auth/update-password', { session, email, newPassword });
       setMessage('Contraseña actualizada exitosamente');
       setError(null);
       setNewPassword('');
@@ -32,10 +46,12 @@ const ResetPassword = () => {
     }
   };
 
+
+
   return (
     <div className="w-full h-full flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4">
       <div className="w-full max-w-md bg-white p-8 rounded-[30px] shadow-lg">
-        <h1 className="text-3xl font-bold text-center mb-6">Restablecer Contraseña</h1>
+        <h1 className="text-3xl font-bold text-center mb-6">Cambiar Contraseña</h1>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         {message && <p className="text-green-500 text-center mb-4">{message}</p>}
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -80,4 +96,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default UpdatePassword;
